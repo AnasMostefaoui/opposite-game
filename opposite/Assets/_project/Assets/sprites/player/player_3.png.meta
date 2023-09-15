@@ -44,7 +44,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -132,18 +132,18 @@ TextureImporter:
       name: player_3_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 45
+        width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a45c295853d6b5a47b379c0c6a4ba1c0
+      spriteID: 604134264ff2f60409425e35d2abb18d
       internalID: -898951894
       vertices: []
       indices: 
@@ -153,9 +153,9 @@ TextureImporter:
       name: player_3_1
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 0
-        width: 44
+        width: 48
         height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -164,8 +164,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eca18b0a0ea1383419f52b8c2e96750a
-      internalID: -1339459935
+      spriteID: 700145475c34c73409d39572b1deee3a
+      internalID: -824969979
       vertices: []
       indices: 
       edges: []
@@ -182,7 +182,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       player_3_0: -898951894
-      player_3_1: -1339459935
+      player_3_1: -824969979
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
