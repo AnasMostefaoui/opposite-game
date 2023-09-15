@@ -22,7 +22,15 @@ namespace OppositeGame
 
         void Update()
         {
+            // Calculate the rotation angle in radians
+            float angleRad = Mathf.Atan2(velocity.y, velocity.x);
             rb.velocity = velocity;
+            // Convert the angle to degrees
+            float angleDeg = angleRad * Mathf.Rad2Deg * -1;
+
+            
+            // Rotate the object to face the velocity direction
+            transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
         }
     }
 }
