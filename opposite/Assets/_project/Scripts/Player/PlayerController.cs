@@ -17,7 +17,7 @@ namespace OppositeGame
         // The padding is used to prevent the player from going off screen
         // these values work best with the current player size. setting it less than that will cause the player sprite to be clamped to the edge of the screen
         [Range(0.03f, 1f)] [SerializeField] private float horizontalPadding = 0.03f;
-        [Range(0.05f, 1f)] [SerializeField] private float verticalPadding = 0.05f;
+        [Range(0.08f, 1f)] [SerializeField] private float verticalPadding = 0.08f;
 
         private InputReader _inputReader;
         private Vector3 _destination;

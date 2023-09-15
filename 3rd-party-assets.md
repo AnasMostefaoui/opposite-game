@@ -12,4 +12,9 @@ https://alb-pixel-store.itch.io/super-space-shooter-v2
 
 https://trashero.itch.io/space-shooter-pack
 
+https://greatdocbrown.itch.io/gamepad-ui
+
+https://foxyofjungle.itch.io/post-processing-fx
+
+https://bdragon1727.itch.io/fire-pixel-bullet-16x16
  
