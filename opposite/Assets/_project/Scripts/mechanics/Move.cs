@@ -12,23 +12,17 @@ namespace OppositeGame
     
     public class Move : MonoBehaviour
     {
-        private Vector2 velocity =Vector2.zero; // Adjust the speed as needed
-
+        public Vector2 velocity =Vector2.zero; // Adjust the speed as needed
+        private Rigidbody2D rb;
         private void Start()
         {
             var movable = GetComponent<IMovable>();
+            rb = GetComponent<Rigidbody2D>();
         }
 
         void Update()
         {
-            // Get the current position of the object
-            Vector3 currentPosition = transform.position;
-
-            // Calculate the new position based on input or other conditions
-            Vector3 newPosition = currentPosition + Vector3.right * moveSpeed * Time.deltaTime;
-
-            // Update the object's position
-            transform.position = newPosition;
+            rb.velocity = velocity;
         }
     }
 }

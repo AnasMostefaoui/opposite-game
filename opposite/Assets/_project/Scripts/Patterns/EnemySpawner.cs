@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace OppositeGame
@@ -35,8 +36,16 @@ namespace OppositeGame
                 
             //TODO: use pooling?
             var enemy = _factory.CreateEnemy(enemyType, bulletType);
+            enemy.GetComponent<Move>().velocity = velocity;
             enemy.transform.position = transform.position;
         }
-        
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            
+            Gizmos.DrawWireSphere( transform.position, 0.1f);
+            Gizmos.DrawRay(transform.position, velocity.normalized * 0.25f);
+        }
     }
 }
