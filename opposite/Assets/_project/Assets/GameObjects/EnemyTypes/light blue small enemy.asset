@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e089d661834aec966e19cb741434bc, type: 3}
   m_Name: light blue small enemy
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
-  bulletType: {fileID: 0}
-  speed: 5
-  fireRate: 1
+  enemyPrefab: {fileID: 4201063058476003429, guid: 186a77419d7e67b4ca632eb10ba9a64e, type: 3}
+  bulletType: {fileID: 11400000, guid: 5d05cdc48f159f4488bdbfc9464f0959, type: 2}
+  speed: 2
+  fireRate: 3
   health: 1
-  score: 1
+  score: 3

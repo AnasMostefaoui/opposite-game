@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 9173432599853947094, guid: 087a9b90935223e4b924d9f43dc116c9, type: 3}
   bulletType: {fileID: 11400000, guid: 5d05cdc48f159f4488bdbfc9464f0959, type: 2}
-  speed: 5
+  speed: 2
   fireRate: 1
   health: 1
   score: 5
