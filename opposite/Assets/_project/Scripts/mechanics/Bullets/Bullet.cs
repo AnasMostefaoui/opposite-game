@@ -5,13 +5,11 @@ using UnityEngine.Pool;
 
 namespace OppositeGame._project.Scripts.mechanics.Bullets
 {
-    [RequireComponent(typeof(ViewPortObserver))]
     public class Bullet : MonoBehaviour
     {
         [SerializeField] private BulletType bulletType;
         private float _speed = 1f;
         private GameObject _firingEffect;
-        private GameObject _hitEffect;
         private GameObject _bullet;
         
 
@@ -29,7 +27,7 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
                 _firingEffect.transform.SetParent(transform);
             }
             
-            GetComponent<ViewPortObserver>().OnLeftViewport += () => Destroy(gameObject);
+            Destroy(gameObject, bulletType.lifeTime);
         }
 
         private void Update()
@@ -44,7 +42,7 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
             if (bulletType.hitEffectPrefab)
             {
                 var contactPoint = other.contacts[0];
-                _hitEffect = Instantiate(bulletType.hitEffectPrefab, contactPoint.point, Quaternion.identity);
+                Instantiate(bulletType.hitEffectPrefab, contactPoint.point, Quaternion.identity);
             }
             Destroy(gameObject);
         }

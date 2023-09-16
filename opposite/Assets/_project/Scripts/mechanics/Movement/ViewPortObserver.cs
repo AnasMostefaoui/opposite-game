@@ -13,7 +13,7 @@ namespace OppositeGame._project.Scripts.mechanics.Movement
         private bool _isInViewport;
         private bool _hasEnteredViewport;
         private Camera _camera;
-        private const float SafeZone = 1f;
+        private const float SafeZone = 0f;
 
 
         private void Start()
@@ -23,10 +23,6 @@ namespace OppositeGame._project.Scripts.mechanics.Movement
         
         private void FixedUpdate()
         {
-            if (_isInViewport)
-            {
-                
-            }
             var transformPosition = transform.position + new Vector3(0, SafeZone, 0);
             _isInViewport = _camera.IsPointInViewport(transformPosition);
 
