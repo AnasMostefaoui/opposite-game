@@ -10,13 +10,13 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
     {
         [SerializeField] protected WeaponStrategy weaponStrategy;
         [FormerlySerializedAs("startPosition")] [SerializeField] protected Transform startTransform;
-        [SerializeField] protected LayerMask layerMask;
+        [SerializeField] protected int layer;
 
         private IShootingPattern _shootingPattern; 
         
         private void OnValidate()
         {
-            layerMask = gameObject.layer;
+            layer = gameObject.layer;
         }
         
         public void changeWeaponStrategy(WeaponStrategy newWeaponStrategy)

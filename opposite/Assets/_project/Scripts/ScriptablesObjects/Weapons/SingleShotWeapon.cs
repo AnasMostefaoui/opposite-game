@@ -7,13 +7,12 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
     [CreateAssetMenu(fileName = "SingleShotWeapon", menuName = "OppositeGame/Weapons", order = 1)]
     public class SingleShotWeapon : WeaponStrategy
     {
-        public override void Fire(Transform startTransform, LayerMask layerMask)
+        public override void Fire(Transform startTransform, int layer)
         {
-            Debug.Log($"startTransform.position: {startTransform.position}");
             var bullet = Instantiate(bulletType.bulletPrefab, startTransform.position, startTransform.rotation);
             bullet.transform.SetParent(startTransform);
             bullet.GetComponent<Bullet>().SetBulletSpeed(bulletSpeed);
-            bullet.layer = layerMask;
+            bullet.layer = layer;
         }
     }
 }

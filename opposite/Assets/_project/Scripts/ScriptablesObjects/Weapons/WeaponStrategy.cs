@@ -12,6 +12,6 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
         {
         }
 
-        public abstract void Fire(Transform startPosition, LayerMask layerMask);
+        public abstract void Fire(Transform startPosition, int layerMask);
     }
 }

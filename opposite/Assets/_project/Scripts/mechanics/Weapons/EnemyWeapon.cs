@@ -10,7 +10,7 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
         {
             if (!(Time.time >= _nextFireTime)) return;
             
-            weaponStrategy.Fire(startTransform, layerMask);
+            weaponStrategy.Fire(startTransform, layer);
             _nextFireTime = Time.time + weaponStrategy.fireRate;
         }
     }
