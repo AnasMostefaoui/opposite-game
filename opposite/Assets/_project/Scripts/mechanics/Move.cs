@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
-namespace OppositeGame
+namespace OppositeGame._project.Scripts.mechanics
 {
     public interface IMovable
     {

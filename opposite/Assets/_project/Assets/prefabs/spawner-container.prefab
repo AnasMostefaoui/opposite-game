@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3185921028369022205}
   - component: {fileID: 3185921028369022204}
   m_Layer: 0
-  m_Name: Small enemy spawners
+  m_Name: spawner-container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

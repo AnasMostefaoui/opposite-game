@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using OppositeGame._project.Scripts.mechanics;
+using UnityEngine;
 
 namespace OppositeGame
 {
