@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4201063058476003482}
   - component: {fileID: 4201063058476003483}
   - component: {fileID: 4201063058476003428}
+  - component: {fileID: 8336974864425504083}
   m_Layer: 0
   m_Name: enemy_small_light_blue
   m_TagString: Untagged
@@ -142,3 +143,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8336974864425504083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201063058476003429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714f7beddb7e4ef29aee527d33ce98bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

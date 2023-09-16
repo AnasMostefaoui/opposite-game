@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Purple small bullet
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7373868840479470147, guid: e4d7d580f8fdb1841975add3ad2f1f3b, type: 3}
-  speed: 5
+  hitEffectPrefab: {fileID: 2347342346228721873, guid: a05db9f31e195c34db7fef530f9d6635, type: 3}
+  firingEffectPrefab: {fileID: 0}
+  speed: 4
   damage: 1
+  lifeTime: 5

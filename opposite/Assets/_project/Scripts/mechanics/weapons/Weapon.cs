@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace OppositeGame._project.Scripts.mechanics
+namespace OppositeGame._project.Scripts.mechanics.weapons
 {
     public class Weapon : MonoBehaviour
     {

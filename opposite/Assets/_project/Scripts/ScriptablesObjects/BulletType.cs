@@ -7,8 +7,12 @@ namespace OppositeGame
     public class BulletType : ScriptableObject, IMovable
     {
         public GameObject bulletPrefab;
+        public GameObject hitEffectPrefab;
+        public GameObject firingEffectPrefab;
+        
         public float speed = 5f;
         public float damage = 1f;
+        public float lifeTime = 5f;
         // bullet sound
         
         
