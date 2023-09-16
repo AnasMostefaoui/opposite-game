@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace OppositeGame._project.Scripts.Spawners
 {
+    
     public class EnemySpawner : MonoBehaviour
     {
         [Header("Enemy settings")]
@@ -63,7 +64,7 @@ namespace OppositeGame._project.Scripts.Spawners
             // method calls in updates are expensive, since we only spawn, we can inline the code
             var enemyType = enemyTypes[UnityEngine.Random.Range(0, enemyTypes.Count)];
             //TODO: use pooling?
-            var enemy = _factory.CreateEnemy(enemyType);
+            var enemy = _factory.CreateEnemy(enemyType, transform.position,Quaternion.Euler(0,0,180));
             enemy.GetComponent<Move>().velocity = velocity.normalized * enemyType.speed;
             enemy.transform.position = transform.position;
             enemy.GetComponent<ViewPortObserver>().OnLeftViewport += () => _factory.DestroyEnemy(enemy);

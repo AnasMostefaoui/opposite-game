@@ -8,6 +8,8 @@ namespace OppositeGame
         private EnemyType _enemyType;
         private BulletType _bulletType;
         private Vector3[] _waypoints;
+        private Vector3 _position;
+        private Quaternion _rotation;
 
         public EnemyBuilder SetEnemyType(EnemyType enemyType)
         {
@@ -20,15 +22,23 @@ namespace OppositeGame
             _bulletType = bulletType;
             return this;
         }
-        public EnemyBuilder SetWaypoints(Vector3[] waypoints = null)
+        
+        public EnemyBuilder SetPosition(Vector3 position)
         {
-            _waypoints = waypoints ?? Array.Empty<Vector3>();
+            _position = position;
+            return this;
+        }
+        
+        public EnemyBuilder SetRotation(Quaternion rotation)
+        {
+            _rotation = rotation;
             return this;
         }
         
         public GameObject Build()
         {
-            var instance = GameObject.Instantiate(_enemyType.enemyPrefab);
+            
+            var instance = GameObject.Instantiate(_enemyType.enemyPrefab, _position, _rotation);
             var followPath = instance.GetComponent<FollowPath>();
             if (followPath)
             {

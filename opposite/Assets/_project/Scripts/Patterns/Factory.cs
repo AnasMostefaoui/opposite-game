@@ -9,12 +9,13 @@ namespace OppositeGame._project.Scripts.Patterns
         // first draft of pooling
         private List<GameObject> _enemies = new List<GameObject>();
         
-        public GameObject CreateEnemy(EnemyType enemyType, Vector3[] waypoints = null )
+        public GameObject CreateEnemy(EnemyType enemyType, Vector3 position, Quaternion rotation)
         {
             var builder = new EnemyBuilder();
             var enemy = builder.SetEnemyType(enemyType)
                 .SetBulletType(enemyType.bulletType)
-                .SetWaypoints(waypoints)
+                .SetPosition(position)
+                .SetRotation(rotation)
                 .Build();
             _enemies.Add(enemy);
             return enemy;

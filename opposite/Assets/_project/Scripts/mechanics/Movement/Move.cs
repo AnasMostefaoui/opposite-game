@@ -17,15 +17,15 @@ namespace OppositeGame._project.Scripts.mechanics
         {
             var movable = GetComponent<IMovable>();
             _rb = GetComponent<Rigidbody2D>();
-            _rb.velocity = velocity;
-            transform.LookAt2D(velocity, isLookingFaceDown);
+            _rb.velocity = velocity; 
+            transform.LookAt2D(velocity);
         }
         
         void FixedUpdate()
         {
             // update speed
-            _rb.velocity = velocity;
-            transform.LookAt2D(velocity, isLookingFaceDown);
+           _rb.velocity = velocity;
+            transform.LookAt2D(velocity);
         }
 
         private void OnDrawGizmos()
