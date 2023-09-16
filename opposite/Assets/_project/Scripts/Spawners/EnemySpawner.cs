@@ -6,7 +6,7 @@ using OppositeGame._project.Scripts.Patterns;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
-namespace OppositeGame
+namespace OppositeGame._project.Scripts.Spawners
 {
     public class EnemySpawner : MonoBehaviour
     {
@@ -24,12 +24,15 @@ namespace OppositeGame
         private float _nextSpawnTime;
         private int _enemyCount;
         private Vector3[] _waypoints;
+        private ViewPortObserver _viewPortObserver;
 
         private void Start()
         {
             _factory = new EnemyFactory(); 
             _nextSpawnTime = Time.time + spawnIntervalInSeconds;
             cameraObject ??= Camera.main;
+            _viewPortObserver = GetComponent<ViewPortObserver>();
+            _viewPortObserver.OnLeftViewport += () => Destroy(gameObject);
         }
 
         private void Update()
@@ -64,6 +67,11 @@ namespace OppositeGame
             enemy.GetComponent<Move>().velocity = velocity.normalized * enemyType.speed;
             enemy.transform.position = transform.position;
             enemy.GetComponent<ViewPortObserver>().OnLeftViewport += () => _factory.DestroyEnemy(enemy);
+        }
+        
+        private void OnDestroy()
+        {
+            _viewPortObserver.OnLeftViewport = null;
         }
         
         private void OnDrawGizmos()

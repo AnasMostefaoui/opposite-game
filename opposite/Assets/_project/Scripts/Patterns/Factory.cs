@@ -1,21 +1,32 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using OppositeGame._project.Scripts.mechanics.Movement;
 using UnityEngine;
 
-namespace OppositeGame
+namespace OppositeGame._project.Scripts.Patterns
 {
     public class EnemyFactory
     {
-        public GameObject CreateEnemy(EnemyType enemyType, BulletType bulletType, Vector3[] waypoints = null )
+        // first draft of pooling
+        private List<GameObject> _enemies = new List<GameObject>();
+        
+        public GameObject CreateEnemy(EnemyType enemyType, Vector3[] waypoints = null )
         {
             var builder = new EnemyBuilder();
-            builder.SetEnemyType(enemyType)
-                .SetBulletType(bulletType)
-                .SetWaypoints(waypoints);
-
-            return builder.SetEnemyType(enemyType)
-                .SetBulletType(bulletType)
+            var enemy = builder.SetEnemyType(enemyType)
+                .SetBulletType(enemyType.bulletType)
                 .SetWaypoints(waypoints)
                 .Build();
+            _enemies.Add(enemy);
+            return enemy;
+        }
+        
+        public void DestroyEnemy(GameObject enemy)
+        {
+            _enemies.Remove(enemy);
+            // in case we subscribed to these events somewhere, clear them up to avoid memory leaks
+            enemy.GetComponent<ViewPortObserver>().OnEnteredViewport = null;
+            enemy.GetComponent<ViewPortObserver>().OnLeftViewport = null;
+            Object.Destroy(enemy);
         }
     }
 }
