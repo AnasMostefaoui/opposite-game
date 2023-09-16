@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using OppositeGame._project.Scripts.mechanics;
+using OppositeGame._project.Scripts.mechanics.Movement;
+using OppositeGame._project.Scripts.Patterns;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
@@ -38,15 +40,6 @@ namespace OppositeGame
             _nextSpawnTime = Time.time + spawnIntervalInSeconds;
         }
 
-        private void FixedUpdate()
-        {
-            // var distance = _endPoint.x - _startPoint.x;
-            // var position = transform.position;
-            // var nextPosition =  new Vector3(_startPoint.x + Mathf.PingPong(Time.time, distance),
-            //     position.y, position.z);
-            // transform.position = nextPosition * (spawnerMovementSpeed * Time.fixedDeltaTime);
-        }
-
         private bool CanSpawn
         {
             get
@@ -66,12 +59,11 @@ namespace OppositeGame
         {
             // method calls in updates are expensive, since we only spawn, we can inline the code
             var enemyType = enemyTypes[UnityEngine.Random.Range(0, enemyTypes.Count)];
-            var bulletType = enemyType.bulletType;
-                
             //TODO: use pooling?
-            var enemy = _factory.CreateEnemy(enemyType, bulletType);
+            var enemy = _factory.CreateEnemy(enemyType);
             enemy.GetComponent<Move>().velocity = velocity.normalized * enemyType.speed;
             enemy.transform.position = transform.position;
+            enemy.GetComponent<ViewPortObserver>().OnLeftViewport += () => _factory.DestroyEnemy(enemy);
         }
         
         private void OnDrawGizmos()
