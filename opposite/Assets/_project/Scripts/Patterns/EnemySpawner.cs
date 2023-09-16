@@ -58,7 +58,7 @@ namespace OppositeGame
                 // this is a simple and effective solution
                 var activationPosition =
                     new Vector3(cameraObject.transform.position.x, transform.position.y - activationDistance, 0);
-                return cameraObject.IsPointInViewport(activationPosition) && !isTimeToSpawn && !isMaxEnemies;
+                return cameraObject.IsPointInViewport(activationPosition) && isTimeToSpawn && !isMaxEnemies;
             }
         }
        
