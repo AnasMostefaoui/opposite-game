@@ -1,7 +1,7 @@
-﻿using System;
+﻿using OppositeGame._project.Scripts.ScriptablesObjects;
 using UnityEngine;
 
-namespace OppositeGame
+namespace OppositeGame._project.Scripts.Patterns
 {
     public class EnemyBuilder
     {

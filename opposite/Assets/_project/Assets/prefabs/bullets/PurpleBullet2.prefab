@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 629243335986124254}
   - component: {fileID: 8666774026537752856}
   - component: {fileID: 6935686496016674599}
+  - component: {fileID: 3891083406759938541}
   m_Layer: 0
   m_Name: PurpleBullet2
   m_TagString: Untagged
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 21300000, guid: e4e4fec043ce3b14fa657b4e395e47f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 0.04, y: 0.09}
   m_AdaptiveModeThreshold: 0.5
@@ -144,3 +145,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &3891083406759938541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7373868840479470147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714f7beddb7e4ef29aee527d33ce98bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

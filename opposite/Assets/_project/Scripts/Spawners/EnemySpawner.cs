@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using OppositeGame._project.Scripts.mechanics;
 using OppositeGame._project.Scripts.mechanics.Movement;
 using OppositeGame._project.Scripts.Patterns;
+using OppositeGame._project.Scripts.ScriptablesObjects;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 

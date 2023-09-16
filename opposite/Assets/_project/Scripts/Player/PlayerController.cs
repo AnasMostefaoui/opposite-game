@@ -1,7 +1,7 @@
-using System;
+using OppositeGame._project.Scripts.Inputs;
 using UnityEngine;
 
-namespace OppositeGame
+namespace OppositeGame._project.Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     { 

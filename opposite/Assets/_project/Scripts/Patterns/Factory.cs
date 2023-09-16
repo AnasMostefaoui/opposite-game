@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OppositeGame._project.Scripts.mechanics.Movement;
+using OppositeGame._project.Scripts.ScriptablesObjects;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.Patterns

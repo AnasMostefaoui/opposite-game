@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OppositeGame._project.Scripts.mechanics.weapons
+namespace OppositeGame._project.Scripts.mechanics.Bullets
 {
     public class ProjectileDestroyer : MonoBehaviour
     {
