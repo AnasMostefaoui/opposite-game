@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
 namespace OppositeGame
@@ -12,25 +13,28 @@ namespace OppositeGame
     
     public class Move : MonoBehaviour
     {
-        public Vector2 velocity =Vector2.zero; // Adjust the speed as needed
-        private Rigidbody2D rb;
+        [SerializeField] private bool isLookingFaceDown;
+        public Vector2 velocity =Vector2.zero;
+        private Rigidbody2D _rb;
         private void Start()
         {
             var movable = GetComponent<IMovable>();
-            rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody2D>();
+            _rb.velocity = velocity;
+            transform.LookAt2D(velocity, isLookingFaceDown);
+        }
+        
+        void FixedUpdate()
+        {
+            // update speed
+            _rb.velocity = velocity;
+            transform.LookAt2D(velocity, isLookingFaceDown);
         }
 
-        void Update()
+        private void OnDrawGizmos()
         {
-            // Calculate the rotation angle in radians
-            float angleRad = Mathf.Atan2(velocity.y, velocity.x);
-            rb.velocity = velocity;
-            // Convert the angle to degrees
-            float angleDeg = angleRad * Mathf.Rad2Deg * -1;
-
-            
-            // Rotate the object to face the velocity direction
-            transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, velocity.normalized * 0.25f);
         }
     }
 }

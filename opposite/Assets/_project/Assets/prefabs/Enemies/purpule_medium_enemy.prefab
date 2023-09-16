@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005c430968b3d8a4aa3c28e23b7140f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLookingFaceDown: 1
   velocity: {x: 0, y: 0}
 --- !u!50 &8856969104003794531
 Rigidbody2D:
