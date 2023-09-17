@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6604f41c8c432b9087adaf4cfb61bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: -0.05
+  scrollSpeed: 0.4
   mainCamera: {fileID: 0}
   objectPool: {fileID: 11400000, guid: 3fae14674c1639243a37dcc8cba8fd0b, type: 2}
