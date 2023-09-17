@@ -1,4 +1,5 @@
-﻿using OppositeGame._project.Scripts.mechanics.Movement;
+﻿using System;
+using OppositeGame._project.Scripts.mechanics.Movement;
 using OppositeGame._project.Scripts.ScriptablesObjects;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -7,10 +8,15 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
 {
     public class Bullet : MonoBehaviour
     {
+        [SerializeField] public PolarityType polarityType = PolarityType.None;
         [SerializeField] private BulletType bulletType;
+        public Action<Bullet> OnBulletDestroyed;
+        
         private float _speed = 1f;
         private GameObject _firingEffect;
         private GameObject _bullet;
+        private float _lifetimeTimer = 0f;
+        
         
 
         public void SetBulletSpeed(float speed)
@@ -26,8 +32,6 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
                 _firingEffect.transform.forward = gameObject.transform.forward;
                 _firingEffect.transform.SetParent(transform);
             }
-            
-            Destroy(gameObject, bulletType.lifeTime);
         }
 
         private void Update()
@@ -35,63 +39,29 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
             transform.SetParent(null);
             transform.position += transform.up * (_speed * Time.deltaTime);
             
+            _lifetimeTimer += Time.deltaTime;
+            // we release the bullet from the pool if it's destroyed or it's life time is over
+            if (_lifetimeTimer >= bulletType.lifeTime)
+            {
+                _lifetimeTimer = 0;
+                OnBulletDestroyed?.Invoke(this);
+            }
+
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
-        {
+        private void OnTriggerEnter2D(Collider2D other)
+        {           
             if (bulletType.hitEffectPrefab)
             {
-                var contactPoint = other.contacts[0];
-                Instantiate(bulletType.hitEffectPrefab, contactPoint.point, Quaternion.identity);
+                Instantiate(bulletType.hitEffectPrefab, transform.position, Quaternion.identity);
             }
-            Destroy(gameObject);
+            OnBulletDestroyed?.Invoke(this);
         }
-
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(transform.position, transform.up * 0.25f);
-        }
-
-    }
-
-    public class BulletSpawner : MonoBehaviour
-    {
-        public ObjectPool<GameObject> bulletPool;
-        public BulletType bulletType;
-        
-        private void Start()
-        {
-            bulletPool = new ObjectPool<GameObject>(CreateBullet,
-                onBulletRequest, 
-                onReturnBullet,
-                OnDestroyBullet, 
-                true, 
-                200, 
-                500);
-        }
-
-        private GameObject CreateBullet()
-        {
-            var bullet = Instantiate(bulletType.bulletPrefab, transform.position, transform.rotation);
-            return bullet;
-        }
-        
-        private void onBulletRequest(GameObject bullet)
-        {
-           // whhaht to once we got the bullet? rotate, move, etc
-           
-           bullet.SetActive(true);
-        }
-        
-        private void onReturnBullet(GameObject bullet)
-        {
-            bullet.SetActive(false);
-        }
-        
-        private void OnDestroyBullet(GameObject bullet)
-        {
-            Destroy(bullet);
         }
     }
 }

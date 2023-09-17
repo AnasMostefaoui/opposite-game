@@ -18,3 +18,6 @@ https://foxyofjungle.itch.io/post-processing-fx
 
 https://bdragon1727.itch.io/fire-pixel-bullet-16x16
  
+
+# tutorials
+https://www.youtube.com/watch?v=_nAVbHYaEN8&t=487s&ab_channel=TheElectricUnderground

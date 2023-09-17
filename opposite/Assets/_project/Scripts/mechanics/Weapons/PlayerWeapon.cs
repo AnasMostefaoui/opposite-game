@@ -1,5 +1,6 @@
 ﻿using System;
 using OppositeGame._project.Scripts.Inputs;
+using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.mechanics.weapons
@@ -13,7 +14,7 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
         {
             _inputReader = GetComponent<InputReader>();
         }
-
+        
         private void Update()
         {
             if (!_inputReader.IsFiring || !(Time.time >= _nextFireTime)) return;

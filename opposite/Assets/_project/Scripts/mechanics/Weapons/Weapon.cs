@@ -22,26 +22,11 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
         public void changeWeaponStrategy(WeaponStrategy newWeaponStrategy)
         {
             weaponStrategy = newWeaponStrategy;
-            weaponStrategy.setupWeapon();
+            weaponStrategy.SetupWeapon();
         }
     }
 
-
-    public class ShootThreeBullets : IShootingPattern
-    {
-        public List<Bullet> Shoot()
-        {
-            var bullets = new List<Bullet>()
-            {
-                new Bullet(),
-                new Bullet(),
-                new Bullet()
-            };
-            
-            
-            return bullets;
-        }
-    }
+    
 
     public interface IShootingPattern
     {
