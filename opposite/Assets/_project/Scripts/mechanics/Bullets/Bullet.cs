@@ -2,6 +2,7 @@
 using OppositeGame._project.Scripts.mechanics.Movement;
 using OppositeGame._project.Scripts.Patterns;
 using OppositeGame._project.Scripts.ScriptablesObjects;
+using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -10,10 +11,11 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
     public class Bullet : MonoBehaviour, IPoolable<Bullet>
     {
         [SerializeField] public PolarityType polarityType = PolarityType.None;
-        [SerializeField] private BulletType bulletType;
+        [SerializeField] private BulletType bulletType; 
         public Action<Bullet> OnRelease { get; set; }
         public Action OnUpdate;
         
+        private Camera _camera;
         private float _speed = 1f;
         private GameObject _firingEffect;
         private GameObject _bullet;
@@ -34,6 +36,7 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
                 _firingEffect.transform.forward = gameObject.transform.forward;
                 _firingEffect.transform.SetParent(transform);
             }
+            _camera ??= Camera.main;
         }
 
         private void Update()
@@ -55,6 +58,7 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if(_camera.IsPointInViewport(transform.position) == false) return;
             DisplayHitEffect();
             _lifetimeTimer = 0;
             OnRelease?.Invoke(this);
