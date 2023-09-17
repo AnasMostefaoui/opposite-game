@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4097e5747bd44e25b30a02203b818cde, type: 3}
   m_Name: SpreadShootWeapon
   m_EditorClassIdentifier: 
-  fireRate: 1
-  bulletSpeed: 1
-  bulletsPool: {fileID: 0}
-  spreadAngle: 0
-  numberOfBullets: 0
+  fireRate: 0.5
+  bulletSpeed: 5
+  bulletsPool: {fileID: 11400000, guid: 152ec199326e3cd4c9137eafe45698d5, type: 2}
+  spreadAngle: 100
+  numberOfBullets: 5
