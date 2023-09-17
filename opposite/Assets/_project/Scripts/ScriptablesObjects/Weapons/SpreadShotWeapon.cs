@@ -4,8 +4,8 @@ using UnityEngine.Serialization;
 
 namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
 {
-    [CreateAssetMenu(fileName = "SpreadShootWeapon", menuName = "OppositeGame/Weapons/SpreadShootWeapon")]
-    public class SpreadShootWeapon : WeaponStrategy
+    [CreateAssetMenu(fileName = "SpreadShotWeapon", menuName = "OppositeGame/Weapons/SpreadShotWeapon")]
+    public class SpreadShotWeapon : WeaponStrategy
     {
         [SerializeField] private float spreadAngle;
         [SerializeField] private int numberOfBullets;
@@ -24,14 +24,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
             for (var i = 0; i < numberOfBullets; i++)
             {
                 var bullet = GetBullet();
-                bullet.transform.position = startPosition.position;
-                // rotate to match the start position rotation to avoid messing with the calculation below
-                bullet.transform.rotation = startPosition.rotation;
-                // ensure that it will only hit the target from the weapon carrier layer masks.
-                bullet.gameObject.layer = layerMask;
-                bullet.transform.Rotate(0, 0, currentAngle );
-                bullet.GetComponent<Bullet>().SetBulletSpeed(bulletSpeed);
-                
+                PrepareBullet(bullet, startPosition, layerMask, currentAngle);
                 currentAngle += angleStep; 
             }
         }

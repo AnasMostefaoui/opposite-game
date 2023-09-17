@@ -11,6 +11,7 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
         [SerializeField] public PolarityType polarityType = PolarityType.None;
         [SerializeField] private BulletType bulletType;
         public Action<Bullet> OnBulletDestroyed;
+        public Action OnUpdate;
         
         private float _speed = 1f;
         private GameObject _firingEffect;
@@ -38,11 +39,13 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
         {
             transform.SetParent(null);
             transform.position += transform.up * (_speed * Time.deltaTime);
+            OnUpdate?.Invoke();
             
             _lifetimeTimer += Time.deltaTime;
             // we release the bullet from the pool if it's destroyed or it's life time is over
             if (_lifetimeTimer >= bulletType.lifeTime)
             {
+                DisplayHitEffect();
                 _lifetimeTimer = 0;
                 OnBulletDestroyed?.Invoke(this);
             }
@@ -50,14 +53,19 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
         }
 
         private void OnTriggerEnter2D(Collider2D other)
-        {           
+        {
+            DisplayHitEffect();
+            _lifetimeTimer = 0;
+            OnBulletDestroyed?.Invoke(this);
+        }
+        
+        private void DisplayHitEffect()
+        {
             if (bulletType.hitEffectPrefab)
             {
                 Instantiate(bulletType.hitEffectPrefab, transform.position, Quaternion.identity);
             }
-            OnBulletDestroyed?.Invoke(this);
         }
-        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

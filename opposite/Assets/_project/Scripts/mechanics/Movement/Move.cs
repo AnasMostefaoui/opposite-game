@@ -13,8 +13,8 @@ namespace OppositeGame._project.Scripts.mechanics.Movement
             _rb.velocity = velocity; 
             transform.LookAt2D(velocity);
         }
-        
-        void FixedUpdate()
+
+        private void FixedUpdate()
         {
             // update speed
            _rb.velocity = velocity;

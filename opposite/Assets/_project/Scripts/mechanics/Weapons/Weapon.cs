@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using OppositeGame._project.Scripts.ScriptablesObjects.Weapons;
 using UnityEngine;
@@ -18,7 +19,12 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
         {
             layer = gameObject.layer;
         }
-        
+
+        private void Start()
+        {
+            weaponStrategy.Initialize();
+        }
+
         public void changeWeaponStrategy(WeaponStrategy newWeaponStrategy)
         {
             weaponStrategy = newWeaponStrategy;

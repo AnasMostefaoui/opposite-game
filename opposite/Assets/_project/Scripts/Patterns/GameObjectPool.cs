@@ -31,13 +31,11 @@ namespace OppositeGame._project.Scripts.Patterns
         
         public T Get()
         {
-            Debug.Log("active: " + _objectPool.CountActive + " inactive: " + _objectPool.CountInactive + " total: " + _objectPool.CountAll);
             return _objectPool.Get();
         }
         
         public void Release(T gameObject)
         {
-            Debug.Log("Is released");
             _objectPool.Release(gameObject);
         }
         
