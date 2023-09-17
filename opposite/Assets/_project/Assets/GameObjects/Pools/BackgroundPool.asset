@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07deb843a9e4d969c92af9193ddd7f8, type: 3}
   m_Name: BackgroundPool
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 8930570073573890823, guid: 9c930c1b30db2104da73e089c6d4cb35, type: 3}
