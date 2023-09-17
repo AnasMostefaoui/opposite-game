@@ -1,4 +1,5 @@
-﻿using OppositeGame._project.Scripts.ScriptablesObjects;
+﻿using OppositeGame._project.Scripts.mechanics;
+using OppositeGame._project.Scripts.ScriptablesObjects;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.Patterns
@@ -39,13 +40,11 @@ namespace OppositeGame._project.Scripts.Patterns
         {
             
             var instance = GameObject.Instantiate(_enemyType.enemyPrefab, _position, _rotation);
-            var followPath = instance.GetComponent<FollowPath>();
-            if (followPath)
-            {
-                followPath.waypoints = _waypoints;
-            } 
+            var enemy = instance.GetComponent<Destructible>();
+            enemy.LifePoints = _enemyType.health;
             // bullet from pool?
-            
+            Debug.Log("enemy.health: " + _enemyType.health);
+            Debug.Log("enemy.LifePoints : " + enemy.LifePoints );
             return instance;
         }
     }

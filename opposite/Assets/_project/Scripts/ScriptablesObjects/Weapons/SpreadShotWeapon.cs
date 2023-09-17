@@ -20,8 +20,6 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
             var startAngle = targetAngle - halfAngle;
             var angleStep = spreadAngle / (numberOfBullets - 1);
             var currentAngle = startAngle;
-            
-            Debug.Log("");
             // place the bullets in a circle around the start position and assign speed and rotation based on the position on the circle.
             for (var i = 0; i < numberOfBullets; i++)
             {

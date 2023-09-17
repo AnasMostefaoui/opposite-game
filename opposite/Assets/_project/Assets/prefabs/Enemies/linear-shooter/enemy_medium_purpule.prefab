@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 6403788127943676743}
   - component: {fileID: 6451552839375302938}
   - component: {fileID: 7159719615849690097}
+  - component: {fileID: 1378158430996551938}
   m_Layer: 7
   m_Name: enemy_medium_purpule
   m_TagString: Untagged
@@ -188,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714f7beddb7e4ef29aee527d33ce98bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  safeZone: 0
 --- !u!114 &6451552839375302938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +205,7 @@ MonoBehaviour:
   weaponStrategy: {fileID: 11400000, guid: 66f1c7281a7f81b48a0e2c2ad8e0b60f, type: 2}
   startTransform: {fileID: 6023976145652114661}
   layer: 7
+  cameraObject: {fileID: 0}
 --- !u!58 &7159719615849690097
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -219,3 +222,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.21
+--- !u!114 &1378158430996551938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173432599853947094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34aef79fa4340ca8da818f647342175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destructionEffect: {fileID: 0}
+  explosionPool: {fileID: 11400000, guid: f6d90c73af280a2439fda8d933ace054, type: 2}

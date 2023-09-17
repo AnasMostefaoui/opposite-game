@@ -1,6 +1,7 @@
 ﻿using System;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using OppositeGame._project.Scripts.Patterns;
+using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
@@ -9,11 +10,19 @@ namespace OppositeGame._project.Scripts.mechanics
     public class Destructible : MonoBehaviour, IPoolable<GameObject>
     {
         [SerializeField] public GameObject destructionEffect;
+        [SerializeField] public BulletImpactPool explosionPool;
+        
         public Action<GameObject> OnRelease { get; set; }
         private bool _canBeDestroyed = false;
-        private float _currentLifePoints;
+        private float _currentLifePoints = 5f;
         private Camera _camera;
-        
+
+        public float LifePoints
+        {
+            set => _currentLifePoints = value;
+            get => _currentLifePoints;
+        }
+
         private void Start()
         {
             _camera ??= Camera.main;
@@ -21,13 +30,11 @@ namespace OppositeGame._project.Scripts.mechanics
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            
             if(_camera.IsPointInViewport(transform.position) == false) return;
             var bullet = other.TryGetComponent<Bullet>(out var bulletComponent);
             if (bullet && _currentLifePoints > 0)
             {
                 _currentLifePoints -= bulletComponent.Damage;
-                Debug.Log("_currentLifePoints: " + _currentLifePoints);
                 
             }
             
@@ -42,9 +49,12 @@ namespace OppositeGame._project.Scripts.mechanics
         
         private void DisplayHitEffect()
         {
-            if (destructionEffect)
+            Debug.Log("DisplayHitEffect: " + _currentLifePoints);
+            if (explosionPool)
             {
-                Instantiate(destructionEffect, transform.position, Quaternion.identity);
+                Debug.Log("_currentLifePoints: " + _currentLifePoints);
+                explosionPool.GetHitEffect();
+                gameObject.SetActive(false);
             }
         }
     }
