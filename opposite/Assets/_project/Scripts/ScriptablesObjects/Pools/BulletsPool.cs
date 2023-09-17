@@ -19,7 +19,6 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Pools
         public GameObject GetBullet() => _objectPool.Get();
         private GameObject CreateBullet()
         {
-            Debug.Log("CreateBullet");
             var bullet = Instantiate(bulletType.bulletPrefab);
             bullet.GetComponent<Bullet>().OnBulletDestroyed ??= (b) => _objectPool.Release(b.gameObject); 
             return bullet;

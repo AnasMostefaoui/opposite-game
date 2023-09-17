@@ -258,7 +258,6 @@ MonoBehaviour:
   weaponStrategy: {fileID: 11400000, guid: 66f1c7281a7f81b48a0e2c2ad8e0b60f, type: 2}
   startTransform: {fileID: 250605243511300962}
   layer: 6
-  test: {fileID: 0}
 --- !u!114 &4812840732624561145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,10 +270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7f2d411f32431584c5716ded7ee6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStrategy: {fileID: 11400000, guid: 66f1c7281a7f81b48a0e2c2ad8e0b60f, type: 2}
+  weaponStrategy: {fileID: 11400000, guid: f14e22dbf51bf334db171238c08d52db, type: 2}
   startTransform: {fileID: 9001406276387919299}
   layer: 6
-  test: {fileID: 11400000, guid: 152ec199326e3cd4c9137eafe45698d5, type: 2}
 --- !u!1 &8189117298150329147
 GameObject:
   m_ObjectHideFlags: 0

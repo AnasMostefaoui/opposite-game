@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
 {
-    [CreateAssetMenu(fileName = "SingleShotWeapon", menuName = "OppositeGame/Weapons", order = 1)]
+    [CreateAssetMenu(fileName = "SingleShotWeapon", menuName = "OppositeGame/Weapons/SingleShotWeapon", order = 1)]
     public class SingleShotWeapon : WeaponStrategy
     {
         public override void Fire(Transform startTransform, int layer)
