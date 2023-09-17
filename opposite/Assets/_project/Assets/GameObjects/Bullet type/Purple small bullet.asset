@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d907b57e8b6e2b9459310507d2fc5f09, type: 3}
   m_Name: Purple small bullet
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2004259021739533809, guid: 56943fd10c127144eb9a50d510d15f62, type: 3}
+  bulletPrefab: {fileID: -6373034945798254142, guid: 56943fd10c127144eb9a50d510d15f62, type: 3}
   hitEffectPrefab: {fileID: 2347342346228721873, guid: a05db9f31e195c34db7fef530f9d6635, type: 3}
   firingEffectPrefab: {fileID: 0}
   damage: 1
-  lifeTime: 5
+  lifeTime: 2

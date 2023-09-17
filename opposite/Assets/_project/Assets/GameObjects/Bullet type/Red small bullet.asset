@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d907b57e8b6e2b9459310507d2fc5f09, type: 3}
   m_Name: Red small bullet
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 310254301108201647, guid: f1b7a900f84e1da49ae0cf1924a3c579, type: 3}
+  bulletPrefab: {fileID: -4583099719210730926, guid: f1b7a900f84e1da49ae0cf1924a3c579, type: 3}
   hitEffectPrefab: {fileID: 2347342346228721873, guid: a05db9f31e195c34db7fef530f9d6635, type: 3}
   firingEffectPrefab: {fileID: 0}
   damage: 1

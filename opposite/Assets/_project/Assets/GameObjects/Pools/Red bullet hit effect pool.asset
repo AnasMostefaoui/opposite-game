@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364215dd06c1488db5c13d92130a531a, type: 3}
   m_Name: Red bullet hit effect pool
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 4148422010561086121, guid: 3f9b42c46ddd673468d0e39e0884b3f0, type: 3}
