@@ -2,7 +2,7 @@
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
-namespace OppositeGame._project.Scripts.mechanics.Movement
+namespace OppositeGame._project.Scripts.CameraScripts
 {
     public class ViewPortObserver: MonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace OppositeGame._project.Scripts.mechanics.Movement
         private bool _isInViewport;
         private bool _hasEnteredViewport;
         private Camera _camera;
-        private const float SafeZone = 0f;
+        [SerializeField] private float safeZone = 0f;
 
 
         private void Start()
@@ -23,7 +23,7 @@ namespace OppositeGame._project.Scripts.mechanics.Movement
         
         private void FixedUpdate()
         {
-            var transformPosition = transform.position + new Vector3(0, SafeZone, 0);
+            var transformPosition = transform.position + new Vector3(0, safeZone, 0);
             _isInViewport = _camera.IsPointInViewport(transformPosition);
 
             if (_hasEnteredViewport == false && _isInViewport)

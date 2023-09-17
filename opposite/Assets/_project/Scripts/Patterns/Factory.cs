@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using OppositeGame._project.Scripts.CameraScripts;
 using OppositeGame._project.Scripts.mechanics.Movement;
 using OppositeGame._project.Scripts.ScriptablesObjects;
 using UnityEngine;

@@ -1,16 +1,17 @@
 ﻿using System;
 using OppositeGame._project.Scripts.mechanics.Movement;
+using OppositeGame._project.Scripts.Patterns;
 using OppositeGame._project.Scripts.ScriptablesObjects;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace OppositeGame._project.Scripts.mechanics.Bullets
 {
-    public class Bullet : MonoBehaviour
+    public class Bullet : MonoBehaviour, IPoolable<Bullet>
     {
         [SerializeField] public PolarityType polarityType = PolarityType.None;
         [SerializeField] private BulletType bulletType;
-        public Action<Bullet> OnBulletDestroyed;
+        public Action<Bullet> OnRelease { get; set; }
         public Action OnUpdate;
         
         private float _speed = 1f;
@@ -47,7 +48,7 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
             {
                 DisplayHitEffect();
                 _lifetimeTimer = 0;
-                OnBulletDestroyed?.Invoke(this);
+                OnRelease?.Invoke(this);
             }
 
         }
@@ -56,7 +57,7 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
         {
             DisplayHitEffect();
             _lifetimeTimer = 0;
-            OnBulletDestroyed?.Invoke(this);
+            OnRelease?.Invoke(this);
         }
         
         private void DisplayHitEffect()

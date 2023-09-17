@@ -12,6 +12,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
 
         public override void Fire(Transform startPosition, int layerMask)
         {
+            if(startPosition == null) return;
             // Calculate the angle between the start position and the target position and the angle step for each bullet.
             var targetDirection = startPosition.forward;
             var targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;

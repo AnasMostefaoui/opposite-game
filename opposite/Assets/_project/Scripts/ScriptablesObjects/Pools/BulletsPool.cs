@@ -20,15 +20,29 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Pools
         private GameObject CreateBullet()
         {
             var bullet = Instantiate(bulletType.bulletPrefab);
-            bullet.GetComponent<Bullet>().OnBulletDestroyed ??= (b) => _objectPool.Release(b.gameObject); 
+            bullet.GetComponent<Bullet>().OnRelease ??= (b) => _objectPool.Release(b.gameObject); 
             return bullet;
         }
 
-        private void OnActivation(GameObject objectToActivate) => objectToActivate.SetActive(true);
-        private void OnRemoval(GameObject objectToRemove) =>  objectToRemove.SetActive(false);
+        private void OnActivation(GameObject objectToActivate)
+        {
+            if (objectToActivate != null )
+            {
+                objectToActivate.SetActive(true);
+            } 
+        }
+
+        private void OnRemoval(GameObject objectToRemove)
+        {
+            if (objectToRemove != null )
+            {
+                objectToRemove.SetActive(false);
+            } 
+        }
+
         private void OnPoolCleanup(GameObject objectToDestroy)
         {
-            objectToDestroy.GetComponent<Bullet>().OnBulletDestroyed = null; 
+            objectToDestroy.GetComponent<Bullet>().OnRelease = null; 
             Destroy(objectToDestroy);
         }
     }

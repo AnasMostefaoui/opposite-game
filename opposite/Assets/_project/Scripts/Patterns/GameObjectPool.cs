@@ -13,7 +13,13 @@ namespace OppositeGame._project.Scripts.Patterns
         private readonly Action<T> _onActivation;
         private readonly Action<T> _onDeactivation;
 
-        public GameObjectPool(Func<T> createObject, Action<T> onDestroyObject, Action<T> onActivation, Action<T> onDeactivation)
+        public GameObjectPool(
+            Func<T> createObject, 
+            Action<T> onDestroyObject, 
+            Action<T> onActivation, 
+            Action<T> onDeactivation, 
+            int defaultCapacity = 20, 
+            int maxCapacity = 50)
         {
             _createObject = createObject;
             _onDestroyObject = onDestroyObject;
@@ -25,8 +31,8 @@ namespace OppositeGame._project.Scripts.Patterns
                 OnRemoval,
                 OnDestroy, 
                 true, 
-                20, 
-                50);
+                defaultCapacity, 
+                maxCapacity);
         }
         
         public T Get()

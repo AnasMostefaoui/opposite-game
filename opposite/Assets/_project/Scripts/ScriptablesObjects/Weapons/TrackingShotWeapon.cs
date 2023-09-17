@@ -16,6 +16,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
 
         public override void Fire(Transform startTransform, int layer)
         {
+            if(startTransform == null) return;
             var bullet = GetBullet();
             PrepareBullet(bullet, startTransform, layer);
             bullet.GetComponent<Bullet>().OnUpdate = () =>
