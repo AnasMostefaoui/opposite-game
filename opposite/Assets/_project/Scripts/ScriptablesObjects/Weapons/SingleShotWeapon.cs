@@ -16,8 +16,8 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
             bullet.transform.position = startTransform.position;
             bullet.transform.rotation = startTransform.rotation;
             bullet.transform.SetParent(startTransform);
-            bullet.GetComponent<Bullet>().SetBulletSpeed(bulletSpeed);
-            bullet.layer = layer;
+            bullet.SetBulletSpeed(bulletSpeed);
+            bullet.gameObject.layer = layer;
         }
     }
 }

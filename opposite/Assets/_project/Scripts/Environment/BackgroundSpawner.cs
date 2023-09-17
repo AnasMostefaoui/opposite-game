@@ -26,7 +26,6 @@ namespace OppositeGame._project.Scripts.Environment
         private void Update()
         {
             _offset += (Time.deltaTime * scrollSpeed) * 0.1f;
-            Debug.Log("offset: " + _offset);
             _backgroundMaterial.SetTextureOffset(MainTex, new Vector2(0, _offset));
         }
     }
