@@ -20,9 +20,9 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
         private GameObject _firingEffect;
         private GameObject _bullet;
         private float _lifetimeTimer = 0f;
-        
-        
 
+
+        public float Damage => bulletType.damage;
         public void SetBulletSpeed(float speed)
         {
             _speed = speed;

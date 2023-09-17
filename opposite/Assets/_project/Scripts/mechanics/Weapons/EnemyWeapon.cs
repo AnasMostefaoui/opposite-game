@@ -6,14 +6,14 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
 {
     public class EnemyWeapon : Weapon
     {
-        [SerializeField] private Camera camera;
+        [SerializeField] private Camera cameraObject;
         private float _nextFireTime;
-        private bool IsInViewPort => camera.IsPointInViewport(transform.position);
+        private bool IsInViewPort => cameraObject.IsPointInViewport(transform.position);
         
         private void Awake()
         {
             weaponStrategy.Initialize();
-            camera ??= Camera.main;
+            cameraObject ??= Camera.main;
         }
         
         private void Update()

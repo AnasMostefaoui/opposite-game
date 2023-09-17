@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714f7beddb7e4ef29aee527d33ce98bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  safeZone: 0
 --- !u!114 &-6373034945798254142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154c424793744742b3ce7eeec008f9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  polarityType: 0
   bulletType: {fileID: 11400000, guid: 5d05cdc48f159f4488bdbfc9464f0959, type: 2}
 --- !u!61 &-4663865826744502407
 BoxCollider2D:
