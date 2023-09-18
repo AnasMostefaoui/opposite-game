@@ -735,9 +735,18 @@
             "id": "ce5d3d7c-0ca1-42df-98ef-00531ca3ebdd",
             "actions": [
                 {
-                    "name": "Menu Activation",
+                    "name": "Start",
                     "type": "Button",
                     "id": "72c958bc-8691-46ff-a160-e77f3f0ad50e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Quite",
+                    "type": "Button",
+                    "id": "f5d63a6e-fd70-4849-a0ee-c33191f0ce1a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -752,7 +761,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Menu Activation",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -763,7 +772,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Menu Activation",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -774,7 +783,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Menu Activation",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6da7bd7-9dc6-49ae-8220-97e48fd141c4",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Quite",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

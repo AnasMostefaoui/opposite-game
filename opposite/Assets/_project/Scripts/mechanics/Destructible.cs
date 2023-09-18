@@ -11,7 +11,6 @@ namespace OppositeGame._project.Scripts.mechanics
     {
         [SerializeField] public GameObject destructionEffect;
         [SerializeField] public BulletImpactPool explosionPool;
-        [SerializeField] public String name;
         public Action<GameObject> OnRelease { get; set; }
         private bool _canBeDestroyed = false;
         private float _currentLifePoints = 5f;
@@ -25,7 +24,7 @@ namespace OppositeGame._project.Scripts.mechanics
 
         private void Start()
         {
-            _camera ??= Camera.main;
+            _camera = Camera.main;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

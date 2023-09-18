@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 939722172869613436}
   - component: {fileID: -7552803087856450411}
   - component: {fileID: 7832448692836858872}
+  - component: {fileID: -2166166963791579893}
   m_Layer: 7
   m_Name: enemy_medium_red
   m_TagString: Untagged
@@ -155,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714f7beddb7e4ef29aee527d33ce98bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  safeZone: 0
 --- !u!61 &7832448692836858872
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -181,3 +183,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.39, y: 0.42}
   m_EdgeRadius: 0
+--- !u!114 &-2166166963791579893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5585544413244168349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34aef79fa4340ca8da818f647342175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destructionEffect: {fileID: 0}
+  explosionPool: {fileID: 11400000, guid: f6d90c73af280a2439fda8d933ace054, type: 2}

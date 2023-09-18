@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace OppositeGame._project.Scripts
 {
@@ -6,21 +8,40 @@ namespace OppositeGame._project.Scripts
     {
         MainMenu,
         Game,
+        ContinueScreen,
         GameOver,
         Pause
     }
     
+    public enum GameLevels
+    {
+        Level1 = 0,
+        Level2,
+    }
+
+    
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
+        public event EventHandler OnGameOver;
+        public event EventHandler OnGamePaused;
+        public event EventHandler OnGameResumed;
+        public event EventHandler OnGameStarted;
+        public event EventHandler OnContinueScreen;
+        public event EventHandler OnContinuePlaying;
 
-        [SerializeField] private GameScreen currentScreen = GameScreen.MainMenu;
-        public int Score { get; private set; }
-        public int isGameOver { get; private set; }
-        public int isPaused { get; private set; }
-        public float timeScale { get; private set; }
         
-        public event System.Action<int> OnScoreChanged;
+        [SerializeField] public GameScreen currentScreen = GameScreen.MainMenu;
+        public bool IsGameStarted { get; set; }
+        public bool IsGameOver { get; set; }
+
+        public bool IsPaused
+        {
+            get; 
+            private set;
+        }
+
+        private float TimeScale { get; set; }
         
         private void Awake()
         {
@@ -30,12 +51,113 @@ namespace OppositeGame._project.Scripts
             } 
             
         }
-        
-        public void AddScore(int score)
+
+        private void Update()
         {
-            Score += score;
-            OnScoreChanged?.Invoke(Score);
+            
+            if(IsGameOver && currentScreen != GameScreen.GameOver)
+            {
+                GameIsOver();
+            }
         }
         
+        private void ResetManager()
+        {
+            IsGameOver = false;
+            IsGameStarted = true;
+            IsPaused = false;
+            currentScreen = GameScreen.MainMenu;
+        }
+
+        private void GameIsOver()
+        {
+            IsPaused = true;
+            TimeScale = Time.timeScale;
+            Time.timeScale = 0;
+            
+            currentScreen = GameScreen.GameOver;
+            OnGameOver?.Invoke(this, EventArgs.Empty);
+        }
+        public void StartGame()
+        {
+            IsGameStarted = true;
+            currentScreen = GameScreen.Game;
+            OnGameStarted?.Invoke(null, EventArgs.Empty);
+        }
+        
+        public void Revive()
+        {
+            IsGameOver = false;
+            currentScreen = GameScreen.Game;
+            OnContinuePlaying?.Invoke(null, EventArgs.Empty);
+        }
+        public void Pause()
+        {
+            IsPaused = true;
+            TimeScale = Time.timeScale;
+            Time.timeScale = 0;
+            currentScreen = GameScreen.Pause;
+            OnOnGamePaused();
+        }
+        
+        public void Resume()
+        {
+            IsPaused = false;
+            Time.timeScale = TimeScale;
+            currentScreen = GameScreen.Game;
+            OnGameResumed?.Invoke(null, EventArgs.Empty);
+        }
+
+        public void RestartTheLevel()
+        {
+        }
+        
+        public void RestartFromMainMenu()
+        {
+            currentScreen = GameScreen.MainMenu;   
+        }
+        
+        public void QuiteTheGame()
+        {
+            
+        }
+        
+        
+        private void OnOnGamePaused()
+        {
+            OnGamePaused?.Invoke(null, EventArgs.Empty);
+        }
+
+        #region Cleanup
+
+        private void OnDestroy()
+        {
+            CleanupEventsHandlers();
+        }
+        
+        private void CleanupEventsHandlers()
+        {
+            UnsubscribeFromEvents(OnGameOver);
+            UnsubscribeFromEvents(OnGamePaused);
+            UnsubscribeFromEvents(OnGameResumed);
+            UnsubscribeFromEvents(OnGameStarted);
+            UnsubscribeFromEvents(OnContinueScreen);
+            UnsubscribeFromEvents(OnContinuePlaying);
+        }
+        
+        private void UnsubscribeFromEvents(EventHandler eventHandler)
+        {
+            var subscribers = eventHandler?.GetInvocationList();
+            if (subscribers != null)
+            {
+                foreach (var subscriber in subscribers)
+                {
+                    eventHandler -= subscriber as EventHandler;
+                }
+            }
+        }
+
+
+        #endregion
     }
 }

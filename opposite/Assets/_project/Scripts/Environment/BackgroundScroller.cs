@@ -17,7 +17,6 @@ namespace OppositeGame._project.Scripts.Environment
         {
             _mainCamera ??= Camera.main;
             _backgroundMaterial = GetComponent<SpriteRenderer>().material;
-            Debug.Log("_backgroundMaterial = " + _backgroundMaterial);
         }
 
         private void Update()

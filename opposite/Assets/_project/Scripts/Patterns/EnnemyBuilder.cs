@@ -42,9 +42,6 @@ namespace OppositeGame._project.Scripts.Patterns
             var instance = GameObject.Instantiate(_enemyType.enemyPrefab, _position, _rotation);
             var enemy = instance.GetComponent<Destructible>();
             enemy.LifePoints = _enemyType.health;
-            // bullet from pool?
-            Debug.Log("enemy.health: " + _enemyType.health);
-            Debug.Log("enemy.LifePoints : " + enemy.LifePoints );
             return instance;
         }
     }
