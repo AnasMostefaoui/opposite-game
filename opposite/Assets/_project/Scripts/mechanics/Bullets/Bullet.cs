@@ -30,11 +30,9 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
         
         private void Start()
         {
-            if (bulletType.firingEffectPrefab)
+            if (bulletType.firingEffectPool)
             {
-                _firingEffect = Instantiate(bulletType.firingEffectPrefab, transform.position, Quaternion.identity);
-                _firingEffect.transform.forward = gameObject.transform.forward;
-                _firingEffect.transform.SetParent(transform);
+                bulletType.firingEffectPool.GetHitEffect();
             }
             _camera ??= Camera.main;
         }
@@ -49,28 +47,37 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
             // we release the bullet from the pool if it's destroyed or it's life time is over
             if (_lifetimeTimer >= bulletType.lifeTime)
             {
-                DisplayHitEffect();
                 _lifetimeTimer = 0;
-                OnRelease?.Invoke(this);
+                if (OnRelease != null)
+                {               
+                    OnRelease.Invoke(this);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
 
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            Debug.Log($"Bullet collided with {other.gameObject.name}");
             if(_camera.IsPointInViewport(transform.position) == false) return;
-            DisplayHitEffect();
             _lifetimeTimer = 0;
-            OnRelease?.Invoke(this);
-        }
-        
-        private void DisplayHitEffect()
-        {
-            if (bulletType.hitEffectPrefab)
+            
+            if (OnRelease != null)
+            {               
+                Debug.Log($"OnRelease {other.gameObject.name}");
+                OnRelease.Invoke(this);
+            }
+            else
             {
-                Instantiate(bulletType.hitEffectPrefab, transform.position, Quaternion.identity);
+                Debug.Log($"Destroy {other.gameObject.name}");
+                Destroy(gameObject);
             }
         }
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

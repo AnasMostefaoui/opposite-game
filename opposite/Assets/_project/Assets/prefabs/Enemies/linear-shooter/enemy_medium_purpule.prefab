@@ -42,11 +42,11 @@ GameObject:
   - component: {fileID: 9173432599853947089}
   - component: {fileID: 9173432599853947088}
   - component: {fileID: 9173432599853947095}
-  - component: {fileID: 3615625094555702672}
-  - component: {fileID: 8856969104003794531}
-  - component: {fileID: 6403788127943676743}
-  - component: {fileID: 6451552839375302938}
   - component: {fileID: 7159719615849690097}
+  - component: {fileID: 8856969104003794531}
+  - component: {fileID: 6451552839375302938}
+  - component: {fileID: 3615625094555702672}
+  - component: {fileID: 6403788127943676743}
   - component: {fileID: 1378158430996551938}
   m_Layer: 7
   m_Name: enemy_medium_purpule
@@ -63,7 +63,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9173432599853947094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9, y: -0.11, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -143,19 +143,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &3615625094555702672
-MonoBehaviour:
+--- !u!58 &7159719615849690097
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9173432599853947094}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 005c430968b3d8a4aa3c28e23b7140f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.21
 --- !u!50 &8856969104003794531
 Rigidbody2D:
   serializedVersion: 4
@@ -177,19 +180,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &6403788127943676743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9173432599853947094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 714f7beddb7e4ef29aee527d33ce98bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  safeZone: 0
 --- !u!114 &6451552839375302938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,23 +195,32 @@ MonoBehaviour:
   weaponStrategy: {fileID: 11400000, guid: 66f1c7281a7f81b48a0e2c2ad8e0b60f, type: 2}
   startTransform: {fileID: 6023976145652114661}
   layer: 7
-  cameraObject: {fileID: 0}
---- !u!58 &7159719615849690097
-CircleCollider2D:
+--- !u!114 &3615625094555702672
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9173432599853947094}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.21
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005c430968b3d8a4aa3c28e23b7140f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0}
+--- !u!114 &6403788127943676743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173432599853947094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714f7beddb7e4ef29aee527d33ce98bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  safeZone: 0
 --- !u!114 &1378158430996551938
 MonoBehaviour:
   m_ObjectHideFlags: 0

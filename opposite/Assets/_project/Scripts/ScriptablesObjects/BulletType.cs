@@ -1,5 +1,6 @@
 ﻿using OppositeGame._project.Scripts.mechanics;
 using OppositeGame._project.Scripts.mechanics.Bullets;
+using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.ScriptablesObjects
@@ -8,10 +9,11 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects
     public class BulletType : ScriptableObject
     {
         public Bullet bulletPrefab;
-        public GameObject hitEffectPrefab;
-        public GameObject firingEffectPrefab;
+        public  BulletImpactPool bulletImpactPool;
+        public  BulletImpactPool firingEffectPool;
         
         public float damage = 1f;
+        
         public float lifeTime = 5f;
         // bullet sound
         

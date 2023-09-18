@@ -20,7 +20,6 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
 
         protected void PrepareBullet(Bullet bullet, Transform startPosition, int layerMask, float rotationAngle = 0f)
         {
-            //var bullet = Instantiate(bulletType.bulletPrefab, startTransform.position, startTransform.rotation);
             bullet.transform.position = startPosition.position;
             // rotate to match the start position rotation to avoid messing with the calculation below
             bullet.transform.rotation = startPosition.rotation;
@@ -30,8 +29,13 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
             bullet.gameObject.layer = layerMask;
         }
 
-        protected Bullet GetBullet() => bulletsPool.GetBullet();
-        
+        protected Bullet GetBullet()
+        {
+            var bullet = bulletsPool.GetBullet();
+            bullet.GetComponent<Bullet>().OnUpdate = null;
+            return bullet;
+        }
+
         public abstract void Fire(Transform startPosition, int layerMask);
     }
 }

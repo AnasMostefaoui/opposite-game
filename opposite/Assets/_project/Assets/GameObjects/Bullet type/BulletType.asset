@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317be496101348df8512aa3c67cfb979, type: 3}
-  m_Name: Tracking shot weapon
+  m_Script: {fileID: 11500000, guid: d907b57e8b6e2b9459310507d2fc5f09, type: 3}
+  m_Name: BulletType
   m_EditorClassIdentifier: 
-  fireRate: 4
-  bulletSpeed: 2
-  bulletsPool: {fileID: 11400000, guid: 7001fb01287777b40ab5fff2914ed0f0, type: 2}
-  trackingSpeed: 5
+  bulletPrefab: {fileID: 0}
+  hitEffectPrefab: {fileID: 0}
+  firingEffectPrefab: {fileID: 0}
+  damage: 1
+  lifeTime: 5

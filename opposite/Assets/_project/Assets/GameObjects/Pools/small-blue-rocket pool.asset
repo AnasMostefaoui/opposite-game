@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317be496101348df8512aa3c67cfb979, type: 3}
-  m_Name: Tracking shot weapon
+  m_Script: {fileID: 11500000, guid: b8d2267abec64071b6f134fece29fda0, type: 3}
+  m_Name: small-blue-rocket pool
   m_EditorClassIdentifier: 
-  fireRate: 4
-  bulletSpeed: 2
-  bulletsPool: {fileID: 11400000, guid: 7001fb01287777b40ab5fff2914ed0f0, type: 2}
-  trackingSpeed: 5
+  bulletType: {fileID: 11400000, guid: 395461220ed999641b8d3a2d88bdea97, type: 2}
+  bulletImpactPool: {fileID: 11400000, guid: f6d90c73af280a2439fda8d933ace054, type: 2}

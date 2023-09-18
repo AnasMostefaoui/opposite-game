@@ -11,15 +11,23 @@ namespace OppositeGame
         [SerializeField] private  float maxSpeed = 2f;  // Target speed to reach
         [SerializeField] private  float accelerationRate = 0.2f;  // Rate of acceleration
         [SerializeField] private  float currentSpeed = 0;
+        
+        private bool _canMove = false;
         private void Awake()
         {
             GameManager.Instance.OnGameStarted += StartMoving;
+            GameManager.Instance.OnGameOver += StopMoving;
         }
 
         private void StartMoving(object sender, EventArgs e)
         {
-            
+            _canMove = true;
         }
+        private void StopMoving(object sender, EventArgs e)
+        {
+            _canMove = false;
+        }
+        
 
         private void Start()
         {
@@ -34,6 +42,7 @@ namespace OppositeGame
 
         private void LateUpdate()
         {
+            if(_canMove == false) return;
             // make the camera slowly start moving.
             currentSpeed = Mathf.MoveTowards(currentSpeed, 
                 maxSpeed, 
