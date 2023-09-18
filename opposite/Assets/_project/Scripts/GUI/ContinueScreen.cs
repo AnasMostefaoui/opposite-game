@@ -8,8 +8,11 @@ namespace OppositeGame._project.Scripts.GUI
         [SerializeField] private float continueTime = 13f;
         [SerializeField] private TMPro.TextMeshProUGUI continueTextMesh;
         [SerializeField] private TMPro.TextMeshProUGUI counterTextMesh;
+        
         private float _continueTime;
         private bool _isContinueTimeOver;
+        
+
         private void OnEnable()
         {
             counterTextMesh.text = $"{continueTime}";
@@ -19,6 +22,11 @@ namespace OppositeGame._project.Scripts.GUI
             InvokeRepeating(nameof(UpdateCounter), 2f, 1.5f);
         }
 
+        private void OnDisable()
+        {
+            CancelInvoke(nameof(UpdateCounter));
+        }
+        
         private void UpdateCounter()
         {
             _continueTime -= 1;
@@ -35,9 +43,8 @@ namespace OppositeGame._project.Scripts.GUI
         {
             if (_isContinueTimeOver)
             {
-                Debug.Log("Go to game over screen");
+                GameManager.Instance.IsGameOver = true;
                 gameObject.SetActive(false);
-                // toggle game over in game manager event.
             }
         }
     }

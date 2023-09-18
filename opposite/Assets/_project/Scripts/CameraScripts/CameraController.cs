@@ -17,6 +17,8 @@ namespace OppositeGame
         {
             GameManager.Instance.OnGameStarted += StartMoving;
             GameManager.Instance.OnGameOver += StopMoving;
+            GameManager.Instance.OnContinueScreen += StopMoving;
+            GameManager.Instance.OnContinuePlaying += StartMoving;
         }
 
         private void StartMoving(object sender, EventArgs e)

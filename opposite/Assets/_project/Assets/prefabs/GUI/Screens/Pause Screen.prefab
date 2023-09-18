@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6872779535824492057}
   - component: {fileID: 7364935513478611290}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pause Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -23,10 +23,10 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
 
         private void Update()
         {
-            if (!_inputReader.IsFiring || !(Time.time >= NextFireTime)) return;
-            
+            FireRateCounter += Time.deltaTime;
+            if (!_inputReader.IsFiring || !DidReload) return;
             CurrentWeaponStrategy.Fire(startTransform, layer);
-            NextFireTime = Time.time + CurrentWeaponStrategy.fireRate;
+            FireRateCounter = 0;
         }
         
         // if you take power up change the weapon based on the powerup content

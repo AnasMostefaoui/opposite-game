@@ -10,10 +10,12 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
         
         private void Update()
         {
-            if (!IsInViewPort || !(Time.time >= NextFireTime)) return;
+            //FireRateCounter += Time.deltaTime;
+            
+            if (!IsInViewPort || !DidReload) return;
             
             CurrentWeaponStrategy.Fire(startTransform, layer);
-            NextFireTime = Time.time + CurrentWeaponStrategy.fireRate;
+           // FireRateCounter = 0;
         }
     }
 }

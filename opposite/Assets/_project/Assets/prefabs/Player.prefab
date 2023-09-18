@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 3771306830598780315}
   - component: {fileID: 4368180595708493598}
   - component: {fileID: 6389968755033446741}
+  - component: {fileID: 1762977603503765590}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -410,5 +411,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34aef79fa4340ca8da818f647342175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionEffect: {fileID: 0}
   explosionPool: {fileID: 11400000, guid: f6d90c73af280a2439fda8d933ace054, type: 2}
+--- !u!114 &1762977603503765590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887280348020307328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735bea1d632b4000b91a89f9945d24a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 5
+  currentWeapon: {fileID: 0}

@@ -28,18 +28,19 @@ namespace OppositeGame._project.Scripts
         public event EventHandler OnGameResumed;
         public event EventHandler OnGameStarted;
         public event EventHandler OnContinueScreen;
+        /**
+         * This event is used to notify the ContinueScreen that the player has inserted a coin
+         */
         public event EventHandler OnContinuePlaying;
 
         
         [SerializeField] public GameScreen currentScreen = GameScreen.MainMenu;
         public bool IsGameStarted { get; set; }
+        
+        public bool HasNoLifePoints { get; set; }
         public bool IsGameOver { get; set; }
 
-        public bool IsPaused
-        {
-            get; 
-            private set;
-        }
+        public bool IsPaused { get;   private set;  }
 
         private float TimeScale { get; set; }
         
@@ -54,10 +55,14 @@ namespace OppositeGame._project.Scripts
 
         private void Update()
         {
-            
-            if(IsGameOver && currentScreen != GameScreen.GameOver)
+            switch (currentScreen)
             {
-                GameIsOver();
+                case GameScreen.Game when HasNoLifePoints:
+                    ContinueRequest();
+                    break;
+                case GameScreen.ContinueScreen when IsGameOver:
+                    GameIsOver();
+                    break;
             }
         }
         
@@ -69,12 +74,23 @@ namespace OppositeGame._project.Scripts
             currentScreen = GameScreen.MainMenu;
         }
 
-        private void GameIsOver()
+        private void PauseTime()
         {
             IsPaused = true;
             TimeScale = Time.timeScale;
             Time.timeScale = 0;
-            
+        }
+
+        private void ResumeTime()
+        {
+            IsPaused = false;
+            Time.timeScale = TimeScale;
+            currentScreen = GameScreen.Game;
+        }
+        
+        private void GameIsOver()
+        {
+            PauseTime(); 
             currentScreen = GameScreen.GameOver;
             OnGameOver?.Invoke(this, EventArgs.Empty);
         }
@@ -84,26 +100,31 @@ namespace OppositeGame._project.Scripts
             currentScreen = GameScreen.Game;
             OnGameStarted?.Invoke(null, EventArgs.Empty);
         }
+
+        public void ContinueRequest()
+        {
+            currentScreen = GameScreen.ContinueScreen;
+            OnContinueScreen?.Invoke(this, EventArgs.Empty);
+        }
         
         public void Revive()
         {
             IsGameOver = false;
             currentScreen = GameScreen.Game;
-            OnContinuePlaying?.Invoke(null, EventArgs.Empty);
+            HasNoLifePoints = false;
+            OnContinuePlaying?.Invoke(null, EventArgs.Empty); 
         }
+        
         public void Pause()
         {
-            IsPaused = true;
-            TimeScale = Time.timeScale;
-            Time.timeScale = 0;
+            PauseTime(); 
             currentScreen = GameScreen.Pause;
             OnOnGamePaused();
         }
         
         public void Resume()
         {
-            IsPaused = false;
-            Time.timeScale = TimeScale;
+            ResumeTime();
             currentScreen = GameScreen.Game;
             OnGameResumed?.Invoke(null, EventArgs.Empty);
         }

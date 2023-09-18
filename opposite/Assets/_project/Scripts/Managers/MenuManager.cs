@@ -37,25 +37,25 @@ namespace OppositeGame._project.Scripts.Managers
             _gameOverScreen = Instantiate(gameOverScreenPrefab);
             _pauseScreen = Instantiate(pauseScreenPrefab);
             
+            GameManager.Instance.OnContinueScreen += DisplayContinueScreen;
             GameManager.Instance.OnGameOver += DisplayGameOverScreen;
         }
 
         private void Start()
         {
             DisableAllScreens();
-            
             DisplayStartScreen();
         }
 
         private void OnStartPressed(InputAction.CallbackContext action)
-        {
+        { 
             DisableAllScreens();
             switch (GameManager.Instance.currentScreen)
             {
                 case GameScreen.MainMenu:
                     GameManager.Instance.StartGame();
                     break;
-                case GameScreen.ContinueScreen:
+                case GameScreen.ContinueScreen when GameManager.Instance.IsGameOver == false:
                     GameManager.Instance.Revive();
                     break;
                 case GameScreen.Game:
@@ -66,6 +66,7 @@ namespace OppositeGame._project.Scripts.Managers
                     GameManager.Instance.Resume();
                     break;
                 case GameScreen.GameOver:
+                    // show leaderboard
                     break;
             }
         }
@@ -93,7 +94,7 @@ namespace OppositeGame._project.Scripts.Managers
             _startScreen.gameObject.SetActive(true);
         }
         
-        private void DisplayContinueScreen()
+        private void DisplayContinueScreen(object sender, EventArgs e)
         {
             DisableAllScreens();
             _continueScreen.gameObject.SetActive(true);
@@ -101,9 +102,9 @@ namespace OppositeGame._project.Scripts.Managers
         
         private void DisableAllScreens()
         {
-            _startScreen.gameObject.SetActive(false);
-            _continueScreen.gameObject.SetActive(false);
-            _gameOverScreen.gameObject.SetActive(false);
+            _startScreen.SetActive(false);
+            _continueScreen.SetActive(false);
+            _gameOverScreen.SetActive(false);
         }
 
         private void OnDestroy()

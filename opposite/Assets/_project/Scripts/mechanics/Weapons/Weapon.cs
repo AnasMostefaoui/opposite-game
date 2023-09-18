@@ -14,10 +14,10 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
         [SerializeField] protected int layer;
         
         protected WeaponStrategy CurrentWeaponStrategy;
-        protected float NextFireTime;
+        protected float FireRateCounter;
         protected Camera CameraObject;
-        private IShootingPattern _shootingPattern;  
-        
+        private IShootingPattern _shootingPattern;
+        protected bool DidReload => FireRateCounter >= CurrentWeaponStrategy.fireRate;
         private void OnValidate()
         {
             layer = gameObject.layer;

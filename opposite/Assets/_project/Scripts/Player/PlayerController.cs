@@ -34,8 +34,9 @@ namespace OppositeGame._project.Scripts.Player
 
         private void Update()
         {
+            var deltaTime = GameManager.Instance.IsPaused ? Time.deltaTime : Time.unscaledDeltaTime;
             // calculate the new position based on the input
-            _destination += new Vector3(_inputReader.GetMoveInput.x, _inputReader.GetMoveInput.y, 0) * (speed * Time.unscaledDeltaTime);
+            _destination += new Vector3(_inputReader.GetMoveInput.x, _inputReader.GetMoveInput.y, 0) * (speed * deltaTime);
 
             
             // limit the movement to viewport
@@ -50,7 +51,7 @@ namespace OppositeGame._project.Scripts.Player
             _destination = cameraObject.ViewportToWorldPoint(viewportPosition);
             
             // smooth the movement
-            transform.position = Vector2.Lerp(transform.position, _destination, smoothness * Time.unscaledDeltaTime);
+            transform.position = Vector2.Lerp(transform.position, _destination, smoothness * deltaTime);
         }
     }
 }
