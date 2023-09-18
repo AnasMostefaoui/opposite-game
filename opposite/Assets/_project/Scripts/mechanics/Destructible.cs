@@ -9,18 +9,11 @@ namespace OppositeGame._project.Scripts.mechanics
 {
     public class Destructible : MonoBehaviour, IPoolable<GameObject>
     {
-        [SerializeField] public GameObject destructionEffect;
         [SerializeField] public BulletImpactPool explosionPool;
         public Action<GameObject> OnRelease { get; set; }
-        private bool _canBeDestroyed = false;
-        private float _currentLifePoints = 5f;
         private Camera _camera;
 
-        public float LifePoints
-        {
-            set => _currentLifePoints = value;
-            get => _currentLifePoints;
-        }
+        public float LifePoints { set; get; } = 5f;
 
         private void Start()
         {
@@ -31,19 +24,18 @@ namespace OppositeGame._project.Scripts.mechanics
         {
             if(_camera.IsPointInViewport(transform.position) == false) return;
             var bullet = other.TryGetComponent<Bullet>(out var bulletComponent);
-            if (bullet && _currentLifePoints > 0)
+            if (bullet && LifePoints > 0)
             {
-                _currentLifePoints -= bulletComponent.Damage;
+                LifePoints -= bulletComponent.Damage;
                 
             }
             
-            if (_currentLifePoints <= 0)
+            if (LifePoints <= 0)
             {
                 Debug.Log("Destructible destroyed");
                 DisplayHitEffect();
                 gameObject.SetActive(false);
                 OnRelease?.Invoke(gameObject);
-                
             }
  
         }

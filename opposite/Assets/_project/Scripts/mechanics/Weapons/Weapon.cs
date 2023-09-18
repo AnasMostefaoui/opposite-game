@@ -13,9 +13,10 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
         [FormerlySerializedAs("startPosition")] [SerializeField] protected Transform startTransform;
         [SerializeField] protected int layer;
         
+        protected WeaponStrategy CurrentWeaponStrategy;
         protected float NextFireTime;
         protected Camera CameraObject;
-        private IShootingPattern _shootingPattern; 
+        private IShootingPattern _shootingPattern;  
         
         private void OnValidate()
         {
@@ -24,15 +25,16 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
 
         private void OnEnable()
         {
-            weaponStrategy.Initialize();
+            CurrentWeaponStrategy = weaponStrategy;
+            CurrentWeaponStrategy.Initialize();
             CameraObject = Camera.main;
         }
 
         public void ChangeWeaponStrategy(WeaponStrategy newWeaponStrategy)
         {
-            weaponStrategy = newWeaponStrategy;
-            weaponStrategy.Initialize();
-            weaponStrategy.SetupWeapon();
+            CurrentWeaponStrategy = newWeaponStrategy;
+            CurrentWeaponStrategy.Initialize();
+            CurrentWeaponStrategy.SetupWeapon();
         }
     }
 

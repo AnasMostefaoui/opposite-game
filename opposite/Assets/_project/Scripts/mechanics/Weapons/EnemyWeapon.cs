@@ -8,17 +8,12 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
     { 
         private bool IsInViewPort => CameraObject.IsPointInViewport(transform.position);
         
-        private void Awake()
-        {
-            weaponStrategy.Initialize();
-        }
-        
         private void Update()
         {
             if (!IsInViewPort || !(Time.time >= NextFireTime)) return;
             
-            weaponStrategy.Fire(startTransform, layer);
-            NextFireTime = Time.time + weaponStrategy.fireRate;
+            CurrentWeaponStrategy.Fire(startTransform, layer);
+            NextFireTime = Time.time + CurrentWeaponStrategy.fireRate;
         }
     }
 }
