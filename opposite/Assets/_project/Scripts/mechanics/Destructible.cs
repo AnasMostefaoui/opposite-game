@@ -41,6 +41,7 @@ namespace OppositeGame._project.Scripts.mechanics
             if (_currentLifePoints <= 0)
             {
                 DisplayHitEffect();
+                gameObject.SetActive(false);
                 OnRelease?.Invoke(gameObject);
                 
             }
@@ -52,9 +53,7 @@ namespace OppositeGame._project.Scripts.mechanics
             Debug.Log("DisplayHitEffect: " + _currentLifePoints);
             if (explosionPool)
             {
-                Debug.Log("_currentLifePoints: " + _currentLifePoints);
                 explosionPool.GetHitEffect();
-                gameObject.SetActive(false);
             }
         }
     }

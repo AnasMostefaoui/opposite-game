@@ -25,9 +25,10 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
             weaponStrategy.Initialize();
         }
 
-        public void changeWeaponStrategy(WeaponStrategy newWeaponStrategy)
+        public void ChangeWeaponStrategy(WeaponStrategy newWeaponStrategy)
         {
             weaponStrategy = newWeaponStrategy;
+            weaponStrategy.Initialize();
             weaponStrategy.SetupWeapon();
         }
     }
