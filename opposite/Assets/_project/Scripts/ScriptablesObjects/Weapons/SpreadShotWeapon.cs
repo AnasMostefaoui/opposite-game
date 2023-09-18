@@ -24,8 +24,11 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
             for (var i = 0; i < numberOfBullets; i++)
             {
                 var bullet = GetBullet();
-                PrepareBullet(bullet, startPosition, layerMask, currentAngle);
-                currentAngle += angleStep; 
+                if(bullet)
+                {
+                    PrepareBullet(bullet, startPosition, layerMask, currentAngle);
+                    currentAngle += angleStep; 
+                };  
             }
         }
     }

@@ -10,10 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8873244613950196702}
   - component: {fileID: 5070278103963256829}
-  - component: {fileID: 5257519791562225062}
-  - component: {fileID: 309650151884269628}
-  - component: {fileID: 6769615861105258582}
-  - component: {fileID: 407203865814123648}
+  - component: {fileID: -7990879997008758578}
   m_Layer: 0
   m_Name: bg_blue_galaxy_tile
   m_TagString: Untagged
@@ -56,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: b2b87529cf9c33f4bac4d63b898c8d7e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5257519791562225062
+--- !u!114 &-7990879997008758578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,53 +94,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8930570073573890823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 714f7beddb7e4ef29aee527d33ce98bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c6604f41c8c432b9087adaf4cfb61bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  safeZone: 0
---- !u!114 &309650151884269628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8930570073573890823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea32a7de9c474888b685f69b9b599bad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6769615861105258582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8930570073573890823}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 005c430968b3d8a4aa3c28e23b7140f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: {x: 0, y: -1}
---- !u!50 &407203865814123648
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8930570073573890823}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  scrollSpeed: 0
+  mainCamera: {fileID: 0}
+  backgroundPrefab: {fileID: 0}

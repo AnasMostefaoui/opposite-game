@@ -5,22 +5,19 @@ using UnityEngine.Serialization;
 
 namespace OppositeGame._project.Scripts.Environment
 {
-    public class BackgroundSpawner : MonoBehaviour
+    public class BackgroundScroller : MonoBehaviour
     {
-        [SerializeField][Range(-1, 1)] private float scrollSpeed = 0f;
-        [SerializeField] private Camera mainCamera;
-        [SerializeField] private BackgroundPool objectPool;
-        private GameObject bg;
+        [SerializeField][Range(-1, 1)] private float scrollSpeed = 0f; 
         private static readonly int MainTex = Shader.PropertyToID("_MainTex");
         private Material _backgroundMaterial;
         private float _offset = 0f;
+        private Camera _mainCamera;
+        
         void Start()
         {
-            mainCamera ??= Camera.main;
-            bg = objectPool.GetBackground();
-            bg.transform.SetParent(transform);
-            bg.transform.position = transform.position;
-            _backgroundMaterial = bg.GetComponent<SpriteRenderer>().material;
+            _mainCamera ??= Camera.main;
+            _backgroundMaterial = GetComponent<SpriteRenderer>().material;
+            Debug.Log("_backgroundMaterial = " + _backgroundMaterial);
         }
 
         private void Update()

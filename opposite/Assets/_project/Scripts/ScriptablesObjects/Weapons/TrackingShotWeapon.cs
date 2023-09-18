@@ -18,13 +18,17 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
         {
             if(startTransform == null) return;
             var bullet = GetBullet();
-            PrepareBullet(bullet, startTransform, layer);
-            bullet.GetComponent<Bullet>().OnUpdate = () =>
+            if(bullet)
             {
-                var direction = (_target.position - bullet.transform.position).With(z: 0).normalized;
-                var rotation = Quaternion.LookRotation(Vector3.forward, direction);
-                bullet.transform.LookAt2D(direction, true, trackingSpeed);
-            };
+                PrepareBullet(bullet, startTransform, layer);
+                bullet.GetComponent<Bullet>().OnUpdate = () =>
+                {
+                    var direction = (_target.position - bullet.transform.position).With(z: 0).normalized;
+                    var rotation = Quaternion.LookRotation(Vector3.forward, direction);
+                    bullet.transform.LookAt2D(direction, true, trackingSpeed);
+                };
+            };  
+           
         }
     }
 }

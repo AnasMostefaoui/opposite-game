@@ -9,9 +9,11 @@ namespace OppositeGame._project.Scripts.Inputs
         [SerializeField] public PlayerInput playerInput;
         private InputAction _moveAction;
         private InputAction _fireAction;
+        private InputAction _menuAction;
 
         public Vector2 GetMoveInput => _moveAction.ReadValue<Vector2>();
         public bool IsFiring => _fireAction.ReadValue<float>() > 0f;
+        
 
         private void Start()
         {

@@ -12,12 +12,12 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
         {
             if(startTransform == null) return;
             var bullet = GetBullet();
-            //var bullet = Instantiate(bulletType.bulletPrefab, startTransform.position, startTransform.rotation);
-            bullet.transform.position = startTransform.position;
-            bullet.transform.rotation = startTransform.rotation;
-            bullet.transform.SetParent(startTransform);
-            bullet.SetBulletSpeed(bulletSpeed);
-            bullet.gameObject.layer = layer;
+            
+            if(bullet)
+            {
+                PrepareBullet(bullet, startTransform, layer);
+            };  
+            
         }
     }
 }

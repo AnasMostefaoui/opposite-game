@@ -11,7 +11,7 @@ namespace OppositeGame._project.Scripts.mechanics
     {
         [SerializeField] public GameObject destructionEffect;
         [SerializeField] public BulletImpactPool explosionPool;
-        
+        [SerializeField] public String name;
         public Action<GameObject> OnRelease { get; set; }
         private bool _canBeDestroyed = false;
         private float _currentLifePoints = 5f;
@@ -40,6 +40,7 @@ namespace OppositeGame._project.Scripts.mechanics
             
             if (_currentLifePoints <= 0)
             {
+                Debug.Log("Destructible destroyed");
                 DisplayHitEffect();
                 gameObject.SetActive(false);
                 OnRelease?.Invoke(gameObject);
@@ -50,7 +51,6 @@ namespace OppositeGame._project.Scripts.mechanics
         
         private void DisplayHitEffect()
         {
-            Debug.Log("DisplayHitEffect: " + _currentLifePoints);
             if (explosionPool)
             {
                 explosionPool.GetHitEffect();
