@@ -17,18 +17,33 @@ namespace OppositeGame._project.Scripts.Player
     public class PlayerStatesController  : MonoBehaviour
     {
         [SerializeField] private float lifePoints = 5f;
+        [SerializeField] private float invincibilityTime = 3f;
+        [Range(0.01f, 0.2f)]
+        [SerializeField] private float flickerDuration = 0.01f;
 
         private Destructible _destructible;
         private float _currentLifePoints;
         private Camera _camera;
         private bool _isReviving;
+        private CircleCollider2D _playerCollider;
+        private SpriteRenderer _spriteRenderer;
+        private TrailRenderer _trailRenderer;
+        private Color _originalColor;
 
         public float LifePoints
         {
             set => _destructible.LifePoints = value;
             get => _destructible.LifePoints;
         }
-        
+
+        private void Awake()
+        { 
+            _playerCollider = GetComponent<CircleCollider2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _trailRenderer = GetComponentInChildren<TrailRenderer>();
+            _originalColor = _spriteRenderer.color;
+        }
+
         private void Start()
         {
             _destructible ??= GetComponent<Destructible>();
@@ -47,40 +62,38 @@ namespace OppositeGame._project.Scripts.Player
                 
         private void WillKeepPlaying(object sender, EventArgs e)
         {
-            gameObject.SetActive(true);
-            var playerCollider = GetComponent<CircleCollider2D>();
-            var spriteRenderer = GetComponent<SpriteRenderer>();
-            if (_isReviving == false)
-            {
-                StartCoroutine(RevivePlayer(10, playerCollider, spriteRenderer));
-            } 
+            SetInvincible(true);
+            gameObject.SetActive(true); 
+            StartCoroutine(RevivePlayer(invincibilityTime));
         }
 
-        private IEnumerator RevivePlayer(float seconds, Behaviour playerCollider, SpriteRenderer spriteRenderer)
+        private void SetInvincible(bool invincible)
         {
-            _isReviving = true;
-            // Disable the Collider
-            playerCollider.enabled = false;
+            _playerCollider.enabled = !invincible;
+            _trailRenderer.enabled = !invincible;
+        }
+        
+        private IEnumerator RevivePlayer(float seconds)
+        {
+            _isReviving = true; 
+            SetInvincible(true);
             // add flashing animation
+            var flickerRate = seconds / flickerDuration; 
+            for (int i = 0; i < flickerRate; i++)
+            {
+                _spriteRenderer.color = Color.clear;
+                yield return new WaitForSeconds(flickerDuration);
+                _spriteRenderer.color = _originalColor;
+                yield return new WaitForSeconds(flickerDuration);
+            }   
             
-            // reduce alpha channel
-            float alpha = Mathf.PingPong(Time.time, 1f);
-            spriteRenderer.color = spriteRenderer.color.WithAlpha(alpha);
-            // Wait for the specified duration
-            yield return new WaitForSeconds(seconds);
-
-            // Enable the Collider after the duration has passed
-            playerCollider.enabled = true;
-            spriteRenderer.color = spriteRenderer.color.WithAlpha(1);
-            _isReviving = false;
+            SetInvincible(false);
+            _isReviving = false; 
         }
 
         private void Update()
         {
             
-            var spriteRenderer = GetComponent<SpriteRenderer>();
-            float alpha = Mathf.PingPong(Time.time, 1.0f); // PingPong between 0 and 1
-             spriteRenderer.color = spriteRenderer.color.WithAlpha(alpha);
         }
 
         private void OnDestroy()

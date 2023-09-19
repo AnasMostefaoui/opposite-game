@@ -425,4 +425,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifePoints: 5
-  currentWeapon: {fileID: 0}
+  invincibilityTime: 3
+  flickerDuration: 0.015
