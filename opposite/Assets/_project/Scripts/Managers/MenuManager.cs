@@ -1,14 +1,20 @@
 ﻿using System;
+using System.Collections;
 using OppositeGame._project.Scripts.GUI;
 using OppositeGame._project.Scripts.Inputs;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 using ArgumentOutOfRangeException = System.ArgumentOutOfRangeException;
+using Image = UnityEngine.UI.Image;
 
 namespace OppositeGame._project.Scripts.Managers
 {
     public class MenuManager : MonoBehaviour
     {
+        public static MenuManager Instance { get; private set; }
         [SerializeField] private GameObject startScreenPrefab;
         [SerializeField] private GameObject continueScreenPrefab;
         [SerializeField] private GameObject gameOverScreenPrefab;
@@ -17,14 +23,30 @@ namespace OppositeGame._project.Scripts.Managers
         private PlayerInput _playerInput;
         private InputAction _startAction;
         private InputAction _quiteAction;
-        
+
+        private GameObject _currentScreen;
+        private GameScreen? _transitioningScreen;
         private GameObject _startScreen;
         private GameObject _continueScreen;
         private GameObject _gameOverScreen;
-        private GameObject _pauseScreen;
-        
+        private GameObject _pauseScreen; 
+        private Animator _animationController;
+        private bool _isTransitioning;
+        private bool _freezeInput = false;
+        private static readonly int FadeOutAnimationKey = Animator.StringToHash("shouldFadeOut");
+        private static readonly int FadeInAnimationKey = Animator.StringToHash("shouldFadeIn");
+
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+            
             _playerInput = GetComponent<PlayerInput>();
             _playerInput.SwitchCurrentActionMap("Menu");
             _startAction = _playerInput.actions["Start"];
@@ -32,23 +54,54 @@ namespace OppositeGame._project.Scripts.Managers
             _startAction.performed += OnStartPressed; 
             _quiteAction.performed += OnPausePressed; 
             
-            _startScreen = Instantiate(startScreenPrefab);
-            _continueScreen = Instantiate(continueScreenPrefab);
-            _gameOverScreen = Instantiate(gameOverScreenPrefab);
-            _pauseScreen = Instantiate(pauseScreenPrefab);
-            
+            _startScreen = Instantiate(startScreenPrefab, transform, true);
+            _continueScreen = Instantiate(continueScreenPrefab, transform, true);
+            _gameOverScreen = Instantiate(gameOverScreenPrefab, transform, true);
+            _pauseScreen = Instantiate(pauseScreenPrefab, transform, true);
+            _animationController = GetComponentInChildren<Animator>();
+            _continueScreen.GetComponent<ContinueScreen>().OnLeaving += OnLeavingContinueScreen;
             GameManager.Instance.OnContinueScreen += DisplayContinueScreen;
             GameManager.Instance.OnGameOver += DisplayGameOverScreen;
+            GameManager.Instance.OnMainMenu +=  DisplayStartScreen;
+            
+            DontDestroyOnLoad(this);
+        }
+        
+        private void OnLeavingContinueScreen(GameScreen newScreen)
+        {
+            // if we are on continue and we have 
+            if (newScreen == GameScreen.GameOver)
+            {
+                StartCoroutine(TransitionTo(newScreen, FadeInAnimationKey, () =>
+                {
+                    _continueScreen.SetActive(false);
+                    _currentScreen = _gameOverScreen;
+                    GameManager.Instance.IsGameOver = true;
+                }));
+            }
         }
 
+        private IEnumerator TransitionTo(GameScreen newScreen, int fadingID, Action callback)
+        {
+            _isTransitioning = true;
+            _transitioningScreen = newScreen;
+            // play fadein animation
+            _animationController.SetTrigger(fadingID);
+            yield return new WaitForSeconds(2f);
+            // then change screen
+            callback();
+            _isTransitioning = false;
+        }
+        
         private void Start()
         {
-            DisableAllScreens();
-            DisplayStartScreen();
+            Debug.Log("MenuManager Start");
+            DisplayStartScreen(this, EventArgs.Empty);
         }
-
+        
         private void OnStartPressed(InputAction.CallbackContext action)
         { 
+            if(_isTransitioning) return;
             DisableAllScreens();
             switch (GameManager.Instance.currentScreen)
             {
@@ -65,8 +118,12 @@ namespace OppositeGame._project.Scripts.Managers
                 case GameScreen.Pause:
                     GameManager.Instance.Resume();
                     break;
-                case GameScreen.GameOver:
-                    // show leaderboard
+                case GameScreen.GameOver: 
+                    GameManager.Instance.RestartFromMainMenu(); 
+                    StartCoroutine(TransitionTo(GameScreen.MainMenu,FadeOutAnimationKey, () =>
+                    {
+                        DisplayStartScreen(this, EventArgs.Empty);
+                    })); 
                     break;
             }
         }
@@ -84,20 +141,22 @@ namespace OppositeGame._project.Scripts.Managers
         
         private void DisplayGameOverScreen(object sender, EventArgs e)
         {
-            DisableAllScreens();
-            _gameOverScreen.gameObject.SetActive(true);
+            _currentScreen = _gameOverScreen;
+            _gameOverScreen.SetActive(true);
         }
         
-        private void DisplayStartScreen()
+        private void DisplayStartScreen(object sender, EventArgs e)
         {
             DisableAllScreens();
-            _startScreen.gameObject.SetActive(true);
+            _currentScreen = _startScreen; 
+            _currentScreen.SetActive(true);
         }
         
         private void DisplayContinueScreen(object sender, EventArgs e)
         {
-            DisableAllScreens();
+            _currentScreen.SetActive(false);
             _continueScreen.gameObject.SetActive(true);
+            _currentScreen = _continueScreen;
         }
         
         private void DisableAllScreens()
@@ -111,6 +170,7 @@ namespace OppositeGame._project.Scripts.Managers
         {
             _startAction.performed -= OnStartPressed; 
             _quiteAction.performed -= OnPausePressed;
+            _continueScreen.GetComponent<ContinueScreen>().OnLeaving -= OnLeavingContinueScreen;
             GameManager.Instance.OnGameOver -= DisplayGameOverScreen;
         }
     }

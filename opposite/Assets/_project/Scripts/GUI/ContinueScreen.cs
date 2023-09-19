@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.GUI
@@ -9,8 +10,10 @@ namespace OppositeGame._project.Scripts.GUI
         [SerializeField] private TMPro.TextMeshProUGUI continueTextMesh;
         [SerializeField] private TMPro.TextMeshProUGUI counterTextMesh;
         
+        public Action<GameScreen> OnLeaving;
         private float _continueTime;
         private bool _isContinueTimeOver;
+        private bool _isTransitioningToGameOver;
         
 
         private void OnEnable()
@@ -37,14 +40,23 @@ namespace OppositeGame._project.Scripts.GUI
                 _continueTime = continueTime;
                 _isContinueTimeOver = true;
             }
+            // we an also speed the sound when we get close to 0
         }
-        
+
+        private IEnumerator TransitionTo(GameScreen newScreen)
+        {
+            yield return new WaitForSeconds(2f);
+            // maybe call this on menu manager? game manager?
+            OnLeaving?.Invoke(newScreen);
+        }
         private void Update()
         {
-            if (_isContinueTimeOver)
+            if (_isContinueTimeOver && _isTransitioningToGameOver == false)
             {
-                GameManager.Instance.IsGameOver = true;
-                gameObject.SetActive(false);
+                _isTransitioningToGameOver = true;
+                // let the player see this screen with 0 time (maybe allow safe time)
+                // then transition to game over
+                StartCoroutine(TransitionTo(GameScreen.GameOver));
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace OppositeGame._project.Scripts
@@ -32,6 +33,7 @@ namespace OppositeGame._project.Scripts
          * This event is used to notify the ContinueScreen that the player has inserted a coin
          */
         public event EventHandler OnContinuePlaying;
+        public event EventHandler OnMainMenu;
 
         
         [SerializeField] public GameScreen currentScreen = GameScreen.MainMenu;
@@ -46,10 +48,16 @@ namespace OppositeGame._project.Scripts
         
         private void Awake()
         {
-            if (Instance == null)
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
             {
                 Instance = this;
-            } 
+            }
+            
+            DontDestroyOnLoad(this);
             
         }
 
@@ -66,12 +74,15 @@ namespace OppositeGame._project.Scripts
             }
         }
         
-        private void ResetManager()
+        private void ResetToMainMenu()
         {
+            HasNoLifePoints = false; // default life points
+            IsGameStarted = false;
             IsGameOver = false;
-            IsGameStarted = true;
             IsPaused = false;
             currentScreen = GameScreen.MainMenu;
+            Time.timeScale = TimeScale;
+            OnMainMenu?.Invoke(this, EventArgs.Empty);
         }
 
         private void PauseTime()
@@ -85,7 +96,6 @@ namespace OppositeGame._project.Scripts
         {
             IsPaused = false;
             Time.timeScale = TimeScale;
-            currentScreen = GameScreen.Game;
         }
         
         private void GameIsOver()
@@ -135,7 +145,9 @@ namespace OppositeGame._project.Scripts
         
         public void RestartFromMainMenu()
         {
-            currentScreen = GameScreen.MainMenu;   
+            ResetToMainMenu();
+            // int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            // SceneManager.LoadScene(currentSceneIndex);
         }
         
         public void QuiteTheGame()

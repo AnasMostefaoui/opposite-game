@@ -51,9 +51,15 @@ namespace OppositeGame._project.Scripts.Player
             _camera ??= Camera.main;
             GameManager.Instance.OnContinueScreen += OnContinueScreen;
             GameManager.Instance.OnContinuePlaying += WillKeepPlaying;
+            GameManager.Instance.OnMainMenu += OnMainMenu;
         }
 
-                
+        private void OnMainMenu(object sender, EventArgs e)
+        {
+            gameObject.SetActive(true);
+        }
+
+
         private void OnContinueScreen(object sender, EventArgs e)
         {
             gameObject.SetActive(false);
@@ -90,16 +96,12 @@ namespace OppositeGame._project.Scripts.Player
             SetInvincible(false);
             _isReviving = false; 
         }
-
-        private void Update()
-        {
-            
-        }
-
+        
         private void OnDestroy()
         {
             GameManager.Instance.OnContinueScreen -= OnContinueScreen;
             GameManager.Instance.OnContinuePlaying -= WillKeepPlaying;
+            GameManager.Instance.OnMainMenu -= OnMainMenu;
         }
     }
 }
