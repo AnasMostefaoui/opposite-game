@@ -18,6 +18,7 @@ namespace OppositeGame._project.Scripts.GUI
 
         private void OnEnable()
         {
+            GameManager.Instance.currentScreen = GameScreen.ContinueScreen;
             counterTextMesh.text = $"{continueTime}";
             _continueTime = continueTime;
             // The continue screen in arcade don''t always respect the time

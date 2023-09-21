@@ -143,10 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d141d6763348fa891528eb6d3b8218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScreenPrefab: {fileID: 0}
-  continueScreenPrefab: {fileID: 0}
-  gameOverScreenPrefab: {fileID: 0}
-  pauseScreenPrefab: {fileID: 0}
+  startScreenPrefab: {fileID: 8188964749470666661, guid: 679bc0d31a753864f936c6aef67c5562, type: 3}
+  continueScreenPrefab: {fileID: 7677534582857747315, guid: 235a0b073598873449497af6a7e396a4, type: 3}
+  gameOverScreenPrefab: {fileID: 1882142360159862167, guid: a52453ee962636d4fbe29d0aa2ce0acc, type: 3}
+  pauseScreenPrefab: {fileID: 3243158266476183841, guid: a581a2575380c3541bebffaf4249be5d, type: 3}
 --- !u!114 &6895600197862406950
 MonoBehaviour:
   m_ObjectHideFlags: 0

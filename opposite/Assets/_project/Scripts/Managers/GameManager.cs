@@ -58,6 +58,7 @@ namespace OppositeGame._project.Scripts
             }
             
             DontDestroyOnLoad(this);
+            TimeScale = Time.timeScale;
             
         }
 
@@ -88,14 +89,13 @@ namespace OppositeGame._project.Scripts
         private void PauseTime()
         {
             IsPaused = true;
-            TimeScale = Time.timeScale;
             Time.timeScale = 0;
         }
 
         private void ResumeTime()
         {
             IsPaused = false;
-            Time.timeScale = TimeScale;
+            Time.timeScale = 1;
         }
         
         private void GameIsOver()
@@ -128,14 +128,12 @@ namespace OppositeGame._project.Scripts
         public void Pause()
         {
             PauseTime(); 
-            currentScreen = GameScreen.Pause;
             OnOnGamePaused();
         }
         
         public void Resume()
         {
             ResumeTime();
-            currentScreen = GameScreen.Game;
             OnGameResumed?.Invoke(null, EventArgs.Empty);
         }
 

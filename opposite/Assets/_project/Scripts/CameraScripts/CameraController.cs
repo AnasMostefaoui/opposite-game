@@ -1,5 +1,6 @@
 ﻿using System;
 using OppositeGame._project.Scripts;
+using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
 namespace OppositeGame
@@ -19,6 +20,12 @@ namespace OppositeGame
             GameManager.Instance.OnGameOver += StopMoving;
             GameManager.Instance.OnContinueScreen += StopMoving;
             GameManager.Instance.OnContinuePlaying += StartMoving;
+            GameManager.Instance.OnMainMenu += ResetPosition;
+        }
+
+        private void ResetPosition(object sender, EventArgs e)
+        {
+            transform.position = transform.position.With(x: 0).With(y: 0);
         }
 
         private void StartMoving(object sender, EventArgs e)
@@ -53,6 +60,15 @@ namespace OppositeGame
             
             // we want the camera to move last.
             transform.position += Vector3.up * (currentSpeed * Time.deltaTime);
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.Instance.OnGameStarted -= StartMoving;
+            GameManager.Instance.OnGameOver -= StopMoving;
+            GameManager.Instance.OnContinueScreen -= StopMoving;
+            GameManager.Instance.OnContinuePlaying -= StartMoving;
+            GameManager.Instance.OnMainMenu -= ResetPosition;
         }
     }
 }

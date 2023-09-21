@@ -23,6 +23,9 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
 
         private void Update()
         {
+            var currentScreen = GameManager.Instance.currentScreen;
+            // enable the player to test the weapon in the main menu
+            if(currentScreen != GameScreen.Game && currentScreen != GameScreen.MainMenu ) return;
             FireRateCounter += Time.deltaTime;
             if (!_inputReader.IsFiring || !DidReload) return;
             CurrentWeaponStrategy.Fire(startTransform, layer);

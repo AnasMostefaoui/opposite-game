@@ -1,4 +1,6 @@
+using System;
 using OppositeGame._project.Scripts.Inputs;
+using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.Player
@@ -30,6 +32,12 @@ namespace OppositeGame._project.Scripts.Player
                 cameraObject = Camera.main;
             }
             _destination = transform.position;
+            GameManager.Instance.OnMainMenu += OnMainMenu;
+        }
+
+        private void OnMainMenu(object sender, EventArgs e)
+        {
+            transform.position = transform.position.With(x: 0).With(y: 0);
         }
 
         private void Update()
@@ -38,7 +46,10 @@ namespace OppositeGame._project.Scripts.Player
             // calculate the new position based on the input
             _destination += new Vector3(_inputReader.GetMoveInput.x, _inputReader.GetMoveInput.y, 0) * (speed * deltaTime);
 
-            
+            if(_inputReader.GetMoveInput.x > 0 )
+            Debug.Log("Input X "+ _inputReader.GetMoveInput.x);
+            if(_inputReader.GetMoveInput.y > 0 )
+            Debug.Log("Input Y " + _inputReader.GetMoveInput.y);
             // limit the movement to viewport
             // first, convert the destination world position to viewport position 
             var viewportPosition = cameraObject.WorldToViewportPoint(_destination);
@@ -52,6 +63,11 @@ namespace OppositeGame._project.Scripts.Player
             
             // smooth the movement
             transform.position = Vector2.Lerp(transform.position, _destination, smoothness * deltaTime);
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.Instance.OnMainMenu -= OnMainMenu;
         }
     }
 }

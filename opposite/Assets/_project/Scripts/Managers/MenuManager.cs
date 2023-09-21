@@ -32,7 +32,6 @@ namespace OppositeGame._project.Scripts.Managers
         private GameObject _pauseScreen; 
         private Animator _animationController;
         private bool _isTransitioning;
-        private bool _freezeInput = false;
         private static readonly int FadeOutAnimationKey = Animator.StringToHash("shouldFadeOut");
         private static readonly int FadeInAnimationKey = Animator.StringToHash("shouldFadeIn");
 
@@ -58,6 +57,7 @@ namespace OppositeGame._project.Scripts.Managers
             _continueScreen = Instantiate(continueScreenPrefab, transform, true);
             _gameOverScreen = Instantiate(gameOverScreenPrefab, transform, true);
             _pauseScreen = Instantiate(pauseScreenPrefab, transform, true);
+            
             _animationController = GetComponentInChildren<Animator>();
             _continueScreen.GetComponent<ContinueScreen>().OnLeaving += OnLeavingContinueScreen;
             GameManager.Instance.OnContinueScreen += DisplayContinueScreen;
@@ -69,6 +69,7 @@ namespace OppositeGame._project.Scripts.Managers
         
         private void OnLeavingContinueScreen(GameScreen newScreen)
         {
+            Debug.Log("OnLeavingContinueScreen");
             // if we are on continue and we have 
             if (newScreen == GameScreen.GameOver)
             {
@@ -95,7 +96,6 @@ namespace OppositeGame._project.Scripts.Managers
         
         private void Start()
         {
-            Debug.Log("MenuManager Start");
             DisplayStartScreen(this, EventArgs.Empty);
         }
         
@@ -110,10 +110,6 @@ namespace OppositeGame._project.Scripts.Managers
                     break;
                 case GameScreen.ContinueScreen when GameManager.Instance.IsGameOver == false:
                     GameManager.Instance.Revive();
-                    break;
-                case GameScreen.Game:
-                    GameManager.Instance.Pause();
-                    DisplayPauseScreen();
                     break;
                 case GameScreen.Pause:
                     GameManager.Instance.Resume();
@@ -130,13 +126,14 @@ namespace OppositeGame._project.Scripts.Managers
         
         private void OnPausePressed(InputAction.CallbackContext action)
         {
+            // provide the player the possibility to leave the game from to desktop at any moment.
             DisplayPauseScreen();
         }
 
         private void DisplayPauseScreen()
         {
             DisableAllScreens();
-            _continueScreen.gameObject.SetActive(true);
+            _pauseScreen.gameObject.SetActive(true);
         }
         
         private void DisplayGameOverScreen(object sender, EventArgs e)
@@ -164,6 +161,7 @@ namespace OppositeGame._project.Scripts.Managers
             _startScreen.SetActive(false);
             _continueScreen.SetActive(false);
             _gameOverScreen.SetActive(false);
+            _pauseScreen.SetActive(false);
         }
 
         private void OnDestroy()

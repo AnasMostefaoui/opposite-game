@@ -50,6 +50,8 @@ namespace OppositeGame._project.Scripts.Spawners
         {
             get
             {
+                if(GameManager.Instance.currentScreen == GameScreen.ContinueScreen) return false;
+                
                 var isTimeToSpawn = Time.time >= _nextSpawnTime;
                 var isMaxEnemies = _enemyCount >= maxEnemies;
                 // make sure the activation point of the spawner is inside the camera viewport to start spawning
