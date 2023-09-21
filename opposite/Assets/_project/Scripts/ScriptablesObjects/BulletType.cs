@@ -1,5 +1,6 @@
 ﻿using OppositeGame._project.Scripts.mechanics;
 using OppositeGame._project.Scripts.mechanics.Bullets;
+using OppositeGame._project.Scripts.mechanics.Magnetism;
 using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
 using UnityEngine;
 
@@ -9,8 +10,9 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects
     public class BulletType : ScriptableObject
     {
         public Bullet bulletPrefab;
-        public  BulletImpactPool bulletImpactPool;
-        public  BulletImpactPool firingEffectPool;
+        public BulletImpactPool bulletImpactPool;
+        public BulletImpactPool firingEffectPool;
+        public PolarityType polarityType = PolarityType.Blue;
         
         public float damage = 1f;
         

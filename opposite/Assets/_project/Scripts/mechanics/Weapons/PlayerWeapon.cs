@@ -1,9 +1,6 @@
-﻿using System;
-using OppositeGame._project.Scripts.Inputs;
+﻿using OppositeGame._project.Scripts.Inputs;
 using OppositeGame._project.Scripts.mechanics.Collectibles;
-using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
-using OppositeGame._project.Scripts.ScriptablesObjects.Weapons;
-using Unity.VisualScripting;
+using OppositeGame._project.Scripts.mechanics.Magnetism;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.mechanics.weapons
@@ -11,6 +8,7 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
     public class PlayerWeapon : Weapon
     {
         private InputReader _inputReader; 
+        private PolarityType _polarity; 
         private void Awake()
         {
             _inputReader = GetComponent<InputReader>();
@@ -28,7 +26,7 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
             if(currentScreen != GameScreen.Game && currentScreen != GameScreen.MainMenu ) return;
             FireRateCounter += Time.deltaTime;
             if (!_inputReader.IsFiring || !DidReload) return;
-            CurrentWeaponStrategy.Fire(startTransform, layer);
+            CurrentWeaponStrategy.Fire(startTransform, layer, _polarity);
             FireRateCounter = 0;
         }
         

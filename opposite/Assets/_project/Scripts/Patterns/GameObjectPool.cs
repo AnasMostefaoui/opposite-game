@@ -35,34 +35,11 @@ namespace OppositeGame._project.Scripts.Patterns
                 maxCapacity);
         }
         
-        public T Get()
-        {
-            return _objectPool.Get();
-        }
-        
-        public void Release(T gameObject)
-        {
-            _objectPool.Release(gameObject);
-        }
-        
-        private T CreateBullet()
-        {
-            return  _createObject?.Invoke();
-        }
-        
-        private void OnRequest(T gameObject)
-        {
-            _onActivation?.Invoke(gameObject);
-        }
-        
-        private void OnRemoval(T gameObject)
-        {
-            _onDeactivation?.Invoke(gameObject);
-        }
-        
-        private void OnDestroy(T gameObject)
-        {
-            _onDestroyObject?.Invoke(gameObject);
-        }
+        public T Get() =>  _objectPool.Get();
+        public void Release(T gameObject) => _objectPool.Release(gameObject);
+        private T CreateBullet() => _createObject?.Invoke();
+        private void OnRequest(T gameObject) => _onActivation?.Invoke(gameObject);
+        private void OnRemoval(T gameObject) => _onDeactivation?.Invoke(gameObject);
+        private void OnDestroy(T gameObject) => _onDestroyObject?.Invoke(gameObject);
     }
 }

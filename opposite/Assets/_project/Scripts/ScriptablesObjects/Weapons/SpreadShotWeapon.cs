@@ -1,4 +1,5 @@
 ﻿using OppositeGame._project.Scripts.mechanics.Bullets;
+using OppositeGame._project.Scripts.mechanics.Magnetism;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,7 +11,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
         [SerializeField] private float spreadAngle;
         [SerializeField] private int numberOfBullets;
 
-        public override void Fire(Transform startPosition, int layerMask)
+        public override void Fire(Transform startPosition, int layerMask, PolarityType polarity = PolarityType.Blue)
         {
             if(startPosition == null) return;
             // Calculate the angle between the start position and the target position and the angle step for each bullet.

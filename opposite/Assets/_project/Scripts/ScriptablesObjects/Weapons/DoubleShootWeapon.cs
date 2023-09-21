@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using OppositeGame._project.Scripts.mechanics.Magnetism;
+using UnityEngine;
 
 namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
 {
@@ -6,7 +7,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
     public class DoubleShootWeapon : WeaponStrategy
     {
         [SerializeField] private float spacing = 2f;
-        public override void Fire(Transform startTransform, int layer)
+        public override void Fire(Transform startTransform, int layer, PolarityType polarity = PolarityType.Blue )
         {
             if(startTransform == null) return;
             

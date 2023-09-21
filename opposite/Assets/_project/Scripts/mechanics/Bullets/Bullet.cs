@@ -3,6 +3,7 @@ using OppositeGame._project.Scripts.mechanics.Magnetism;
 using OppositeGame._project.Scripts.mechanics.Movement;
 using OppositeGame._project.Scripts.Patterns;
 using OppositeGame._project.Scripts.ScriptablesObjects;
+using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -11,8 +12,9 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
 {
     public class Bullet : MonoBehaviour, IPoolable<Bullet>
     {
-        [SerializeField] public PolarityType polarityType = PolarityType.None;
+        [SerializeField] public PolarityType PolarityType = PolarityType.Blue;
         [SerializeField] private BulletType bulletType; 
+        [SerializeField] public BulletImpactPool bulletImpactPool;
         public Action<Bullet> OnRelease { get; set; }
         public Action OnUpdate;
         
@@ -48,15 +50,7 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
             // we release the bullet from the pool if it's destroyed or it's life time is over
             if (_lifetimeTimer >= bulletType.lifeTime)
             {
-                _lifetimeTimer = 0;
-                if (OnRelease != null)
-                {               
-                    OnRelease.Invoke(this);
-                }
-                else
-                {
-                    Destroy(gameObject);
-                }
+                Recycle();
             }
 
         }
@@ -65,18 +59,20 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
         {
             Debug.Log($"Bullet collided with {other.gameObject.name}");
             if(_camera.IsPointInViewport(transform.position) == false) return;
+            Recycle();
+        }
+
+        private void Recycle()
+        {
+            Debug.Log("Recycling bullet");
             _lifetimeTimer = 0;
-            
-            if (OnRelease != null)
-            {               
-                Debug.Log($"OnRelease {other.gameObject.name}");
-                OnRelease.Invoke(this);
-            }
-            else
+            if (bulletImpactPool)
             {
-                Debug.Log($"Destroy {other.gameObject.name}");
-                Destroy(gameObject);
+                var hitEffect = bulletImpactPool.GetHitEffect();
+                hitEffect.transform.position = transform.position;
+                hitEffect.Play();
             }
+            ObjectPoolManager.Recycle(gameObject);
         }
         
         private void OnDrawGizmos()

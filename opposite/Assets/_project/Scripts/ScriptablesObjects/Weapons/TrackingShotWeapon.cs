@@ -1,4 +1,5 @@
 ﻿using OppositeGame._project.Scripts.mechanics.Bullets;
+using OppositeGame._project.Scripts.mechanics.Magnetism;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
@@ -14,17 +15,16 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
             _target = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
-        public override void Fire(Transform startTransform, int layer)
+        public override void Fire(Transform startTransform, int layer, PolarityType polarity = PolarityType.Blue)
         {
             if(startTransform == null) return;
             var bullet = GetBullet();
             if(bullet)
             {
                 PrepareBullet(bullet, startTransform, layer);
-                bullet.GetComponent<Bullet>().OnUpdate = () =>
+                bullet.OnUpdate = () =>
                 {
                     var direction = (_target.position - bullet.transform.position).With(z: 0).normalized;
-                    var rotation = Quaternion.LookRotation(Vector3.forward, direction);
                     bullet.transform.LookAt2D(direction, true, trackingSpeed);
                 };
             };  
