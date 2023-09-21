@@ -190,7 +190,8 @@ GameObject:
   - component: {fileID: 4368180595708493598}
   - component: {fileID: 6389968755033446741}
   - component: {fileID: 1762977603503765590}
-  - component: {fileID: 4973021585300777831}
+  - component: {fileID: 6802752045113911258}
+  - component: {fileID: 3630868533795655446}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -428,7 +429,7 @@ MonoBehaviour:
   lifePoints: 5
   invincibilityTime: 3
   flickerDuration: 0.015
---- !u!114 &4973021585300777831
+--- !u!114 &6802752045113911258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -437,7 +438,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1887280348020307328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 071926de00e543faaa3e5e6c21a4b98e, type: 3}
+  m_Script: {fileID: 11500000, guid: b36103a5d3324c44aab96d24a806470b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  polarityType: 0
+  PolarityType: 0
+--- !u!114 &3630868533795655446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887280348020307328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec20829dc2e44b3a0fa83dda33d2565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  smoothness: 10
+  cameraObject: {fileID: 0}
+  horizontalPadding: 0.03
+  verticalPadding: 0.08
