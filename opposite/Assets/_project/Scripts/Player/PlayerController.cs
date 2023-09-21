@@ -21,6 +21,7 @@ namespace OppositeGame._project.Scripts.Player
         [Range(0.03f, 1f)] [SerializeField] private float horizontalPadding = 0.03f;
         [Range(0.08f, 1f)] [SerializeField] private float verticalPadding = 0.08f;
 
+        private Animator _animationController;
         private InputReader _inputReader;
         private Vector3 _destination;
 
@@ -32,6 +33,7 @@ namespace OppositeGame._project.Scripts.Player
                 cameraObject = Camera.main;
             }
             _destination = transform.position;
+            _animationController = GetComponent<Animator>();
             GameManager.Instance.OnMainMenu += OnMainMenu;
         }
 
@@ -45,11 +47,13 @@ namespace OppositeGame._project.Scripts.Player
             var deltaTime = GameManager.Instance.IsPaused ? Time.deltaTime : Time.unscaledDeltaTime;
             // calculate the new position based on the input
             _destination += new Vector3(_inputReader.GetMoveInput.x, _inputReader.GetMoveInput.y, 0) * (speed * deltaTime);
-
-            if(_inputReader.GetMoveInput.x > 0 )
-            Debug.Log("Input X "+ _inputReader.GetMoveInput.x);
-            if(_inputReader.GetMoveInput.y > 0 )
-            Debug.Log("Input Y " + _inputReader.GetMoveInput.y);
+            
+            Debug.Log(_inputReader.GetMoveInput.x < 0.1);
+            _animationController.SetBool("isMovingLeft", _inputReader.GetMoveInput.x < 0);
+            _animationController.SetBool("isMovingRight", _inputReader.GetMoveInput.x > 0);
+            _animationController.SetBool("isBlue", _inputReader.GetMoveInput.x >= 0);
+            _animationController.SetBool("isRed", _inputReader.GetMoveInput.x < 0);
+            
             // limit the movement to viewport
             // first, convert the destination world position to viewport position 
             var viewportPosition = cameraObject.WorldToViewportPoint(_destination);

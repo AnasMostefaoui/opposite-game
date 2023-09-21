@@ -1,4 +1,5 @@
 ﻿using System;
+using OppositeGame._project.Scripts.mechanics.Magnetism;
 using OppositeGame._project.Scripts.mechanics.Movement;
 using OppositeGame._project.Scripts.Patterns;
 using OppositeGame._project.Scripts.ScriptablesObjects;
