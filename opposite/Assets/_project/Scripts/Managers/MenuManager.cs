@@ -69,19 +69,23 @@ namespace OppositeGame._project.Scripts.Managers
         
         private void OnLeavingContinueScreen(GameScreen newScreen)
         {
-            Debug.Log("OnLeavingContinueScreen");
             // if we are on continue and we have 
             if (newScreen == GameScreen.GameOver)
             {
-                StartCoroutine(TransitionTo(newScreen, FadeInAnimationKey, () =>
-                {
-                    _continueScreen.SetActive(false);
-                    _currentScreen = _gameOverScreen;
-                    GameManager.Instance.IsGameOver = true;
-                }));
+                LeaveScreen(newScreen, () => DisplayGameOverScreen(this, EventArgs.Empty));
             }
         }
 
+        private void EnterScreen(GameScreen newScreen, Action callback)
+        {
+            StartCoroutine(TransitionTo(newScreen, FadeOutAnimationKey, callback));
+        }
+
+        private void LeaveScreen(GameScreen newScreen, Action callback)
+        {
+            StartCoroutine(TransitionTo(newScreen, FadeInAnimationKey, callback));
+        }
+        
         private IEnumerator TransitionTo(GameScreen newScreen, int fadingID, Action callback)
         {
             _isTransitioning = true;
@@ -96,7 +100,8 @@ namespace OppositeGame._project.Scripts.Managers
         
         private void Start()
         {
-            DisplayStartScreen(this, EventArgs.Empty);
+            DisableAllScreens();
+            EnterScreen(GameScreen.MainMenu, () => DisplayStartScreen(this, EventArgs.Empty) );
         }
         
         private void OnStartPressed(InputAction.CallbackContext action)
@@ -116,10 +121,7 @@ namespace OppositeGame._project.Scripts.Managers
                     break;
                 case GameScreen.GameOver: 
                     GameManager.Instance.RestartFromMainMenu(); 
-                    StartCoroutine(TransitionTo(GameScreen.MainMenu,FadeOutAnimationKey, () =>
-                    {
-                        DisplayStartScreen(this, EventArgs.Empty);
-                    })); 
+                    EnterScreen(GameScreen.MainMenu,() => DisplayStartScreen(this, EventArgs.Empty));
                     break;
             }
         }
@@ -140,6 +142,7 @@ namespace OppositeGame._project.Scripts.Managers
         {
             _currentScreen = _gameOverScreen;
             _gameOverScreen.SetActive(true);
+            GameManager.Instance.IsGameOver = true;
         }
         
         private void DisplayStartScreen(object sender, EventArgs e)

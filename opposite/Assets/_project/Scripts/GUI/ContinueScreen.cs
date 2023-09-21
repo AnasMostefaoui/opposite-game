@@ -11,10 +11,16 @@ namespace OppositeGame._project.Scripts.GUI
         [SerializeField] private TMPro.TextMeshProUGUI counterTextMesh;
         
         public Action<GameScreen> OnLeaving;
+        private CanvasGroup _canvasGroup;
         private float _continueTime;
         private bool _isContinueTimeOver;
         private bool _isTransitioningToGameOver;
-        
+
+
+        private void Awake()
+        {
+            _canvasGroup = GetComponentInChildren<CanvasGroup>();
+        }
 
         private void OnEnable()
         {
@@ -24,6 +30,7 @@ namespace OppositeGame._project.Scripts.GUI
             // The continue screen in arcade don''t always respect the time
             // some will even slow when you get closer to 0 to give more chances to the player to insert a coin
             InvokeRepeating(nameof(UpdateCounter), 2f, 1.5f);
+            _canvasGroup.alpha = 1f;
         }
 
         private void OnDisable()
@@ -46,10 +53,22 @@ namespace OppositeGame._project.Scripts.GUI
 
         private IEnumerator TransitionTo(GameScreen newScreen)
         {
-            yield return new WaitForSeconds(2f);
             // maybe call this on menu manager? game manager?
             OnLeaving?.Invoke(newScreen);
+            yield return FadeOut();
+            _isTransitioningToGameOver = false;
+            _isContinueTimeOver = false;
         }
+        
+        IEnumerator FadeOut()
+        {
+            while (_canvasGroup.alpha > 0)
+            {
+                _canvasGroup.alpha -= 0.1f;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        
         private void Update()
         {
             if (_isContinueTimeOver && _isTransitioningToGameOver == false)
