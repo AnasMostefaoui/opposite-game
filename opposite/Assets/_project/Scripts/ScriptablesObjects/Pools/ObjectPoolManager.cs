@@ -20,10 +20,8 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Pools
             var pooledObject = pool.InactiveObjects.FirstOrDefault();
             if (pooledObject == null)
             {
-                Debug.Log("create");
                 return Instantiate(gameObject);
             }
-            Debug.Log("REmove from inactive");
             pool.InactiveObjects.RemoveAt(0);
             pooledObject.SetActive(true);
             

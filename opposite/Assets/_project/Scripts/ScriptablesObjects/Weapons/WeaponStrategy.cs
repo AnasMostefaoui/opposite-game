@@ -10,11 +10,13 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
     {
         [SerializeField] public float fireRate = 1f;
         [SerializeField] public float bulletSpeed = 1f;
-        [SerializeField] public BulletsPool bulletsPool;
+        [SerializeField] public BulletType bulletType;
         
         public virtual void Initialize() { }
-        
-        public virtual void SetupWeapon() { }
+
+        public virtual void SetupWeapon()
+        {
+        }
 
         protected void PrepareBullet(Bullet bullet, Transform startPosition, int layerMask, float rotationAngle = 0f)
         {
@@ -27,10 +29,10 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
             bullet.gameObject.layer = layerMask;
         }
 
-        protected Bullet GetBullet(PolarityType polarity = PolarityType.Blue, String Tag)
+        protected Bullet GetBullet(PolarityType polarity = PolarityType.Blue)
         {
-            Debug.Log("ss " + bulletsPool);
-            var bullet =  ObjectPoolManager.Retrieve()
+            var instance = ObjectPoolManager.Retrieve(bulletType.bulletPrefab.gameObject);
+            var bullet = instance.GetComponent<Bullet>();
             bullet.OnUpdate = null;
             bullet.PolarityType = polarity;
             return bullet;

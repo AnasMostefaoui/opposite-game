@@ -183,15 +183,15 @@ GameObject:
   - component: {fileID: 1887280348020307358}
   - component: {fileID: 1887280348020307359}
   - component: {fileID: 8846388534123453194}
-  - component: {fileID: 1485881487096179879}
   - component: {fileID: 4892209692315037896}
+  - component: {fileID: 3630868533795655446}
+  - component: {fileID: 1485881487096179879}
   - component: {fileID: 5948345766406294402}
   - component: {fileID: 3771306830598780315}
   - component: {fileID: 4368180595708493598}
   - component: {fileID: 6389968755033446741}
   - component: {fileID: 1762977603503765590}
   - component: {fileID: 6802752045113911258}
-  - component: {fileID: 3630868533795655446}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -318,24 +318,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1485881487096179879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887280348020307328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0766005420d7d94da3943de30fb9c56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  smoothness: 10
-  player: {fileID: 1887280348020307328}
-  cameraObject: {fileID: 0}
-  horizontalPadding: 0.03
-  verticalPadding: 0.08
 --- !u!114 &4892209692315037896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +331,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 8846388534123453194}
+--- !u!114 &3630868533795655446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887280348020307328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec20829dc2e44b3a0fa83dda33d2565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  smoothness: 10
+  cameraObject: {fileID: 0}
+  horizontalPadding: 0.03
+  verticalPadding: 0.08
+--- !u!114 &1485881487096179879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887280348020307328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0766005420d7d94da3943de30fb9c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1887280348020307328}
+  cameraObject: {fileID: 0}
 --- !u!50 &5948345766406294402
 Rigidbody2D:
   serializedVersion: 4
@@ -398,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7f2d411f32431584c5716ded7ee6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStrategy: {fileID: 11400000, guid: 66f1c7281a7f81b48a0e2c2ad8e0b60f, type: 2}
+  weaponStrategy: {fileID: 11400000, guid: 9e53e177f7d1c4b449e7ce12d2daa060, type: 2}
   startTransform: {fileID: 250605243511300962}
   layer: 6
 --- !u!114 &6389968755033446741
@@ -442,20 +455,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PolarityType: 0
---- !u!114 &3630868533795655446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887280348020307328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec20829dc2e44b3a0fa83dda33d2565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  smoothness: 10
-  cameraObject: {fileID: 0}
-  horizontalPadding: 0.03
-  verticalPadding: 0.08
