@@ -15,7 +15,7 @@ namespace OppositeGame._project.Scripts.mechanics
 
         public float LifePoints { set; get; } = 5f;
 
-        private void Start()
+        private void Awake()
         {
             _camera = Camera.main;
         }
