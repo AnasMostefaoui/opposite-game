@@ -13,17 +13,22 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Pools
         {
             if (Pools.TryGetValue(gameObject.tag, out var pool))
             {
-                return pool?.Get();
+                var obj = pool.Get();
+                Debug.Log("Get? " + obj);
+                return obj;
             }
 
             var newPool = new GameObjectPool<GameObject>(
                 () => Instantiate(gameObject), 
-                Destroy,
+                objectToDestroy => objectToDestroy.SetActive(false),
                 objectToActivate => objectToActivate.SetActive(true),
                 objectToDeactivate => objectToDeactivate.SetActive(false)
             );
             Pools[gameObject.tag] = newPool;
-            return newPool.Get();
+            var newObject = newPool.Get();
+            
+            Debug.Log("newObject? " + newObject);
+            return newObject;
         }
         
         public static void Recycle(GameObject gameObject)

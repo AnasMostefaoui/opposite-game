@@ -393,7 +393,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
@@ -502,9 +502,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldTransparency: 0.3
   energy: 0.3
+  maxEnergy: 10
   energyConsumptionRate: 2
   energyRecoveryRate: 1
-  activationTime: 1
 --- !u!1 &2978092593551125110
 GameObject:
   m_ObjectHideFlags: 0
