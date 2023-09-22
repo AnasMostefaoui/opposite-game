@@ -30,6 +30,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Pools
         {
             if (Pools.TryGetValue(gameObject.tag, out var pool))
             {
+                if (gameObject.gameObject.activeSelf == false) return;
                 pool.Release(gameObject);
             }
             else
