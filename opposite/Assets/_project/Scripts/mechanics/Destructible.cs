@@ -51,8 +51,8 @@ namespace OppositeGame._project.Scripts.mechanics
         private void CollideWithLaser(LaserTrap laser)
         {
             if(!CompareTag("Player") || PolarityProvider == null) return;
-            if(laser.polarityType == PolarityProvider.PolarityType) return;
-            
+            var shield = GetComponent<PlayerShield>();
+            if(laser.polarityType == PolarityProvider.PolarityType && shield.isShieldActive) return;
             TakeDamage(laser.damage);
         } 
 
@@ -68,14 +68,10 @@ namespace OppositeGame._project.Scripts.mechanics
         
         private void DisplayHitEffect()
         {
-            Debug.Log("DisplayHitEffect");
             if(explosionEffectPrefab == null) return;
-            
-            Debug.Log("explosionEffectPrefab available");
             var instance = ObjectPoolManager.Retrieve(explosionEffectPrefab.gameObject);
             if(instance == null) return;
             
-            Debug.Log("instance available");
             instance.transform.position = transform.position;   
             if (instance.TryGetComponent<ParticleSystem>(out var explosionEffect))
             {

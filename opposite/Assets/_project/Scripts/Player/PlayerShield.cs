@@ -27,13 +27,11 @@ namespace OppositeGame._project.Scripts.Player
         // How many energy points the shield recovers per second
         [Range(0, 100)]
         [SerializeField] private float energyRecoveryRate = 1f;
-        // How many seconds the shield needs to rest after being depleted
-        [SerializeField]
-        private float restTime = 3f; 
-        
         
         public Action OnShieldActivated;
-        public Action OnShieldDeactivated;
+        public Action OnShieldDeactivated;        
+        public bool isShieldActive => _shieldState == ShieldState.Active; 
+
 
         private ShieldState _shieldState = ShieldState.Active; 
         private PolarityType _currentPolarityType = PolarityType.Blue;
