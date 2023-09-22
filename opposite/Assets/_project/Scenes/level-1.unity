@@ -1913,7 +1913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887280348020307357, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.58
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1887280348020307357, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1980,6 +1980,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: laser-trap
       objectReference: {fileID: 0}
+    - target: {fileID: 1693318323725830490, guid: 82dc3350d0b9348a592399ffd71afee3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693318323725830490, guid: 82dc3350d0b9348a592399ffd71afee3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.42
+      objectReference: {fileID: 0}
     - target: {fileID: 1908016999055220749, guid: 82dc3350d0b9348a592399ffd71afee3, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -2022,6 +2030,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1908016999055220749, guid: 82dc3350d0b9348a592399ffd71afee3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706296403033334644, guid: 82dc3350d0b9348a592399ffd71afee3, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910671935176309970, guid: 82dc3350d0b9348a592399ffd71afee3, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

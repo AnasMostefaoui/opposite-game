@@ -12,6 +12,7 @@ TagManager:
   - eb-small-type1
   - er-small-type1
   - eb-small-type2
+  - player-shield-mask
   layers:
   - Default
   - TransparentFX
