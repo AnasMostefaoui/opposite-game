@@ -18,8 +18,8 @@ namespace OppositeGame._project.Scripts.Patterns
             Action<T> onDestroyObject, 
             Action<T> onActivation, 
             Action<T> onDeactivation, 
-            int defaultCapacity = 20, 
-            int maxCapacity = 50)
+            int defaultCapacity = 50, 
+            int maxCapacity = 100)
         {
             _createObject = createObject;
             _onDestroyObject = onDestroyObject;

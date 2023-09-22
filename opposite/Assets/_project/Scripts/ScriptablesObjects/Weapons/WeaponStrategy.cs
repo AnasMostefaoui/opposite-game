@@ -13,10 +13,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
         [SerializeField] public BulletType bulletType;
         
         public virtual void Initialize() { }
-
-        public virtual void SetupWeapon()
-        {
-        }
+        public virtual void SetupWeapon() { }
 
         protected void PrepareBullet(Bullet bullet, Transform startPosition, int layerMask, float rotationAngle = 0f)
         {

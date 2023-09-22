@@ -1,50 +1,42 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OppositeGame._project.Scripts.Patterns;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.ScriptablesObjects.Pools
 {
     public class ObjectPoolManager : MonoBehaviour
     {
-        public static readonly List<PooledObjectInfo> ObjectPools = new List<PooledObjectInfo>(200);
+        private static readonly Dictionary<string, GameObjectPool<GameObject>> Pools = new();
         public static GameObject Retrieve(GameObject gameObject)
         {
-            var pool = ObjectPools.Find(x => gameObject.CompareTag(x.LookupKey));
-            if (pool == null)
+            if (Pools.TryGetValue(gameObject.tag, out var pool))
             {
-                pool = new PooledObjectInfo() { LookupKey = gameObject.tag };
-                ObjectPools.Add(pool);
+                return pool?.Get();
             }
 
-            var pooledObject = pool.InactiveObjects.FirstOrDefault();
-            if (pooledObject == null)
-            {
-                return Instantiate(gameObject);
-            }
-            pool.InactiveObjects.RemoveAt(0);
-            pooledObject.SetActive(true);
-            
-            return pooledObject;
+            var newPool = new GameObjectPool<GameObject>(
+                () => Instantiate(gameObject), 
+                Destroy,
+                objectToActivate => objectToActivate.SetActive(true),
+                objectToDeactivate => objectToDeactivate.SetActive(false)
+            );
+            Pools[gameObject.tag] = newPool;
+            return newPool.Get();
         }
         
         public static void Recycle(GameObject gameObject)
         {
-            var pool = ObjectPools.Find(x => gameObject.CompareTag(x.LookupKey));
-            if (pool == null)
+            if (Pools.TryGetValue(gameObject.tag, out var pool))
+            {
+                pool.Release(gameObject);
+            }
+            else
             {
                 Debug.LogError($"No pool found for key: {gameObject.tag}");
-                return;
             }
-            gameObject.SetActive(false);
-            pool.InactiveObjects.Add(gameObject);
         }
 
-    }
-    
-    public class PooledObjectInfo
-    {
-        public string LookupKey;
-        public List<GameObject> InactiveObjects = new List<GameObject>();
     }
 }
