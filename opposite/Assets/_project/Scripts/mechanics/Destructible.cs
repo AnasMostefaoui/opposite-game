@@ -1,6 +1,9 @@
 ﻿using System;
 using OppositeGame._project.Scripts.mechanics.Bullets;
+using OppositeGame._project.Scripts.mechanics.Magnetism;
+using OppositeGame._project.Scripts.mechanics.Traps;
 using OppositeGame._project.Scripts.Patterns;
+using OppositeGame._project.Scripts.Player;
 using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
@@ -11,6 +14,7 @@ namespace OppositeGame._project.Scripts.mechanics
     {
         [SerializeField] public ParticleSystem explosionEffectPrefab;
         public Action<GameObject> OnRelease { get; set; }
+        public PolarityProvider PolarityProvider { get; set; }
         private Camera _camera;
 
         public float LifePoints { set; get; } = 5f;
@@ -18,36 +22,61 @@ namespace OppositeGame._project.Scripts.mechanics
         private void Awake()
         {
             _camera = Camera.main;
+            if (TryGetComponent<PlayerPolarity>(out var playerPolarityProvider))
+            {
+                PolarityProvider = playerPolarityProvider;
+            } 
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if(_camera.IsPointInViewport(transform.position) == false) return;
-            var bullet = other.TryGetComponent<Bullet>(out var bulletComponent);
-            Debug.Log("Destructible hit by bullet");
-            if (bullet && LifePoints > 0)
+            if (other.TryGetComponent<Bullet>(out var bulletComponent))
             {
-                LifePoints -= bulletComponent.Damage;
-                
+                CollideWithBullet(bulletComponent);
             }
             
-            if (LifePoints <= 0)
+            if (other.TryGetComponent<LaserTrap>(out var laserTrap))
             {
-                Debug.Log("Destructible destroyed");
-                DisplayHitEffect();
-                gameObject.SetActive(false);
-                OnRelease?.Invoke(gameObject);
+                CollideWithLaser(laserTrap);
             }
- 
+            
+        }
+
+        private void CollideWithBullet(Bullet bullet)
+        {
+            TakeDamage(bullet.Damage);
+        } 
+        
+        private void CollideWithLaser(LaserTrap laser)
+        {
+            if(!CompareTag("Player") || PolarityProvider == null) return;
+            if(laser.polarityType == PolarityProvider.PolarityType) return;
+            
+            TakeDamage(laser.damage);
+        } 
+
+        public void TakeDamage(float damage)
+        {
+            LifePoints -= damage;
+            if (LifePoints > 0) return;
+            
+            DisplayHitEffect();
+            gameObject.SetActive(false);
+            OnRelease?.Invoke(gameObject);
         }
         
         private void DisplayHitEffect()
         {
+            Debug.Log("DisplayHitEffect");
             if(explosionEffectPrefab == null) return;
+            
+            Debug.Log("explosionEffectPrefab available");
             var instance = ObjectPoolManager.Retrieve(explosionEffectPrefab.gameObject);
             if(instance == null) return;
             
-            instance.transform.SetParent(transform);   
+            Debug.Log("instance available");
+            instance.transform.position = transform.position;   
             if (instance.TryGetComponent<ParticleSystem>(out var explosionEffect))
             {
                 explosionEffect.Play();
