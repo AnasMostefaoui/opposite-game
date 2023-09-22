@@ -14,7 +14,6 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
     {
         [SerializeField] public PolarityType PolarityType = PolarityType.Blue;
         [SerializeField] private BulletType bulletType; 
-        [SerializeField] public BulletImpactPool bulletImpactPool;
         public Action<Bullet> OnRelease { get; set; }
         public Action OnUpdate;
         
@@ -33,10 +32,6 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
         
         private void Start()
         {
-            if (bulletType.firingEffectPool)
-            {
-                bulletType.firingEffectPool.GetHitEffect();
-            }
             _camera ??= Camera.main;
         }
 
@@ -64,13 +59,12 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
 
         private void Recycle()
         {
-            Debug.Log("Recycling bullet");
             _lifetimeTimer = 0;
-            if (bulletImpactPool)
+            if (bulletType.explosionEffect != null)
             {
-                var hitEffect = bulletImpactPool.GetHitEffect();
+                var hitEffect = ObjectPoolManager.Retrieve(bulletType.explosionEffect.gameObject);
                 hitEffect.transform.position = transform.position;
-                hitEffect.Play();
+                hitEffect.GetComponent<ParticleSystem>().Play();
             }
             ObjectPoolManager.Recycle(gameObject);
         }

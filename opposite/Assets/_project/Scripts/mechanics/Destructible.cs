@@ -9,7 +9,7 @@ namespace OppositeGame._project.Scripts.mechanics
 {
     public class Destructible : MonoBehaviour, IPoolable<GameObject>
     {
-        [SerializeField] public BulletImpactPool explosionPool;
+        [SerializeField] public ParticleSystem explosionEffectPrefab;
         public Action<GameObject> OnRelease { get; set; }
         private Camera _camera;
 
@@ -24,6 +24,7 @@ namespace OppositeGame._project.Scripts.mechanics
         {
             if(_camera.IsPointInViewport(transform.position) == false) return;
             var bullet = other.TryGetComponent<Bullet>(out var bulletComponent);
+            Debug.Log("Destructible hit by bullet");
             if (bullet && LifePoints > 0)
             {
                 LifePoints -= bulletComponent.Damage;
@@ -42,9 +43,14 @@ namespace OppositeGame._project.Scripts.mechanics
         
         private void DisplayHitEffect()
         {
-            if (explosionPool)
+            if(explosionEffectPrefab == null) return;
+            var instance = ObjectPoolManager.Retrieve(explosionEffectPrefab.gameObject);
+            if(instance == null) return;
+            
+            instance.transform.SetParent(transform);   
+            if (instance.TryGetComponent<ParticleSystem>(out var explosionEffect))
             {
-                explosionPool.GetHitEffect();
+                explosionEffect.Play();
             }
         }
     }

@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: -2166166963791579893}
   m_Layer: 7
   m_Name: enemy_medium_red
-  m_TagString: Untagged
+  m_TagString: er-small-type1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,5 +243,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34aef79fa4340ca8da818f647342175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionEffect: {fileID: 0}
-  explosionPool: {fileID: 11400000, guid: f6d90c73af280a2439fda8d933ace054, type: 2}
+  explosionEffectPrefab: {fileID: 4148422010561086121, guid: 3f9b42c46ddd673468d0e39e0884b3f0, type: 3}

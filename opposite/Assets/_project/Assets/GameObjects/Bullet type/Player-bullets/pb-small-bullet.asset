@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: pb-small-bullet
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5555417829989427099, guid: 5a49d33ba49cc486ab0eb39e1eb6201b, type: 3}
-  bulletImpactPool: {fileID: 0}
+  explosionEffect: {fileID: 4148422010561086121, guid: 75f2469cebb0540a7bf47941d6a597a7, type: 3}
   firingEffectPool: {fileID: 11400000, guid: f6d90c73af280a2439fda8d933ace054, type: 2}
   polarityType: 0
   damage: 2

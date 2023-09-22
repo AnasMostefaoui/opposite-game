@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34aef79fa4340ca8da818f647342175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPool: {fileID: 11400000, guid: f6d90c73af280a2439fda8d933ace054, type: 2}
+  explosionEffectPrefab: {fileID: 4148422010561086121, guid: b4512b800baea48c5ba4f95e5966de0b, type: 3}
 --- !u!114 &1762977603503765590
 MonoBehaviour:
   m_ObjectHideFlags: 0

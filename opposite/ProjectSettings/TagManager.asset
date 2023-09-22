@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - player-red-small-bullet
+  - red-small-bullet-explosion
+  - blue-small-bullet-explosion
+  - pb-small-bullet
+  - pr-small-bullet
+  - eb-small-type1
+  - er-small-type1
+  - eb-small-type2
   layers:
   - Default
   - TransparentFX
