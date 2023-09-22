@@ -16,10 +16,16 @@ namespace OppositeGame._project.Scripts.Player
         {
             _inputReader = GetComponent<InputReader>();
             _animationController = GetComponent<Animator>();
-            OnPolarityChanged += OnOnPolarityChanged;
+            OnPolarityChanged += OnInternalPolarityChanged;
+            _inputReader.OnPolarityChanged += OnInputPolarityChanged;
         }
 
-        private void OnOnPolarityChanged(PolarityType newPolarityType, PolarityType oldPolarityType)
+        private void OnInputPolarityChanged(PolarityType newPolarity)
+        {
+            PolarityType = newPolarity;
+        }
+
+        private void OnInternalPolarityChanged(PolarityType newPolarityType, PolarityType oldPolarityType)
         {
             _animationController.SetBool("isRed", PolarityType == PolarityType.Red);
             _animationController.SetBool("isBlue", PolarityType == PolarityType.Blue);
@@ -27,7 +33,8 @@ namespace OppositeGame._project.Scripts.Player
 
         private void OnDestroy()
         {
-            OnPolarityChanged -= OnOnPolarityChanged;
+            OnPolarityChanged -= OnInternalPolarityChanged;
+            _inputReader.OnPolarityChanged -= OnInputPolarityChanged;
         }
     }
 }

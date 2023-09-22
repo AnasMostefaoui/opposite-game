@@ -30,8 +30,6 @@ namespace OppositeGame._project.Scripts.mechanics.Traps
             
             var collisionXSize = Vector3.Distance(startPoint.position, endPoint.position);
             _boxCollider2D.size = new Vector2(collisionXSize, _boxCollider2D.size.y);
-            
-            Debug.Log(collisionXSize);
         }
 
         private void Update()

@@ -23,10 +23,5 @@ namespace OppositeGame._project.Scripts.mechanics.Magnetism
                 OnPolarityChanged?.Invoke(_polarityType, oldPolarity);
             }
         }
-
-        private void Update()
-        {
-            PolarityType = polarityType;
-        }
     }
 }

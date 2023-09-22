@@ -1899,6 +1899,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: energy
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: restTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: shieldTransparency
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1887280348020307328, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1913,7 +1925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1887280348020307357, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.01
+      value: -0.699
       objectReference: {fileID: 0}
     - target: {fileID: 1887280348020307357, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1951,6 +1963,10 @@ PrefabInstance:
       propertyPath: m_MaskInteraction
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3771306830598780315, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4973021585300777831, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: polarityType
       value: 1
@@ -1961,7 +1977,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6802752045113911258, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: PolarityType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6802752045113911258, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: polarityType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882081000069537844, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1998,7 +2022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1908016999055220749, guid: 82dc3350d0b9348a592399ffd71afee3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.16222529
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1908016999055220749, guid: 82dc3350d0b9348a592399ffd71afee3, type: 3}
       propertyPath: m_LocalPosition.z
