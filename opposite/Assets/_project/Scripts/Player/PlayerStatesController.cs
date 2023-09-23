@@ -9,11 +9,6 @@ using UnityEngine;
 
 namespace OppositeGame._project.Scripts.Player
 {
-    public class WeaponPowerUp
-    {
-        
-    }
-    
     [RequireComponent(typeof(Destructible))]
     public class PlayerStatesController  : MonoBehaviour
     {

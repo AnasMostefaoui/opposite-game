@@ -2,17 +2,36 @@
 using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics.Collectibles;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
+using OppositeGame._project.Scripts.Player;
+using OppositeGame._project.Scripts.ScriptablesObjects.Weapons;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.mechanics.weapons
 {
     public class PlayerWeapon : Weapon
     {
-        private InputReader _inputReader; 
-        private PolarityType _polarity; 
+        private InputReader _inputReader;
+        private PlayerPolarity _playerPolarity;
+        [SerializeField]
+        private WeaponCollectible basicWeapon;
+        private WeaponStrategy _redWeaponStrategy;
+        private WeaponStrategy _blueWeaponStrategy;
         private void Awake()
         {
             _inputReader = GetComponent<InputReader>();
+            _playerPolarity = GetComponent<PlayerPolarity>();
+            _playerPolarity.OnPolarityChanged += OnPolarityChanged;
+            _redWeaponStrategy = basicWeapon.content.redWeaponStrategy;
+            _blueWeaponStrategy = basicWeapon.content.blueWeaponStrategy;
+            weaponStrategy = _playerPolarity.PolarityType == PolarityType.Red ?
+                _redWeaponStrategy : _blueWeaponStrategy;
+        }
+
+        private void OnPolarityChanged(PolarityType newPolarityType, PolarityType oldPolarityType)
+        {
+            var newWeapon = _playerPolarity.PolarityType == PolarityType.Red ?
+                _redWeaponStrategy : _blueWeaponStrategy;
+            ChangeWeaponStrategy(newWeapon);
         }
 
         private void OnDisable()
@@ -27,7 +46,7 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
             if(currentScreen != GameScreen.Game && currentScreen != GameScreen.MainMenu ) return;
             FireRateCounter += Time.deltaTime;
             if (!_inputReader.IsFiring || !DidReload) return;
-            CurrentWeaponStrategy.Fire(startTransform, layer, _polarity);
+            CurrentWeaponStrategy.Fire(startTransform, layer, _playerPolarity.PolarityType);
             FireRateCounter = 0;
         }
         
@@ -36,7 +55,12 @@ namespace OppositeGame._project.Scripts.mechanics.weapons
         {
             var powerUp = other.GetComponent<WeaponCollectible>();
             if (powerUp == null) return;
-            ChangeWeaponStrategy(powerUp.weaponStrategy);
+            var powerUpContent = powerUp.content;
+            var newWeapon = _playerPolarity.PolarityType == PolarityType.Red ?
+                powerUpContent.redWeaponStrategy : powerUpContent.blueWeaponStrategy;
+            _redWeaponStrategy = powerUpContent.redWeaponStrategy;
+            _blueWeaponStrategy = powerUpContent.blueWeaponStrategy;
+            ChangeWeaponStrategy(newWeapon);
             Destroy(other.gameObject);
         }
     }

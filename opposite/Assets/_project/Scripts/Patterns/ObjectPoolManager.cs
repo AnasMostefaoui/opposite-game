@@ -10,22 +10,35 @@ namespace OppositeGame._project.Scripts.Patterns
         {
             if (Pools.TryGetValue(gameObject.tag, out var pool))
             {
-                var obj = pool.Get();
-                Debug.Log("Get? " + obj);
-                return obj;
+                return pool.Get();
             }
 
             var newPool = new GameObjectPool<GameObject>(
                 () => Instantiate(gameObject), 
-                objectToDestroy => objectToDestroy.SetActive(false),
-                objectToActivate => objectToActivate.SetActive(true),
-                objectToDeactivate => objectToDeactivate.SetActive(false)
-            );
+                objectToDestroy =>
+                {
+                    if (objectToDestroy != null)
+                    {
+                        objectToDestroy.SetActive(false);
+                    }
+                },
+                objectToActivate =>
+                {
+                    if (objectToActivate != null)
+                    {
+                        objectToActivate.SetActive(true);
+                    }
+                },
+                objectToDeactivate =>
+                {
+                    
+                    if (objectToDeactivate != null)
+                    {
+                        objectToDeactivate.SetActive(false);
+                    }
+                });
             Pools[gameObject.tag] = newPool;
-            var newObject = newPool.Get();
-            
-            Debug.Log("newObject? " + newObject);
-            return newObject;
+            return newPool.Get();
         }
         
         public static void Recycle(GameObject gameObject)

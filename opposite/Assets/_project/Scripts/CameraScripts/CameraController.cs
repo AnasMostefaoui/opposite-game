@@ -12,7 +12,10 @@ namespace OppositeGame._project.Scripts.CameraScripts
         [SerializeField] private  float maxSpeed = 2f;  // Target speed to reach
         [SerializeField] private  float accelerationRate = 0.2f;  // Rate of acceleration
         [SerializeField] private  float currentSpeed = 0;
-        
+        [SerializeField] private  float zoomSpeed = 1;
+        [SerializeField] private  float zoomFactor = 1;
+        private Camera thisCamera;
+        private float originalSize;
         private bool _canMove = false;
         private void Awake()
         {
@@ -21,6 +24,8 @@ namespace OppositeGame._project.Scripts.CameraScripts
             GameManager.Instance.OnContinueScreen += StopMoving;
             GameManager.Instance.OnContinuePlaying += StartMoving;
             GameManager.Instance.OnMainMenu += ResetPosition;
+            thisCamera = GetComponent<Camera>();
+            originalSize = thisCamera.orthographicSize;
         }
 
         private void ResetPosition(object sender, EventArgs e)
@@ -51,6 +56,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
 
         private void LateUpdate()
         {
+            HandleZoom();
             if(_canMove == false) return;
             // make the camera slowly start moving.
             currentSpeed = Mathf.MoveTowards(currentSpeed, 
@@ -60,6 +66,20 @@ namespace OppositeGame._project.Scripts.CameraScripts
             
             // we want the camera to move last.
             transform.position += Vector3.up * (currentSpeed * Time.deltaTime);
+            
+        }
+
+        private void HandleZoom()
+        {
+            float targetSize = originalSize * zoomFactor;
+            if (targetSize != thisCamera.orthographicSize)
+            {
+                thisCamera.orthographicSize = Mathf.Lerp(thisCamera.orthographicSize, 
+                    targetSize, Time.deltaTime * zoomSpeed);
+            }
+            
+            thisCamera.orthographicSize = Mathf.Lerp(thisCamera.orthographicSize, 
+                targetSize, Time.deltaTime * zoomSpeed);
         }
 
         private void OnDestroy()

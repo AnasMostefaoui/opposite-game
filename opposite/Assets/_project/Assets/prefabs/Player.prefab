@@ -447,6 +447,7 @@ MonoBehaviour:
   weaponStrategy: {fileID: 11400000, guid: 9e53e177f7d1c4b449e7ce12d2daa060, type: 2}
   startTransform: {fileID: 250605243511300962}
   layer: 6
+  basicWeapon: {fileID: 8150677453934727065, guid: 38c5f4f07cbd14907bae7091dfef25f2, type: 3}
 --- !u!114 &6389968755033446741
 MonoBehaviour:
   m_ObjectHideFlags: 0

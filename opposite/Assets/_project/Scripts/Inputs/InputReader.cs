@@ -37,6 +37,7 @@ namespace OppositeGame._project.Scripts.Inputs
             _redPolarityAction.performed += OnReadPolarityAction;
             _bluePolarityAction.performed += OnReadPolarityAction;
             _redPolarityAction.canceled += OnPolarityActionCancelled;
+            _bluePolarityAction.canceled += OnPolarityActionCancelled;
         }
 
         private void OnPolarityActionCancelled(InputAction.CallbackContext obj)
