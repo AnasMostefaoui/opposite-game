@@ -13,6 +13,7 @@ TagManager:
   - er-small-type1
   - eb-small-type2
   - player-shield-mask
+  - background-scroller
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Bullets-Negative
   - Collectibles
   - Traps
-  - 
+  - CameraModifiers
   - 
   - 
   - 

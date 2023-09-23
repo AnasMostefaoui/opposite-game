@@ -29,6 +29,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
         protected Bullet GetBullet(PolarityType polarity = PolarityType.Blue)
         {
             var instance = ObjectPoolManager.Retrieve(bulletType.bulletPrefab.gameObject);
+            if(instance == null) return null;
             var bullet = instance.GetComponent<Bullet>();
             bullet.OnUpdate = null;
             bullet.PolarityType = polarity;

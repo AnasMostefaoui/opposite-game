@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d288fd0e4a146f28bbba0ef7525c9a3, type: 3}
   m_Name: single-shot
   m_EditorClassIdentifier: 
-  redWeaponStrategy: {fileID: 0}
-  blueWeaponStrategy: {fileID: 0}
+  redWeaponStrategy: {fileID: 11400000, guid: 36e48dee4318b4e218a041d2a38bfc60, type: 2}
+  blueWeaponStrategy: {fileID: 11400000, guid: 9e53e177f7d1c4b449e7ce12d2daa060, type: 2}

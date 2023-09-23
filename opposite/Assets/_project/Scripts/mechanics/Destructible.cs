@@ -44,8 +44,17 @@ namespace OppositeGame._project.Scripts.mechanics
             if (other.TryGetComponent<Asteroid>(out var asteroid))
             {
                 CollideWithAsteroid(asteroid);
+            }            
+            if (other.TryGetComponent<RotorMine>(out var mine))
+            {
+                CollidedWithMine(mine);
             }
             
+        }
+
+        private void CollidedWithMine(RotorMine component)
+        {
+            TakeDamage(component.Damage);
         }
 
         private void OnTriggerStay2D(Collider2D other)
