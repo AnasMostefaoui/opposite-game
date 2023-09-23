@@ -12,7 +12,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
         public override void Fire(Transform startTransform, int layer, PolarityType polarity = PolarityType.Blue )
         {
             if(startTransform == null) return;
-            var bullet = GetBullet();
+            var bullet = GetBullet(polarity);
             
             if(bullet)
             {

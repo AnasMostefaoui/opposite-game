@@ -14,6 +14,9 @@ TagManager:
   - eb-small-type2
   - player-shield-mask
   - background-scroller
+  - en-small-tracking-bullet
+  - en-small-purple-bullet
+  - en-small-red-bullet
   layers:
   - Default
   - TransparentFX

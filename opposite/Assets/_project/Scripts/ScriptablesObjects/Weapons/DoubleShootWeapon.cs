@@ -11,8 +11,8 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
         {
             if(startTransform == null) return;
             
-            var rightBullet = GetBullet();
-            var leftBullet = GetBullet();
+            var rightBullet = GetBullet(polarity);
+            var leftBullet = GetBullet(polarity);
             if(rightBullet && leftBullet)
             {
                 var rightPosition = startTransform.position + startTransform.right * spacing;

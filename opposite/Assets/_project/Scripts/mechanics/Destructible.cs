@@ -12,12 +12,13 @@ namespace OppositeGame._project.Scripts.mechanics
 {
     public class Destructible : MonoBehaviour, IPoolable<GameObject>
     {
+        [SerializeField] public float LifePoints = 5f;
         [SerializeField] public ParticleSystem explosionEffectPrefab;
         public Action<GameObject> OnRelease { get; set; }
         public PolarityProvider PolarityProvider { get; set; }
+        public PlayerShield PlayerShield { get; set; }
         private Camera _camera;
 
-        public float LifePoints { set; get; } = 5f;
 
         private void Awake()
         {
@@ -25,6 +26,10 @@ namespace OppositeGame._project.Scripts.mechanics
             if (TryGetComponent<PlayerPolarity>(out var playerPolarityProvider))
             {
                 PolarityProvider = playerPolarityProvider;
+            }           
+            if (TryGetComponent<PlayerShield>(out var shield))
+            {
+                PlayerShield = shield;
             } 
         }
 
@@ -51,12 +56,7 @@ namespace OppositeGame._project.Scripts.mechanics
             }
             
         }
-
-        private void CollidedWithMine(RotorMine component)
-        {
-            TakeDamage(component.Damage);
-        }
-
+        
         private void OnTriggerStay2D(Collider2D other)
         {
             if (other.TryGetComponent<LaserTrap>(out var laserTrap))
@@ -67,7 +67,21 @@ namespace OppositeGame._project.Scripts.mechanics
 
         private void CollideWithBullet(Bullet bullet)
         {
-            TakeDamage(bullet.Damage);
+            if (PlayerShield == null || PlayerShield.isShieldActive == false)
+            {
+                TakeDamage(bullet.Damage);
+                return;
+            }
+            
+            if(PlayerShield.isShieldActive && bullet.PolarityType == PolarityProvider.PolarityType)
+            {
+                // or reduced damage?
+                TakeDamage(0);
+            }
+            else
+            {
+                TakeDamage(bullet.Damage);
+            }
         } 
         
         private void CollideWithAsteroid(Asteroid astroid)
@@ -95,6 +109,12 @@ namespace OppositeGame._project.Scripts.mechanics
                 gameObject.SetActive(false);
             }
             OnRelease?.Invoke(gameObject);
+        }
+        
+        
+        private void CollidedWithMine(RotorMine component)
+        {
+            TakeDamage(component.Damage);
         }
         
         private void DisplayHitEffect()

@@ -51,7 +51,6 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log($"Bullet collided with {other.gameObject.name}");
             if(_camera.IsPointInViewport(transform.position) == false) return;
             Recycle();
         }

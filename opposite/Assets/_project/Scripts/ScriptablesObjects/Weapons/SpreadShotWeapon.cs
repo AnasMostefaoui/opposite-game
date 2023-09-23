@@ -24,7 +24,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
             // place the bullets in a circle around the start position and assign speed and rotation based on the position on the circle.
             for (var i = 0; i < numberOfBullets; i++)
             {
-                var bullet = GetBullet();
+                var bullet = GetBullet(polarity);
                 if(bullet)
                 {
                     PrepareBullet(bullet, startPosition, layerMask, currentAngle);

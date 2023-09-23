@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bdf6d2137e407ba885fe32ec4f64df, type: 3}
   m_Name: pr-single-small
   m_EditorClassIdentifier: 
-  fireRate: 1
+  fireRate: 0.5
   bulletSpeed: 3
   bulletType: {fileID: 11400000, guid: 34f7678551ca54887b869b245c153c8c, type: 2}

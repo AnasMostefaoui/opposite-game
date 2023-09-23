@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 3524946018169703167}
   - component: {fileID: 2026909718259283008}
   - component: {fileID: 736457372664262197}
+  - component: {fileID: 8118536485401908335}
   m_Layer: 7
   m_Name: mine-rotor
   m_TagString: Untagged
@@ -217,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34aef79fa4340ca8da818f647342175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LifePoints: 5
   explosionEffectPrefab: {fileID: 4148422010561086121, guid: 3f9b42c46ddd673468d0e39e0884b3f0, type: 3}
 --- !u!114 &3524946018169703167
 MonoBehaviour:
@@ -231,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 100
+  Damage: 9999
 --- !u!58 &2026909718259283008
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -293,3 +296,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &8118536485401908335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6362903725132557499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3670ddfb44f24c30842370178bf187b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreValue: 15

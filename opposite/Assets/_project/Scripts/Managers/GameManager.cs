@@ -44,6 +44,7 @@ namespace OppositeGame._project.Scripts.Managers
 
         public bool IsPaused { get;   private set;  }
 
+        public int CurrentScore = 0;
         private float TimeScale { get; set; }
         
         private void Awake()
@@ -78,6 +79,7 @@ namespace OppositeGame._project.Scripts.Managers
         
         private void ResetToMainMenu()
         {
+            CurrentScore = 0;
             HasNoLifePoints = false; // default life points
             IsGameStarted = false;
             IsGameOver = false;

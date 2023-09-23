@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d907b57e8b6e2b9459310507d2fc5f09, type: 3}
   m_Name: Tracking bullet
   m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 4148422010561086121, guid: 75f2469cebb0540a7bf47941d6a597a7, type: 3}
   bulletPrefab: {fileID: 417265543973168434, guid: c28efc69b04ce4a448117a5e9870bf56, type: 3}
-  bulletImpactPool: {fileID: 0}
-  firingEffectPool: {fileID: 0}
-  damage: 5
   lifeTime: 3
+  damage: 5

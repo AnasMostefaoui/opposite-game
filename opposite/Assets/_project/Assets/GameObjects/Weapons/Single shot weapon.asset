@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bdf6d2137e407ba885fe32ec4f64df, type: 3}
   m_Name: Single shot weapon
   m_EditorClassIdentifier: 
-  fireRate: 0.3
+  fireRate: 0.8
   bulletSpeed: 3.5
-  bulletsPool: {fileID: 11400000, guid: 152ec199326e3cd4c9137eafe45698d5, type: 2}
+  bulletType: {fileID: 11400000, guid: 5d05cdc48f159f4488bdbfc9464f0959, type: 2}

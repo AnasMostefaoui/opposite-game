@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 1
   bulletSpeed: 3
-  bulletsPool: {fileID: 11400000, guid: 152ec199326e3cd4c9137eafe45698d5, type: 2}
+  bulletType: {fileID: 11400000, guid: ed45e5bbab921034bb73db91cbbc46e9, type: 2}
   spacing: 0.1
