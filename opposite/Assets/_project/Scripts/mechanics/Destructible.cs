@@ -100,7 +100,6 @@ namespace OppositeGame._project.Scripts.mechanics
             
             if (!samePolarity)
             {
-                Debug.Log("Not the same polarity");
                 TakeDamage(bullet.Damage);
                 return;
             }
@@ -108,12 +107,10 @@ namespace OppositeGame._project.Scripts.mechanics
             // shield absorb same bullets
             if (samePolarityShield && samePolarityShield.isShieldActive)
             {
-                Debug.Log("Same polarity and shield on");
                 TakeDamage(0);
             }
             else
             {
-                Debug.Log("Same polarity and shield off");
                 // same polarity will deal no damage as long as we have energy
                 samePolarityShield.ReduceEnergy(bullet.Damage * 0.5f);
                 TakeDamage( samePolarityShield.Energy > 0 ? 0 : bullet.Damage);
