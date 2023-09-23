@@ -22,7 +22,7 @@ namespace OppositeGame._project.Scripts.mechanics.Traps
             _positions[0] = startPoint.position;
             _positions[1] = endPoint.position;
             
-            var color = polarityType == PolarityType.Blue ? Color.blue : Color.red;
+            var color = polarityType == PolarityType.Blue ? Color.white : Color.red;
             _lineRenderer.startColor = color;
             _lineRenderer.endColor  = color;
             _lineRenderer.positionCount = _positions.Length;

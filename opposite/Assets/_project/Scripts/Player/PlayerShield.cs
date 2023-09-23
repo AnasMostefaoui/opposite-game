@@ -42,8 +42,17 @@ namespace OppositeGame._project.Scripts.Player
         private GameObject _shieldMaskObject;
         // flag to know that the player is still pressing the buttons
         private bool _activationIsRequested = false;
-        private Color RedShieldColor => Color.red.WithAlpha(shieldTransparency);
-        private Color BlueShieldColor => new Color(34f / 255f, 168f / 255f, 204f / 255f).WithAlpha(shieldTransparency);
+        private Color RedShieldColor
+        {
+            get
+            {
+                var color = Color.red;
+                    color.a = shieldTransparency;
+                return color;
+            }
+        }
+
+        private Color BlueShieldColor => new Color(34f / 255f, 168f / 255f, 204f / 255f, shieldTransparency);
         
         private bool CanEnableShield => energy > 0;
         

@@ -28,14 +28,7 @@ namespace OppositeGame._project.Scripts.GUI
 
         private void LeaveTheGame()
         {
-            if (Application.isEditor)
-            {
-                UnityEditor.EditorApplication.isPlaying = false;
-            }
-            else
-            { 
                 Application.Quit();
-            }
         }
 
         private void OnDestroy()
