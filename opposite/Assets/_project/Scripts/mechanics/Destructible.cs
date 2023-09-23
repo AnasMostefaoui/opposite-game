@@ -1,4 +1,5 @@
 ﻿using System;
+using OppositeGame._project.Scripts.Environment;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
 using OppositeGame._project.Scripts.mechanics.Traps;
@@ -40,6 +41,11 @@ namespace OppositeGame._project.Scripts.mechanics
                 CollideWithLaser(laserTrap);
             }
             
+            if (other.TryGetComponent<Asteroid>(out var asteroid))
+            {
+                CollideWithAsteroid(asteroid);
+            }
+            
         }
 
         private void OnTriggerStay2D(Collider2D other)
@@ -53,6 +59,11 @@ namespace OppositeGame._project.Scripts.mechanics
         private void CollideWithBullet(Bullet bullet)
         {
             TakeDamage(bullet.Damage);
+        } 
+        
+        private void CollideWithAsteroid(Asteroid astroid)
+        {
+            TakeDamage(astroid.Damage);
         } 
         
         private void CollideWithLaser(LaserTrap laser)

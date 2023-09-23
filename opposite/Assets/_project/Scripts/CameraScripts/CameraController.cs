@@ -1,4 +1,5 @@
 ﻿using System;
+using OppositeGame._project.Scripts.Environment;
 using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
         [SerializeField] private  float zoomFactor = 1;
         private Camera thisCamera;
         private float originalSize;
+        private float _speedModifier = 1;
         private bool _canMove;
         public float CurrentSpeed => currentSpeed;
         private void Awake()
@@ -61,9 +63,9 @@ namespace OppositeGame._project.Scripts.CameraScripts
             if(_canMove == false) return;
             // make the camera slowly start moving.
             currentSpeed = Mathf.MoveTowards(currentSpeed, 
-                maxSpeed, 
+                maxSpeed * _speedModifier, 
                 // once at max speed don't accelerate any more.
-                currentSpeed < maxSpeed ? accelerationRate * Time.deltaTime : 0);
+                 accelerationRate * Time.deltaTime);
             
             // we want the camera to move last.
             transform.position += Vector3.up * (currentSpeed * Time.deltaTime);
@@ -83,6 +85,23 @@ namespace OppositeGame._project.Scripts.CameraScripts
                 targetSize, Time.deltaTime * zoomSpeed);
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        { 
+            if (other.TryGetComponent<CameraModifier>(out var cameraModifier))
+            {
+                _speedModifier = cameraModifier.speedMultiplier;
+                var backgroundScroller = FindObjectOfType<BackgroundScroller>();
+                if (backgroundScroller != null) backgroundScroller.speedModifier = _speedModifier;
+            }
+        }
+        
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            _speedModifier = 1;
+            var backgroundScroller = FindObjectOfType<BackgroundScroller>();
+            if (backgroundScroller != null) backgroundScroller.speedModifier = 1;
+        }
+        
         private void OnDestroy()
         {
             GameManager.Instance.OnGameStarted -= StartMoving;
