@@ -17,6 +17,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
         private Camera thisCamera;
         private float originalSize;
         private bool _canMove;
+        public float CurrentSpeed => currentSpeed;
         private void Awake()
         {
             GameManager.Instance.OnGameStarted += StartMoving;

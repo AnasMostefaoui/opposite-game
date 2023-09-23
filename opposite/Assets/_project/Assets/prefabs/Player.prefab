@@ -370,6 +370,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1887280348020307328}
   cameraObject: {fileID: 0}
+  lifePoints: 5
+  invincibilityTime: 2
+  flickerDuration: 0.01
 --- !u!50 &5948345766406294402
 Rigidbody2D:
   serializedVersion: 4

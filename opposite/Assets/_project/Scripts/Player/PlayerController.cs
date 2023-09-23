@@ -53,7 +53,6 @@ namespace OppositeGame._project.Scripts.Player
         {
             if (GameManager.Instance.currentScreen == GameScreen.Game && !IsAlive)
             {
-                Debug.Log("Game Over");
                 GameManager.Instance.ContinueRequest();
             }
         }
@@ -74,9 +73,15 @@ namespace OppositeGame._project.Scripts.Player
                 
         private void WillKeepPlaying(object sender, EventArgs e)
         {
+            ResetLifePoints();
             SetInvincible(true);
             gameObject.SetActive(true); 
             StartCoroutine(RevivePlayer(invincibilityTime));
+        }
+
+        private void ResetLifePoints()
+        {
+            _destructible.LifePoints = lifePoints;
         }
 
         private void SetInvincible(bool invincible)
@@ -89,8 +94,8 @@ namespace OppositeGame._project.Scripts.Player
         {
             _isReviving = true; 
             SetInvincible(true);
-            // add flashing animation
-            var flickerRate = seconds / flickerDuration; 
+            // add flashing animation we split it in 2 as we have 2 phases (blink and not blink)
+            var flickerRate = seconds / (flickerDuration * 2); 
             for (int i = 0; i < flickerRate; i++)
             {
                 _spriteRenderer.color = Color.clear;

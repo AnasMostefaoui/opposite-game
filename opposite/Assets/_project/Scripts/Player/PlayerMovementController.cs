@@ -1,4 +1,5 @@
 using System;
+using OppositeGame._project.Scripts.CameraScripts;
 using OppositeGame._project.Scripts.Inputs;
 using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.Utilities;
@@ -22,18 +23,17 @@ namespace OppositeGame._project.Scripts.Player
         [Range(0.08f, 1f)] [SerializeField] private float verticalPadding = 0.08f;
 
         private Animator _animationController;
+        private CameraController _cameraController;
         private InputReader _inputReader;
         private Vector3 _destination;
 
-        private void Start()
+        private void Awake()
         {
+            cameraObject = Camera.main;
             _inputReader = GetComponent<InputReader>();
-            if (cameraObject == null)
-            {
-                cameraObject = Camera.main;
-            }
             _destination = transform.position;
             _animationController = GetComponent<Animator>();
+            _cameraController = cameraObject.GetComponent<CameraController>();
             GameManager.Instance.OnMainMenu += OnMainMenu;
         }
 
@@ -47,7 +47,7 @@ namespace OppositeGame._project.Scripts.Player
             var deltaTime = GameManager.Instance.IsPaused ? Time.deltaTime : Time.unscaledDeltaTime;
             // calculate the new position based on the input
             _destination += new Vector3(_inputReader.GetMoveInput.x, _inputReader.GetMoveInput.y, 0) * (speed * deltaTime);
-            
+            _destination = _destination.With(y: _destination.y + _cameraController.CurrentSpeed * deltaTime);
             _animationController.SetBool("isMovingLeft", _inputReader.GetMoveInput.x < 0);
             _animationController.SetBool("isMovingRight", _inputReader.GetMoveInput.x > 0);
 
