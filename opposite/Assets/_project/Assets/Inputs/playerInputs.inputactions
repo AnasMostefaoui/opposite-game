@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Power-up",
+                    "name": "power-up",
                     "type": "Button",
                     "id": "ceb8ca5e-148a-4b5b-bb2b-4c89056e2c66",
                     "expectedControlType": "Button",
@@ -246,29 +246,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Power-up",
+                    "action": "power-up",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "modifier",
                     "id": "325319d6-5909-4312-96eb-dabd2e36fad9",
-                    "path": "",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Power-up",
+                    "groups": "Keyboard&Mouse",
+                    "action": "power-up",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "binding",
                     "id": "f80c6fe2-7554-4513-8409-97523ec156d2",
-                    "path": "<VirtualMouse>/scroll/down",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Power-up",
+                    "groups": "Keyboard&Mouse",
+                    "action": "power-up",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

@@ -42,10 +42,12 @@ namespace OppositeGame._project.Scripts.Managers
         public bool HasNoLifePoints { get; set; }
         public bool IsGameOver { get; set; }
 
-        public bool IsPaused { get;   private set;  }
+        public bool IsPaused => _timeManager.IsTimePaused;
 
         public int CurrentScore = 0;
         private float TimeScale { get; set; }
+        
+        private TimeManager _timeManager;
         
         private void Awake()
         {
@@ -60,7 +62,8 @@ namespace OppositeGame._project.Scripts.Managers
             }
             
             DontDestroyOnLoad(this);
-            TimeScale = Time.timeScale;
+            _timeManager = GetComponent<TimeManager>();
+            _timeManager.normalTimeScale = Time.timeScale;
             
         }
 
@@ -69,6 +72,11 @@ namespace OppositeGame._project.Scripts.Managers
             ObjectPoolManager.Cleanup();
         }
 
+        public void SlowTime()
+        {
+            _timeManager.SlowTime();
+        }
+        
         private void Update()
         {
             switch (currentScreen)
@@ -88,27 +96,14 @@ namespace OppositeGame._project.Scripts.Managers
             HasNoLifePoints = false; // default life points
             IsGameStarted = false;
             IsGameOver = false;
-            IsPaused = false;
             currentScreen = GameScreen.MainMenu;
-            Time.timeScale = TimeScale;
+            _timeManager.ResumeTime();
             OnMainMenu?.Invoke(this, EventArgs.Empty);
         }
 
-        private void PauseTime()
-        {
-            IsPaused = true;
-            Time.timeScale = 0;
-        }
-
-        private void ResumeTime()
-        {
-            IsPaused = false;
-            Time.timeScale = 1;
-        }
-        
         private void GameIsOver()
         {
-            PauseTime(); 
+            _timeManager.PauseTime();
             currentScreen = GameScreen.GameOver;
             OnGameOver?.Invoke(this, EventArgs.Empty);
         }
@@ -135,13 +130,13 @@ namespace OppositeGame._project.Scripts.Managers
         
         public void Pause()
         {
-            PauseTime(); 
+            _timeManager.PauseTime();
             OnOnGamePaused();
         }
         
         public void Resume()
         {
-            ResumeTime();
+            _timeManager.ResumeTime();
             OnGameResumed?.Invoke(null, EventArgs.Empty);
         }
 

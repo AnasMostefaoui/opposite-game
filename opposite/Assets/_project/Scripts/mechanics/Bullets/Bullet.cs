@@ -36,8 +36,10 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
 
         private void Update()
         {
+            // 6 is player layer
+            var deltaTime = gameObject.layer == 6 ? Time.unscaledDeltaTime : Time.deltaTime;
             transform.SetParent(null);
-            transform.position += transform.up * (_speed * Time.deltaTime);
+            transform.position += transform.up * (_speed * deltaTime);
             OnUpdate?.Invoke();
             
             _lifetimeTimer += Time.deltaTime;

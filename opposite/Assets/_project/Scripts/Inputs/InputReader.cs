@@ -14,12 +14,14 @@ namespace OppositeGame._project.Scripts.Inputs
         public Action<PolarityType> OnPolarityChanged;
         public Action<PolarityType> OnShieldActivated;
         public Action OnShieldDeactivated;
+        public Action OnPowerUpActivated;
         
         private InputAction _moveAction;
         private InputAction _fireAction;
         private InputAction _menuAction;
         private InputAction _redPolarityAction;
         private InputAction _bluePolarityAction;
+        private InputAction _powerUpAction;
 
         public Vector2 GetMoveInput => _moveAction.ReadValue<Vector2>();
         public bool IsFiring => _fireAction.ReadValue<float>() > 0f;
@@ -33,11 +35,18 @@ namespace OppositeGame._project.Scripts.Inputs
             _fireAction = playerInput.actions["Fire"]; 
             _redPolarityAction = playerInput.actions["red-polarity"]; 
             _bluePolarityAction = playerInput.actions["blue-polarity"];
+            _powerUpAction = playerInput.actions["power-up"];
             
+            _powerUpAction.performed += OnPowerUpAction;
             _redPolarityAction.performed += OnReadPolarityAction;
             _bluePolarityAction.performed += OnReadPolarityAction;
             _redPolarityAction.canceled += OnPolarityActionCancelled;
             _bluePolarityAction.canceled += OnPolarityActionCancelled;
+        }
+
+        private void OnPowerUpAction(InputAction.CallbackContext obj)
+        {
+            OnPowerUpActivated?.Invoke();
         }
 
         private void OnPolarityActionCancelled(InputAction.CallbackContext obj)

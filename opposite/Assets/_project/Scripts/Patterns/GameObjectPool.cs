@@ -37,7 +37,6 @@ namespace OppositeGame._project.Scripts.Patterns
         
         public T Get()
         {
-            Debug.Log("Getting from pool internal");
             return _objectPool.Get();
         }
 

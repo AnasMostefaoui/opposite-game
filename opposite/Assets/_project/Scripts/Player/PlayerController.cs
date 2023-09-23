@@ -41,6 +41,12 @@ namespace OppositeGame._project.Scripts.Player
             GameManager.Instance.OnContinueScreen += OnContinueScreen;
             GameManager.Instance.OnContinuePlaying += WillKeepPlaying;
             GameManager.Instance.OnMainMenu += OnMainMenu;
+            _inputReader.OnPowerUpActivated += OnPowerUpActivated;
+        }
+    
+        private void OnPowerUpActivated()
+        {
+            GameManager.Instance.SlowTime();
         }
 
         private void Start()
@@ -114,6 +120,7 @@ namespace OppositeGame._project.Scripts.Player
             GameManager.Instance.OnContinueScreen -= OnContinueScreen;
             GameManager.Instance.OnContinuePlaying -= WillKeepPlaying;
             GameManager.Instance.OnMainMenu -= OnMainMenu;
+            _inputReader.OnPowerUpActivated -= OnPowerUpActivated;
         }
     }
 }

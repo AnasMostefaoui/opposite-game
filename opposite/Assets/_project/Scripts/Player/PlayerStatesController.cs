@@ -42,10 +42,8 @@ namespace OppositeGame._project.Scripts.Player
 
         private void Update()
         {
-            Debug.Log("IsAlive: " + _destructible.LifePoints);
             if (GameManager.Instance.currentScreen == GameScreen.Game && !isAlive)
             {
-                Debug.Log("Game Over");
                 GameManager.Instance.ContinueRequest();
             }
         }

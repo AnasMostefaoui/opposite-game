@@ -11,11 +11,9 @@ namespace OppositeGame._project.Scripts.Patterns
         {
             if (_pools.TryGetValue(gameObject.tag, out var pool))
             {
-                Debug.Log("getting from pool");
                 return pool.Get();
             }
 
-            Debug.Log("Creating pool");
             var newPool = new GameObjectPool<GameObject>(
                 () => Object.Instantiate(gameObject), 
                 objectToDestroy =>
