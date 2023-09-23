@@ -5,7 +5,6 @@ namespace OppositeGame._project.Scripts.Patterns
 {
     public static class ObjectPoolManager 
     {
-        
         private static Dictionary<string, GameObjectPool<GameObject>> _pools = new();
         public static GameObject Retrieve(GameObject gameObject)
         {

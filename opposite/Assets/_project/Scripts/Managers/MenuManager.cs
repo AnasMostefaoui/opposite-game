@@ -3,6 +3,7 @@ using System.Collections;
 using OppositeGame._project.Scripts.GUI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace OppositeGame._project.Scripts.Managers
 {
@@ -13,6 +14,8 @@ namespace OppositeGame._project.Scripts.Managers
         [SerializeField] private GameObject continueScreenPrefab;
         [SerializeField] private GameObject gameOverScreenPrefab;
         [SerializeField] private GameObject pauseScreenPrefab;
+        [SerializeField] private Image redEnergyFillImage;
+        [SerializeField] private Image blueEnergyFillImage;
         
         private PlayerInput _playerInput;
         private InputAction _startAction;
@@ -29,8 +32,24 @@ namespace OppositeGame._project.Scripts.Managers
         private static readonly int FadeOutAnimationKey = Animator.StringToHash("shouldFadeOut");
         private static readonly int FadeInAnimationKey = Animator.StringToHash("shouldFadeIn");
 
+        public void UpdateRedEnergy(float value)
+        {
+            redEnergyFillImage.fillAmount = value;
+            blueEnergyFillImage.fillAmount = value;
+        }
+        
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            else
+            {
+                Instance = this;
+            }
+            
             _playerInput = GetComponent<PlayerInput>();
             _playerInput.SwitchCurrentActionMap("Menu");
             _startAction = _playerInput.actions["Start"];
@@ -48,8 +67,6 @@ namespace OppositeGame._project.Scripts.Managers
             GameManager.Instance.OnContinueScreen += DisplayContinueScreen;
             GameManager.Instance.OnGameOver += DisplayGameOverScreen;
             GameManager.Instance.OnMainMenu +=  DisplayStartScreen;
-            
-            DontDestroyOnLoad(this);
         }
         
         private void OnLeavingContinueScreen(GameScreen newScreen)
@@ -128,6 +145,13 @@ namespace OppositeGame._project.Scripts.Managers
             _currentScreen = _gameOverScreen;
             _gameOverScreen.SetActive(true);
             GameManager.Instance.IsGameOver = true;
+            
+            var highScore = PlayerPrefs.GetInt("high-score", 0);
+            if (GameManager.Instance.CurrentScore > highScore)
+            {
+                PlayerPrefs.SetInt("high-score", GameManager.Instance.CurrentScore);
+                PlayerPrefs.Save();
+            }
         }
         
         private void DisplayStartScreen(object sender, EventArgs e)

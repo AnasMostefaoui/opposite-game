@@ -26,7 +26,7 @@ namespace OppositeGame._project.Scripts.Patterns
             _onActivation = onActivation;
             _onDeactivation = onDeactivation;
             
-            _objectPool = new ObjectPool<T>(CreateBullet,
+            _objectPool = new ObjectPool<T>(CreateObject,
                 OnRequest, 
                 OnRemoval,
                 OnDestroy, 
@@ -41,7 +41,7 @@ namespace OppositeGame._project.Scripts.Patterns
         }
 
         public void Release(T gameObject) => _objectPool.Release(gameObject);
-        private T CreateBullet() => _createObject?.Invoke();
+        private T CreateObject() => _createObject?.Invoke();
         private void OnRequest(T gameObject) => _onActivation?.Invoke(gameObject);
         private void OnRemoval(T gameObject) => _onDeactivation?.Invoke(gameObject);
         private void OnDestroy(T gameObject) => _onDestroyObject?.Invoke(gameObject);

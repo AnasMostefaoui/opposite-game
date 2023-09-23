@@ -3,6 +3,7 @@ using OppositeGame._project.Scripts.Enemies;
 using OppositeGame._project.Scripts.Environment;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
+using OppositeGame._project.Scripts.mechanics.Scoring;
 using OppositeGame._project.Scripts.mechanics.Traps;
 using OppositeGame._project.Scripts.Patterns;
 using OppositeGame._project.Scripts.Player;

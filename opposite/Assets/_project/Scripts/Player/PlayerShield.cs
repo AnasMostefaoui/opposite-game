@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using OppositeGame._project.Scripts.Inputs;
+using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace OppositeGame._project.Scripts.Player
 {
     public enum ShieldState
     {
-        Active, Inactive, Depleted, Recharging
+        Inactive, Active, Depleted, Recharging
     }
     public class PlayerShield : MonoBehaviour
     {
@@ -29,11 +30,11 @@ namespace OppositeGame._project.Scripts.Player
         [SerializeField] private float energyRecoveryRate = 1f;
         
         public Action OnShieldActivated;
-        public Action OnShieldDeactivated;        
-        public bool isShieldActive => _shieldState == ShieldState.Active; 
+        public Action OnShieldDeactivated;
+        public bool isShieldActive => _shieldState == ShieldState.Active && _activationIsRequested;
 
 
-        private ShieldState _shieldState = ShieldState.Active; 
+        private ShieldState _shieldState = ShieldState.Inactive; 
         private PolarityType _currentPolarityType = PolarityType.Blue;
         private PlayerPolarity _playerPolarity;
         private SpriteRenderer _maskSpriteRenderer;
@@ -55,6 +56,8 @@ namespace OppositeGame._project.Scripts.Player
         private Color BlueShieldColor => new Color(34f / 255f, 168f / 255f, 204f / 255f, shieldTransparency);
         
         private bool CanEnableShield => energy > 0;
+
+        private float normalizedEnergy => energy / maxEnergy;
         
         private void Awake()
         {
@@ -67,6 +70,7 @@ namespace OppositeGame._project.Scripts.Player
             _inputReader.OnShieldDeactivated += DeactivateShield;
             _playerPolarity.OnPolarityChanged += OnPolarityChanged;
             _shieldMaskObject.SetActive(false);
+            GameManager.Instance.UpdateRedEnergy(normalizedEnergy);
         }
 
         private void ActivateShield(PolarityType obj)
@@ -83,7 +87,11 @@ namespace OppositeGame._project.Scripts.Player
 
         private void DeactivateShield()
         {
-            _shieldState = ShieldState.Recharging;
+            if(energy < maxEnergy)
+                _shieldState = ShieldState.Recharging;
+            else 
+                _shieldState = ShieldState.Inactive;
+            
             if(_shieldMaskObject.activeSelf == false) return;
             _activationIsRequested = false;
             _shieldMaskObject.SetActive(false);
@@ -114,8 +122,9 @@ namespace OppositeGame._project.Scripts.Player
         {
             energy += energyRecoveryRate * Time.deltaTime;
             energy = Math.Clamp(energy, 0, maxEnergy);
-                
+            GameManager.Instance.UpdateRedEnergy(normalizedEnergy);
         }
+        
         private void OnPolarityChanged(PolarityType newPolarityType, PolarityType oldPolarityType)
         {
             _currentPolarityType = newPolarityType;

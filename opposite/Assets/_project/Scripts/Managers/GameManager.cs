@@ -64,9 +64,12 @@ namespace OppositeGame._project.Scripts.Managers
             DontDestroyOnLoad(this);
             _timeManager = GetComponent<TimeManager>();
             _timeManager.normalTimeScale = Time.timeScale;
-            
         }
 
+        public void UpdateRedEnergy(float value)
+        {
+            MenuManager.Instance.UpdateRedEnergy(value);
+        }
         private void Start()
         {
             ObjectPoolManager.Cleanup();
@@ -85,6 +88,7 @@ namespace OppositeGame._project.Scripts.Managers
                     ContinueRequest();
                     break;
                 case GameScreen.ContinueScreen when IsGameOver:
+                    Debug.Log("Call game over");
                     GameIsOver();
                     break;
             }
@@ -101,7 +105,7 @@ namespace OppositeGame._project.Scripts.Managers
             OnMainMenu?.Invoke(this, EventArgs.Empty);
         }
 
-        private void GameIsOver()
+        public void GameIsOver()
         {
             _timeManager.PauseTime();
             currentScreen = GameScreen.GameOver;

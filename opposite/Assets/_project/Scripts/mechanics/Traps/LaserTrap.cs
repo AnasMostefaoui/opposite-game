@@ -1,5 +1,6 @@
 using System;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
+using OppositeGame._project.Scripts.mechanics.Scoring;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,8 +13,8 @@ namespace OppositeGame._project.Scripts.mechanics.Traps
         [SerializeField] private Transform startPoint;
         [SerializeField] private Transform endPoint;
         
-        private LineRenderer _lineRenderer;
         private BoxCollider2D _boxCollider2D;
+        private LineRenderer _lineRenderer;
         private Vector3[] _positions = new Vector3[2];
         private void Awake()
         {
