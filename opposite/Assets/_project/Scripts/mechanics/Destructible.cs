@@ -4,7 +4,6 @@ using OppositeGame._project.Scripts.mechanics.Magnetism;
 using OppositeGame._project.Scripts.mechanics.Traps;
 using OppositeGame._project.Scripts.Patterns;
 using OppositeGame._project.Scripts.Player;
-using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
@@ -41,6 +40,14 @@ namespace OppositeGame._project.Scripts.mechanics
                 CollideWithLaser(laserTrap);
             }
             
+        }
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.TryGetComponent<LaserTrap>(out var laserTrap))
+            {
+                CollideWithLaser(laserTrap);
+            }
         }
 
         private void CollideWithBullet(Bullet bullet)
