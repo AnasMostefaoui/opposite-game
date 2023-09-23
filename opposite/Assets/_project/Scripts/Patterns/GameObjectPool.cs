@@ -35,7 +35,12 @@ namespace OppositeGame._project.Scripts.Patterns
                 maxCapacity);
         }
         
-        public T Get() =>  _objectPool.Get();
+        public T Get()
+        {
+            Debug.Log("Getting from pool internal");
+            return _objectPool.Get();
+        }
+
         public void Release(T gameObject) => _objectPool.Release(gameObject);
         private T CreateBullet() => _createObject?.Invoke();
         private void OnRequest(T gameObject) => _onActivation?.Invoke(gameObject);

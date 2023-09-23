@@ -64,6 +64,11 @@ namespace OppositeGame._project.Scripts.Managers
             
         }
 
+        private void Start()
+        {
+            ObjectPoolManager.Cleanup();
+        }
+
         private void Update()
         {
             switch (currentScreen)

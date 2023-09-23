@@ -34,7 +34,7 @@ namespace OppositeGame._project.Scripts.Spawners
         {
             _factory = new EnemyFactory(); 
             _nextSpawnTime = Time.time + spawnIntervalInSeconds;
-            cameraObject ??= Camera.main;
+            cameraObject = Camera.main;
             _viewPortObserver = GetComponent<ViewPortObserver>();
             _viewPortObserver.OnLeftViewport += () => Destroy(gameObject);
         }

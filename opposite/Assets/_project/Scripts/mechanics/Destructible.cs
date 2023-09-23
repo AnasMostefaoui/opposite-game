@@ -1,4 +1,5 @@
 ﻿using System;
+using OppositeGame._project.Scripts.Enemies;
 using OppositeGame._project.Scripts.Environment;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
@@ -36,6 +37,16 @@ namespace OppositeGame._project.Scripts.mechanics
         private void OnTriggerEnter2D(Collider2D other)
         {
             if(_camera.IsPointInViewport(transform.position) == false) return;
+            
+            if (other.TryGetComponent<PlayerController>(out var player))
+            {
+                EnemyCollideWithPlayer(player);
+            }           
+            if (other.TryGetComponent<Enemy>(out var enemy))
+            {
+                CollideWithEnemy(enemy);
+            }
+            
             if (other.TryGetComponent<Bullet>(out var bulletComponent))
             {
                 CollideWithBullet(bulletComponent);
@@ -56,7 +67,17 @@ namespace OppositeGame._project.Scripts.mechanics
             }
             
         }
-        
+
+        private void EnemyCollideWithPlayer(PlayerController component)
+        {
+            TakeDamage(9999);
+        }
+
+        private void CollideWithEnemy(Enemy enemy)
+        {
+            TakeDamage(9999);
+        }
+
         private void OnTriggerStay2D(Collider2D other)
         {
             if (other.TryGetComponent<LaserTrap>(out var laserTrap))
