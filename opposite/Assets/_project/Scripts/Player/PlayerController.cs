@@ -46,6 +46,8 @@ namespace OppositeGame._project.Scripts.Player
     
         private void OnPowerUpActivated()
         {
+            var hasEnoughEnergy = GameManager.Instance.RedCurrentEnergy >= 1f && GameManager.Instance.BlueCurrentEnergy >= 1f;
+            if (hasEnoughEnergy == false) return;
             GameManager.Instance.SlowTime();
         }
 

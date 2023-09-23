@@ -15,4 +15,4 @@ MonoBehaviour:
   explosionEffect: {fileID: 4148422010561086121, guid: 75f2469cebb0540a7bf47941d6a597a7, type: 3}
   bulletPrefab: {fileID: -6373034945798254142, guid: 56943fd10c127144eb9a50d510d15f62, type: 3}
   lifeTime: 2
-  damage: 1
+  damage: 5

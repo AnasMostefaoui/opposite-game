@@ -58,6 +58,14 @@ namespace OppositeGame._project.Scripts.Player
         
         private bool CanEnableShield => energy > 0;
         
+        public float Energy => energy;
+        public void ReduceEnergy(float amount)
+        {
+            energy -= amount;
+            energy = Mathf.Clamp(energy, 0, maxEnergy);
+            GameManager.Instance.UpdateRedEnergy(energy/maxEnergy, polarity);
+        }
+        
         private void Awake()
         {
             var tagName = polarity == PolarityType.Blue ? "blue-player-shield-mask" : "red-player-shield-mask";

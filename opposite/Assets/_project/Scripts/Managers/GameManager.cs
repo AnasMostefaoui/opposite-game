@@ -46,7 +46,9 @@ namespace OppositeGame._project.Scripts.Managers
         public event EventHandler OnContinuePlaying;
         public event EventHandler OnMainMenu;
         public delegate void EnergyChanged(float value, PolarityType polarity);
+        public delegate void DamageFeedback(float damageAmount, PolarityType polarity);
         public event EnergyChanged OnEnergyChanged;
+        public event EnergyChanged OnDamageFeedbackRequested;
         
         public bool IsGameStarted { get; set; }
         public bool HasNoLifePoints { get; set; }
@@ -86,6 +88,12 @@ namespace OppositeGame._project.Scripts.Managers
             
             OnEnergyChanged?.Invoke(value, polarityType);
         }
+
+        public void RequestDamageFeedBack(float damage)
+        {
+            OnDamageFeedbackRequested?.Invoke(damage, PolarityType.Red);
+        }
+        
         private void Start()
         {
             ObjectPoolManager.Cleanup();

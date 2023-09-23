@@ -69,7 +69,6 @@ namespace OppositeGame._project.Scripts.Managers
 
         private void UpdateRedEnergy(float energy, PolarityType polarity)
         {
-            Debug.Log("update energy " + energy + " " + polarity);
             if (polarity == PolarityType.Blue)
             {
                 blueEnergyFillImage.fillAmount = energy;

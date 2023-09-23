@@ -56,17 +56,14 @@ namespace OppositeGame._project.Scripts.mechanics
             {
                 CollideWithEnemy(enemy);
             }
-            
             if (other.TryGetComponent<Bullet>(out var bulletComponent))
             {
                 CollideWithBullet(bulletComponent);
             }
-            
             if (other.TryGetComponent<LaserTrap>(out var laserTrap))
             {
                 CollideWithLaser(laserTrap);
             }
-            
             if (other.TryGetComponent<Asteroid>(out var asteroid))
             {
                 CollideWithAsteroid(asteroid);
@@ -101,20 +98,25 @@ namespace OppositeGame._project.Scripts.mechanics
             var samePolarity = bullet.PolarityType == PolarityProvider.PolarityType;
             var samePolarityShield = bullet.PolarityType == PolarityType.Red ? RedPlayerShield : BluePlayerShield;
             
-            if (samePolarityShield == null || samePolarityShield.isShieldActive == false)
+            if (!samePolarity)
             {
+                Debug.Log("Not the same polarity");
                 TakeDamage(bullet.Damage);
                 return;
             }
-            
-            if(samePolarityShield.isShieldActive && samePolarity)
+
+            // shield absorb same bullets
+            if (samePolarityShield && samePolarityShield.isShieldActive)
             {
-                // or reduced damage?
+                Debug.Log("Same polarity and shield on");
                 TakeDamage(0);
             }
             else
             {
-                TakeDamage(bullet.Damage);
+                Debug.Log("Same polarity and shield off");
+                // same polarity will deal no damage as long as we have energy
+                samePolarityShield.ReduceEnergy(bullet.Damage * 0.5f);
+                TakeDamage( samePolarityShield.Energy > 0 ? 0 : bullet.Damage);
             }
         } 
         
@@ -147,6 +149,7 @@ namespace OppositeGame._project.Scripts.mechanics
             {
                 gameObject.SetActive(false);
             }
+            // if it's player shake the camera ?
             OnRelease?.Invoke(gameObject);
         }
         
