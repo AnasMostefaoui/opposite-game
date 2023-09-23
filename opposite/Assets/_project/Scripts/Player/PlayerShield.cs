@@ -91,6 +91,10 @@ namespace OppositeGame._project.Scripts.Player
             _shieldState = ShieldState.Active;
             _shieldMaskObject.SetActive(true);
             OnShieldActivated?.Invoke();
+            if(polarity == PolarityType.Blue)
+                GameManager.Instance.IsBlueShieldOn = true;
+            else
+                GameManager.Instance.IsRedShieldOn = true;
         }
 
         private void DeactivateShield(PolarityType obj)
@@ -104,6 +108,10 @@ namespace OppositeGame._project.Scripts.Player
             _activationIsRequested = false;
             _shieldMaskObject.SetActive(false);
             OnShieldDeactivated?.Invoke();
+            if(polarity == PolarityType.Blue)
+                GameManager.Instance.IsBlueShieldOn = false;
+            else
+                GameManager.Instance.IsRedShieldOn = false;
         }
         
         private void Update()

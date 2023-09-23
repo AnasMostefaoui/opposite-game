@@ -18,6 +18,7 @@ TagManager:
   - en-small-red-bullet
   - red-player-shield-mask
   - blue-player-shield-mask
+  - blue-attractor-trap
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Collectibles
   - Traps
   - CameraModifiers
-  - 
+  - Area-effects
   - 
   - 
   - 

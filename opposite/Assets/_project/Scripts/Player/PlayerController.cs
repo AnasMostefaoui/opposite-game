@@ -65,7 +65,6 @@ namespace OppositeGame._project.Scripts.Player
             }
         }
 
-        
         private void OnMainMenu(object sender, EventArgs e)
         {
             transform.position = transform.position.With(x: 0).With(y: 0);

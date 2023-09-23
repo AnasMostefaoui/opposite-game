@@ -2,6 +2,7 @@ using System;
 using OppositeGame._project.Scripts.CameraScripts;
 using OppositeGame._project.Scripts.Inputs;
 using OppositeGame._project.Scripts.Managers;
+using OppositeGame._project.Scripts.mechanics.Magnetism;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
@@ -24,8 +25,10 @@ namespace OppositeGame._project.Scripts.Player
 
         private Animator _animationController;
         private CameraController _cameraController;
+        private PlayerPolarity _playerPolarity;
         private InputReader _inputReader;
         private Vector3 _destination;
+        private Vector3 _force;
 
         private void Awake()
         {
@@ -33,6 +36,7 @@ namespace OppositeGame._project.Scripts.Player
             _inputReader = GetComponent<InputReader>();
             _destination = transform.position;
             _animationController = GetComponent<Animator>();
+            _playerPolarity = GetComponent<PlayerPolarity>();
             _cameraController = cameraObject.GetComponent<CameraController>();
             GameManager.Instance.OnMainMenu += OnMainMenu;
         }
@@ -51,6 +55,8 @@ namespace OppositeGame._project.Scripts.Player
             _animationController.SetBool("isMovingLeft", _inputReader.GetMoveInput.x < 0);
             _animationController.SetBool("isMovingRight", _inputReader.GetMoveInput.x > 0);
 
+            // add force to destination
+            _destination += _force * deltaTime;
             // limit the movement to viewport
             // first, convert the destination world position to viewport position 
             var viewportPosition = cameraObject.WorldToViewportPoint(_destination);
@@ -64,6 +70,34 @@ namespace OppositeGame._project.Scripts.Player
             
             // smooth the movement
             transform.position = Vector2.Lerp(transform.position, _destination, smoothness * deltaTime);
+        }
+        
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Area-effects"))
+            {
+                var polarityProvider = other.GetComponent<PolarityProvider>();
+                var direction = (transform.position - other.transform.position).normalized;
+                var samePolarity = _playerPolarity.PolarityType == polarityProvider.PolarityType;
+                
+                var isShieldOn = polarityProvider.PolarityType == PolarityType.Blue ? 
+                    GameManager.Instance.IsBlueShieldOn : GameManager.Instance.IsRedShieldOn; 
+                var force = isShieldOn && samePolarity ? 2f : -2f;
+                _force = direction * force;
+                Debug.Log("polarityProvider.polarity " + polarityProvider.PolarityType);
+                Debug.Log("polarityProvider.polarity " + polarityProvider.PolarityType);
+                Debug.Log("samePolarity " + _playerPolarity.PolarityType);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Area-effects"))
+            {
+                _force = Vector2.zero;
+                return;
+            }
+            _force = Vector2.zero;
         }
 
         private void OnDestroy()

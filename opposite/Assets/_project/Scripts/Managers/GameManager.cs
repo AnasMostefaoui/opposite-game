@@ -79,6 +79,8 @@ namespace OppositeGame._project.Scripts.Managers
             _timeManager.normalTimeScale = Time.timeScale;
         }
 
+        public bool IsRedShieldOn = false;
+        public bool IsBlueShieldOn = false;
         public void UpdateRedEnergy(float value, PolarityType polarityType)
         {
             if(polarityType == PolarityType.Red)
