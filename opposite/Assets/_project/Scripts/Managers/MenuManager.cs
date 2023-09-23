@@ -31,15 +31,6 @@ namespace OppositeGame._project.Scripts.Managers
 
         private void Awake()
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-            }
-            
             _playerInput = GetComponent<PlayerInput>();
             _playerInput.SwitchCurrentActionMap("Menu");
             _startAction = _playerInput.actions["Start"];
@@ -163,6 +154,9 @@ namespace OppositeGame._project.Scripts.Managers
 
         private void OnDestroy()
         {
+            GameManager.Instance.OnContinueScreen -= DisplayContinueScreen;
+            GameManager.Instance.OnGameOver -= DisplayGameOverScreen;
+            GameManager.Instance.OnMainMenu -=  DisplayStartScreen;
             _startAction.performed -= OnStartPressed; 
             _quiteAction.performed -= OnPausePressed;
             _continueScreen.GetComponent<ContinueScreen>().OnLeaving -= OnLeavingContinueScreen;

@@ -62,6 +62,7 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
             if (bulletType.explosionEffect != null)
             {
                 var hitEffect = ObjectPoolManager.Retrieve(bulletType.explosionEffect.gameObject);
+                if(hitEffect == null) return;
                 hitEffect.transform.position = transform.position;
                 hitEffect.GetComponent<ParticleSystem>().Play();
             }

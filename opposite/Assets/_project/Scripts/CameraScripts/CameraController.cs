@@ -16,7 +16,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
         [SerializeField] private  float zoomFactor = 1;
         private Camera thisCamera;
         private float originalSize;
-        private bool _canMove = false;
+        private bool _canMove;
         private void Awake()
         {
             GameManager.Instance.OnGameStarted += StartMoving;

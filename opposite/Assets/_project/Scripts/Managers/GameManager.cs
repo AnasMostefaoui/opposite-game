@@ -1,5 +1,7 @@
 ﻿using System;
+using OppositeGame._project.Scripts.Patterns;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace OppositeGame._project.Scripts.Managers
 {
@@ -49,6 +51,7 @@ namespace OppositeGame._project.Scripts.Managers
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
+                return;
             }
             else
             {
@@ -142,8 +145,9 @@ namespace OppositeGame._project.Scripts.Managers
         public void RestartFromMainMenu()
         {
             ResetToMainMenu();
-            // int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            // SceneManager.LoadScene(currentSceneIndex);
+            ObjectPoolManager.Cleanup();
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentSceneIndex);
         }
         
         public void QuiteTheGame()

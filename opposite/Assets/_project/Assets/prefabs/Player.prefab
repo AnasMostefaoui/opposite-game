@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735bea1d632b4000b91a89f9945d24a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoints: 5
+  lifePoints: 2
   invincibilityTime: 3
   flickerDuration: 0.015
 --- !u!114 &6802752045113911258

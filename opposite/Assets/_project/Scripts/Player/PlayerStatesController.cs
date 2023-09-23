@@ -23,81 +23,31 @@ namespace OppositeGame._project.Scripts.Player
         private bool _isReviving;
         private CircleCollider2D _playerCollider;
         private SpriteRenderer _spriteRenderer;
-        private TrailRenderer _trailRenderer;
-        private Color _originalColor;
 
-        public float LifePoints
-        {
-            set => _destructible.LifePoints = value;
-            get => _destructible.LifePoints;
-        }
+        public bool isAlive => _destructible.LifePoints > 0;
+        
 
         private void Awake()
         { 
             _playerCollider = GetComponent<CircleCollider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _trailRenderer = GetComponentInChildren<TrailRenderer>();
-            _originalColor = _spriteRenderer.color;
+            _destructible ??= GetComponent<Destructible>();
         }
 
         private void Start()
         {
-            _destructible ??= GetComponent<Destructible>();
             _destructible.LifePoints = lifePoints;
             _camera ??= Camera.main;
-            GameManager.Instance.OnContinueScreen += OnContinueScreen;
-            GameManager.Instance.OnContinuePlaying += WillKeepPlaying;
-            GameManager.Instance.OnMainMenu += OnMainMenu;
         }
 
-        private void OnMainMenu(object sender, EventArgs e)
+        private void Update()
         {
-            gameObject.SetActive(true);
-        }
-
-
-        private void OnContinueScreen(object sender, EventArgs e)
-        {
-            gameObject.SetActive(false);
-        }
-
-                
-        private void WillKeepPlaying(object sender, EventArgs e)
-        {
-            SetInvincible(true);
-            gameObject.SetActive(true); 
-            StartCoroutine(RevivePlayer(invincibilityTime));
-        }
-
-        private void SetInvincible(bool invincible)
-        {
-            _playerCollider.enabled = !invincible;
-            _trailRenderer.enabled = !invincible;
-        }
-        
-        private IEnumerator RevivePlayer(float seconds)
-        {
-            _isReviving = true; 
-            SetInvincible(true);
-            // add flashing animation
-            var flickerRate = seconds / flickerDuration; 
-            for (int i = 0; i < flickerRate; i++)
+            Debug.Log("IsAlive: " + _destructible.LifePoints);
+            if (GameManager.Instance.currentScreen == GameScreen.Game && !isAlive)
             {
-                _spriteRenderer.color = Color.clear;
-                yield return new WaitForSeconds(flickerDuration);
-                _spriteRenderer.color = _originalColor;
-                yield return new WaitForSeconds(flickerDuration);
-            }   
-            
-            SetInvincible(false);
-            _isReviving = false; 
-        }
-        
-        private void OnDestroy()
-        {
-            GameManager.Instance.OnContinueScreen -= OnContinueScreen;
-            GameManager.Instance.OnContinuePlaying -= WillKeepPlaying;
-            GameManager.Instance.OnMainMenu -= OnMainMenu;
+                Debug.Log("Game Over");
+                GameManager.Instance.ContinueRequest();
+            }
         }
     }
 }

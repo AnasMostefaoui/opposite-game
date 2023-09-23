@@ -65,5 +65,10 @@ namespace OppositeGame._project.Scripts.Player
             // smooth the movement
             transform.position = Vector2.Lerp(transform.position, _destination, smoothness * deltaTime);
         }
+
+        private void OnDestroy()
+        {
+            GameManager.Instance.OnMainMenu -= OnMainMenu;
+        }
     }
 }
