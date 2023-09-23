@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using OppositeGame._project.Scripts.Patterns;
 using UnityEngine;
 
-namespace OppositeGame._project.Scripts.ScriptablesObjects.Pools
+namespace OppositeGame._project.Scripts.Patterns
 {
     public class ObjectPoolManager : MonoBehaviour
     {

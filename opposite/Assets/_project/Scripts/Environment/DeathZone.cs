@@ -1,4 +1,5 @@
 ﻿using System;
+using OppositeGame._project.Scripts.Managers;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.Environment

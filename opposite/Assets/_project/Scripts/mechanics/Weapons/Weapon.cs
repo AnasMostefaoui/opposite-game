@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using OppositeGame._project.Scripts.ScriptablesObjects;
-using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
 using OppositeGame._project.Scripts.ScriptablesObjects.Weapons;
 using UnityEngine;
 using UnityEngine.Serialization;

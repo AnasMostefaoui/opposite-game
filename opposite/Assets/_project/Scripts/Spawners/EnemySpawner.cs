@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OppositeGame._project.Scripts.CameraScripts;
+using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics;
 using OppositeGame._project.Scripts.mechanics.Movement;
 using OppositeGame._project.Scripts.Patterns;

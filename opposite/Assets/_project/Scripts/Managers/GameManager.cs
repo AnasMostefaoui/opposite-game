@@ -1,9 +1,7 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
-namespace OppositeGame._project.Scripts
+namespace OppositeGame._project.Scripts.Managers
 {
     public enum GameScreen
     {

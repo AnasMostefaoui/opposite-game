@@ -1,4 +1,5 @@
 ﻿using OppositeGame._project.Scripts.Inputs;
+using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics.Collectibles;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
 using UnityEngine;

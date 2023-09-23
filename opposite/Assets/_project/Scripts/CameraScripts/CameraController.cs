@@ -1,9 +1,9 @@
 ﻿using System;
-using OppositeGame._project.Scripts;
+using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 
-namespace OppositeGame
+namespace OppositeGame._project.Scripts.CameraScripts
 {
     public class CameraController : MonoBehaviour
     {

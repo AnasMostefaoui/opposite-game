@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections;
 using OppositeGame._project.Scripts.GUI;
-using OppositeGame._project.Scripts.Inputs;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using ArgumentOutOfRangeException = System.ArgumentOutOfRangeException;
-using Image = UnityEngine.UI.Image;
 
 namespace OppositeGame._project.Scripts.Managers
 {

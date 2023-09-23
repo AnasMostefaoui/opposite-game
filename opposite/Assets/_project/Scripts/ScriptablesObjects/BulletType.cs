@@ -1,7 +1,6 @@
 ﻿using OppositeGame._project.Scripts.mechanics;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
-using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.ScriptablesObjects

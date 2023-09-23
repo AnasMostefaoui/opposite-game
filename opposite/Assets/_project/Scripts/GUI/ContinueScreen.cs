@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using OppositeGame._project.Scripts.Managers;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.GUI

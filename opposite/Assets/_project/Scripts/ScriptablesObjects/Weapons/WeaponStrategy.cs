@@ -1,7 +1,7 @@
 ﻿using System;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
-using OppositeGame._project.Scripts.ScriptablesObjects.Pools;
+using OppositeGame._project.Scripts.Patterns;
 using UnityEngine;
 
 namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
