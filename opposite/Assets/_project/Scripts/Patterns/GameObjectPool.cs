@@ -41,5 +41,7 @@ namespace OppositeGame._project.Scripts.Patterns
         private void OnRequest(T gameObject) => _onActivation?.Invoke(gameObject);
         private void OnRemoval(T gameObject) => _onDeactivation?.Invoke(gameObject);
         private void OnDestroy(T gameObject) => _onDestroyObject?.Invoke(gameObject);
+        
+        public void Cleanup() => _objectPool.Clear();
     }
 }
