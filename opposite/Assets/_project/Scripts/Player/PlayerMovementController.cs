@@ -84,9 +84,6 @@ namespace OppositeGame._project.Scripts.Player
                     GameManager.Instance.IsBlueShieldOn : GameManager.Instance.IsRedShieldOn; 
                 var force = isShieldOn && samePolarity ? 2f : -2f;
                 _force = direction * force;
-                Debug.Log("polarityProvider.polarity " + polarityProvider.PolarityType);
-                Debug.Log("polarityProvider.polarity " + polarityProvider.PolarityType);
-                Debug.Log("samePolarity " + _playerPolarity.PolarityType);
             }
         }
 
