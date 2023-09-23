@@ -12,11 +12,12 @@ TagManager:
   - eb-small-type1
   - er-small-type1
   - eb-small-type2
-  - player-shield-mask
   - background-scroller
   - en-small-tracking-bullet
   - en-small-purple-bullet
   - en-small-red-bullet
+  - red-player-shield-mask
+  - blue-player-shield-mask
   layers:
   - Default
   - TransparentFX

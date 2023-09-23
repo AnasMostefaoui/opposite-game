@@ -19,7 +19,6 @@ namespace OppositeGame._project.Scripts.Player
         // How many energy points the shield has
         [Range(0, 100)]
         [SerializeField] private float energy = 10;
-        
         [Range(0, 100)]
         [SerializeField] private float maxEnergy = 10;
         // How many energy points the shield consumes per second
@@ -28,64 +27,65 @@ namespace OppositeGame._project.Scripts.Player
         // How many energy points the shield recovers per second
         [Range(0, 100)]
         [SerializeField] private float energyRecoveryRate = 1f;
+
+        [SerializeField] private PolarityType polarity;
         
         public Action OnShieldActivated;
         public Action OnShieldDeactivated;
         public bool isShieldActive => _shieldState == ShieldState.Active && _activationIsRequested;
-
-
-        private ShieldState _shieldState = ShieldState.Inactive; 
-        private PolarityType _currentPolarityType = PolarityType.Blue;
+        public PolarityType test => polarity;
         private PlayerPolarity _playerPolarity;
         private SpriteRenderer _maskSpriteRenderer;
         private TrailRenderer _trailRenderer;
         private InputReader _inputReader;
+        private ShieldState _shieldState = ShieldState.Inactive; 
         private GameObject _shieldMaskObject;
         // flag to know that the player is still pressing the buttons
         private bool _activationIsRequested = false;
-        private Color RedShieldColor
-        {
+        private Color ShieldColor  {
             get
             {
-                var color = Color.red;
-                    color.a = shieldTransparency;
+                var color = Color.red;;
+                if (polarity == PolarityType.Blue)
+                {
+                    color = new Color(34f / 255f, 168f / 255f, 204f / 255f, shieldTransparency);
+                    return color;
+                }
+                color.a = shieldTransparency;
                 return color;
             }
         }
-
-        private Color BlueShieldColor => new Color(34f / 255f, 168f / 255f, 204f / 255f, shieldTransparency);
         
         private bool CanEnableShield => energy > 0;
-
-        private float normalizedEnergy => energy / maxEnergy;
         
         private void Awake()
         {
-            _shieldMaskObject = GameObject.FindWithTag("player-shield-mask");
-            _playerPolarity = GetComponent<PlayerPolarity>();
+            var tagName = polarity == PolarityType.Blue ? "blue-player-shield-mask" : "red-player-shield-mask";
+  
+            _shieldMaskObject = GameObject.FindWithTag(tagName);
             _maskSpriteRenderer = _shieldMaskObject.GetComponent<SpriteRenderer>();
+            _playerPolarity = GetComponent<PlayerPolarity>();
             _trailRenderer = GetComponentInChildren<TrailRenderer>();
             _inputReader = GetComponent<InputReader>();
             _inputReader.OnShieldActivated += ActivateShield;
             _inputReader.OnShieldDeactivated += DeactivateShield;
-            _playerPolarity.OnPolarityChanged += OnPolarityChanged;
+            _maskSpriteRenderer.color = ShieldColor;
             _shieldMaskObject.SetActive(false);
-            GameManager.Instance.UpdateRedEnergy(normalizedEnergy);
         }
 
         private void ActivateShield(PolarityType obj)
         {
+            if(obj != polarity) return;
             _activationIsRequested = true;
             _playerPolarity.PolarityType = obj;
             
             if(!CanEnableShield) return;
             _shieldState = ShieldState.Active;
-            OnPolarityChanged(obj, _playerPolarity.PolarityType);
             _shieldMaskObject.SetActive(true);
             OnShieldActivated?.Invoke();
         }
 
-        private void DeactivateShield()
+        private void DeactivateShield(PolarityType obj)
         {
             if(energy < maxEnergy)
                 _shieldState = ShieldState.Recharging;
@@ -100,17 +100,17 @@ namespace OppositeGame._project.Scripts.Player
         
         private void Update()
         {
-            _maskSpriteRenderer.color = _currentPolarityType == PolarityType.Red ? RedShieldColor : BlueShieldColor;
             switch (_shieldState)   
             { 
                 case ShieldState.Active when energy > 0:
                     energy -= energyConsumptionRate * Time.deltaTime;
+                    GameManager.Instance.UpdateRedEnergy(energy/maxEnergy, polarity);
                     break;
                 case ShieldState.Active when energy <= 0:
                     _shieldState = ShieldState.Depleted;
                     break;
                 case ShieldState.Depleted:
-                    DeactivateShield();
+                    DeactivateShield(polarity);
                     break;
                 case ShieldState.Recharging:
                     Refill();
@@ -122,23 +122,13 @@ namespace OppositeGame._project.Scripts.Player
         {
             energy += energyRecoveryRate * Time.deltaTime;
             energy = Math.Clamp(energy, 0, maxEnergy);
-            GameManager.Instance.UpdateRedEnergy(normalizedEnergy);
+            GameManager.Instance.UpdateRedEnergy(energy/maxEnergy, polarity);
         }
         
-        private void OnPolarityChanged(PolarityType newPolarityType, PolarityType oldPolarityType)
-        {
-            _currentPolarityType = newPolarityType;
-            var polarityColor = newPolarityType == PolarityType.Red ? RedShieldColor : BlueShieldColor;
-            _maskSpriteRenderer.color = polarityColor;
-            _trailRenderer.startColor = polarityColor;
-            _trailRenderer.endColor = polarityColor;
-        }
-
         private void OnDestroy()
         {
             _inputReader.OnShieldActivated -= ActivateShield;
             _inputReader.OnShieldDeactivated -= DeactivateShield;
-            _playerPolarity.OnPolarityChanged -= OnPolarityChanged;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace OppositeGame._project.Scripts.Inputs
         
         public Action<PolarityType> OnPolarityChanged;
         public Action<PolarityType> OnShieldActivated;
-        public Action OnShieldDeactivated;
+        public Action<PolarityType> OnShieldDeactivated;
         public Action OnPowerUpActivated;
         
         private InputAction _moveAction;
@@ -51,10 +51,11 @@ namespace OppositeGame._project.Scripts.Inputs
 
         private void OnPolarityActionCancelled(InputAction.CallbackContext obj)
         {
+            var polarityType = obj.action.name.Contains("red") ? PolarityType.Red : PolarityType.Blue;
             switch (obj.interaction)
             {
                 case HoldInteraction:
-                    OnShieldDeactivated?.Invoke();
+                    OnShieldDeactivated?.Invoke(polarityType);
                     break;
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using OppositeGame._project.Scripts.mechanics.Magnetism;
 using OppositeGame._project.Scripts.Patterns;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,16 +14,26 @@ namespace OppositeGame._project.Scripts.Managers
         GameOver,
         Pause
     }
-    
-    public enum GameLevels
+
+    [Serializable]
+    public class PlayerData
     {
-        Level1 = 0,
-        Level2,
+        [Range(0, 100)]
+        [SerializeField] public float maxRedEnergy;
+        [Range(0, 100)]
+        [SerializeField] public float maxBlueEnergy;
+        [SerializeField] public float lifePoints;
+        
+        public float currentRedEnergy;
+        public float currentBlueEnergy;
     }
 
     
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] public GameScreen currentScreen = GameScreen.MainMenu;
+        [Header("Player data settings")]
+        [SerializeField] public readonly PlayerData playerData;
         public static GameManager Instance { get; private set; }
         public event EventHandler OnGameOver;
         public event EventHandler OnGamePaused;
@@ -34,16 +45,16 @@ namespace OppositeGame._project.Scripts.Managers
          */
         public event EventHandler OnContinuePlaying;
         public event EventHandler OnMainMenu;
-
+        public delegate void EnergyChanged(float value, PolarityType polarity);
+        public event EnergyChanged OnEnergyChanged;
         
-        [SerializeField] public GameScreen currentScreen = GameScreen.MainMenu;
         public bool IsGameStarted { get; set; }
-        
         public bool HasNoLifePoints { get; set; }
         public bool IsGameOver { get; set; }
-
         public bool IsPaused => _timeManager.IsTimePaused;
-
+        // normalized energy values
+        public float RedCurrentEnergy = 1;
+        public float BlueCurrentEnergy = 1;
         public int CurrentScore = 0;
         private float TimeScale { get; set; }
         
@@ -66,9 +77,14 @@ namespace OppositeGame._project.Scripts.Managers
             _timeManager.normalTimeScale = Time.timeScale;
         }
 
-        public void UpdateRedEnergy(float value)
+        public void UpdateRedEnergy(float value, PolarityType polarityType)
         {
-            MenuManager.Instance.UpdateRedEnergy(value);
+            if(polarityType == PolarityType.Red)
+                RedCurrentEnergy = value;
+            else
+                BlueCurrentEnergy = value;
+            
+            OnEnergyChanged?.Invoke(value, polarityType);
         }
         private void Start()
         {

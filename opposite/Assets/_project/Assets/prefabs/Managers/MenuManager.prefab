@@ -217,7 +217,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 21.3, y: 12.9}
-  m_SizeDelta: {x: 178.8681, y: 30.8076}
+  m_SizeDelta: {x: 110, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &5927578183984179532
 CanvasRenderer:
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 4331630458206208567}
   - component: {fileID: 7622463131753703194}
   m_Layer: 5
-  m_Name: mask
+  m_Name: red-fill-mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.632
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -457,8 +457,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 211.7, y: 12.9}
-  m_SizeDelta: {x: 178.8681, y: 30.8076}
+  m_AnchoredPosition: {x: 125.2, y: 12.9}
+  m_SizeDelta: {x: 110, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &8242907495261560216
 CanvasRenderer:
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 7236101792385352716}
   - component: {fileID: 2096812006092266210}
   m_Layer: 5
-  m_Name: mask
+  m_Name: blue-fill-mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,8 +639,9 @@ MonoBehaviour:
   continueScreenPrefab: {fileID: 7677534582857747315, guid: 235a0b073598873449497af6a7e396a4, type: 3}
   gameOverScreenPrefab: {fileID: 1882142360159862167, guid: a52453ee962636d4fbe29d0aa2ce0acc, type: 3}
   pauseScreenPrefab: {fileID: 3243158266476183841, guid: a581a2575380c3541bebffaf4249be5d, type: 3}
-  redEnergyFillImage: {fileID: 2693584528956375493}
-  blueEnergyFillImage: {fileID: 5913742507703905597}
+  redEnergyFillImage: {fileID: 4331630458206208567}
+  blueEnergyFillImage: {fileID: 7236101792385352716}
+  scoreText: {fileID: 3451639194543540117}
 --- !u!114 &6895600197862406950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,7 +781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -362, y: 234}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2437195834295795171
@@ -811,10 +812,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Score
+  m_text: 'score: 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 01e0fc06edebc4f638ea2f6a8d65ada4, type: 2}
+  m_sharedMaterial: {fileID: -3356195161536011692, guid: 01e0fc06edebc4f638ea2f6a8d65ada4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

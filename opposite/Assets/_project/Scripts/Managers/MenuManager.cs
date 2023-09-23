@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using OppositeGame._project.Scripts.GUI;
+using OppositeGame._project.Scripts.mechanics.Magnetism;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -16,6 +18,7 @@ namespace OppositeGame._project.Scripts.Managers
         [SerializeField] private GameObject pauseScreenPrefab;
         [SerializeField] private Image redEnergyFillImage;
         [SerializeField] private Image blueEnergyFillImage;
+        [SerializeField] private TextMeshProUGUI scoreText;
         
         private PlayerInput _playerInput;
         private InputAction _startAction;
@@ -31,12 +34,6 @@ namespace OppositeGame._project.Scripts.Managers
         private bool _isTransitioning;
         private static readonly int FadeOutAnimationKey = Animator.StringToHash("shouldFadeOut");
         private static readonly int FadeInAnimationKey = Animator.StringToHash("shouldFadeIn");
-
-        public void UpdateRedEnergy(float value)
-        {
-            redEnergyFillImage.fillAmount = value;
-            blueEnergyFillImage.fillAmount = value;
-        }
         
         private void Awake()
         {
@@ -67,8 +64,22 @@ namespace OppositeGame._project.Scripts.Managers
             GameManager.Instance.OnContinueScreen += DisplayContinueScreen;
             GameManager.Instance.OnGameOver += DisplayGameOverScreen;
             GameManager.Instance.OnMainMenu +=  DisplayStartScreen;
+            GameManager.Instance.OnEnergyChanged +=  UpdateRedEnergy;
         }
-        
+
+        private void UpdateRedEnergy(float energy, PolarityType polarity)
+        {
+            Debug.Log("update energy " + energy + " " + polarity);
+            if (polarity == PolarityType.Blue)
+            {
+                blueEnergyFillImage.fillAmount = energy;
+            }
+            else
+            {
+                redEnergyFillImage.fillAmount = energy;
+            }
+        }
+
         private void OnLeavingContinueScreen(GameScreen newScreen)
         {
             // if we are on continue and we have 
@@ -105,7 +116,12 @@ namespace OppositeGame._project.Scripts.Managers
             DisableAllScreens();
             EnterScreen(GameScreen.MainMenu, () => DisplayStartScreen(this, EventArgs.Empty) );
         }
-        
+
+        private void Update()
+        {
+            scoreText.text = $"score: {GameManager.Instance.CurrentScore}";
+        }
+
         private void OnStartPressed(InputAction.CallbackContext action)
         { 
             if(_isTransitioning) return;
@@ -185,6 +201,7 @@ namespace OppositeGame._project.Scripts.Managers
             _quiteAction.performed -= OnPausePressed;
             _continueScreen.GetComponent<ContinueScreen>().OnLeaving -= OnLeavingContinueScreen;
             GameManager.Instance.OnGameOver -= DisplayGameOverScreen;
+            GameManager.Instance.OnEnergyChanged -=  UpdateRedEnergy;
         }
     }
 }

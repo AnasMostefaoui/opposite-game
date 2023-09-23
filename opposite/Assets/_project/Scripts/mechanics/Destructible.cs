@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using OppositeGame._project.Scripts.Enemies;
 using OppositeGame._project.Scripts.Environment;
 using OppositeGame._project.Scripts.mechanics.Bullets;
@@ -18,7 +19,8 @@ namespace OppositeGame._project.Scripts.mechanics
         [SerializeField] public ParticleSystem explosionEffectPrefab;
         public Action<GameObject> OnRelease { get; set; }
         public PolarityProvider PolarityProvider { get; set; }
-        public PlayerShield PlayerShield { get; set; }
+        public PlayerShield RedPlayerShield { get; set; }
+        public PlayerShield BluePlayerShield { get; set; }
         private Camera _camera;
 
 
@@ -29,10 +31,17 @@ namespace OppositeGame._project.Scripts.mechanics
             {
                 PolarityProvider = playerPolarityProvider;
             }           
-            if (TryGetComponent<PlayerShield>(out var shield))
+            if (TryGetComponent<PlayerShield>(out var redShield))
             {
-                PlayerShield = shield;
+                RedPlayerShield = redShield;
             } 
+            var shields = GetComponents<PlayerShield>();
+            if (shields != null && shields.Length > 1)
+            {
+                // this is risky, better have a search by polarity.
+                RedPlayerShield = shields[0];
+                BluePlayerShield = shields[1];
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -89,13 +98,16 @@ namespace OppositeGame._project.Scripts.mechanics
 
         private void CollideWithBullet(Bullet bullet)
         {
-            if (PlayerShield == null || PlayerShield.isShieldActive == false)
+            var samePolarity = bullet.PolarityType == PolarityProvider.PolarityType;
+            var samePolarityShield = bullet.PolarityType == PolarityType.Red ? RedPlayerShield : BluePlayerShield;
+            
+            if (samePolarityShield == null || samePolarityShield.isShieldActive == false)
             {
                 TakeDamage(bullet.Damage);
                 return;
             }
             
-            if(PlayerShield.isShieldActive && bullet.PolarityType == PolarityProvider.PolarityType)
+            if(samePolarityShield.isShieldActive && samePolarity)
             {
                 // or reduced damage?
                 TakeDamage(0);
@@ -114,8 +126,13 @@ namespace OppositeGame._project.Scripts.mechanics
         private void CollideWithLaser(LaserTrap laser)
         {
             if(!CompareTag("Player") || PolarityProvider == null) return;
-            var shield = GetComponent<PlayerShield>();
-            if(laser.polarityType == PolarityProvider.PolarityType && shield.isShieldActive) return;
+            
+            var samePolarity = laser.polarityType == PolarityProvider.PolarityType;
+            var samePolarityShield = laser.polarityType == PolarityType.Red ? RedPlayerShield : BluePlayerShield;
+            if(samePolarity && samePolarityShield.isShieldActive)
+            {
+                return;
+            };
             TakeDamage(laser.damage);
         } 
 

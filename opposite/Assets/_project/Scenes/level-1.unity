@@ -10128,23 +10128,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: energy
-      value: 16
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: polarity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: restTime
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: maxEnergy
-      value: 16
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: energyRecoveryRate
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: shieldTransparency
-      value: 0.2
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326860762805693556, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: energyConsumptionRate
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1485881487096179879, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: lifePoints
@@ -10209,6 +10221,14 @@ PrefabInstance:
     - target: {fileID: 1887280348020307358, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: m_MaskInteraction
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222248770517762888, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: energyRecoveryRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222248770517762888, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
+      propertyPath: energyConsumptionRate
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3771306830598780315, guid: 49bae6bcdbca7ec4b966327a69f322aa, type: 3}
       propertyPath: m_Enabled
