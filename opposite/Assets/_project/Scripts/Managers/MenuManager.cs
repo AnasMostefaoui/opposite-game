@@ -26,6 +26,8 @@ namespace OppositeGame._project.Scripts.Managers
         private InputAction _startAction;
         private InputAction _quiteAction;
 
+        private GameScreen _prePauseScreenEnum;
+        private GameObject _prePauseScreen;
         private GameObject _currentScreen;
         private GameScreen? _transitioningScreen;
         private GameObject _startScreen;
@@ -139,7 +141,8 @@ namespace OppositeGame._project.Scripts.Managers
                     GameManager.Instance.Revive();
                     break;
                 case GameScreen.Pause:
-                    GameManager.Instance.Resume();
+                    Debug.Log("Leaving pause screen");
+                    LeavePauseScreen();
                     break;
                 case GameScreen.GameOver: 
                     GameManager.Instance.RestartFromMainMenu(); 
@@ -147,17 +150,43 @@ namespace OppositeGame._project.Scripts.Managers
                     break;
             }
         }
-        
+
+        private void LeavePauseScreen()
+        {
+            GameManager.Instance.currentScreen = _prePauseScreenEnum;
+            if (_prePauseScreenEnum == GameScreen.Game)
+            {
+                DisableAllScreens();
+            }
+            else
+            {
+                _pauseScreen.gameObject.SetActive(false);
+                _currentScreen = _prePauseScreen;
+                _currentScreen.SetActive(true);
+            }
+            GameManager.Instance.Resume();
+        }
         private void OnPausePressed(InputAction.CallbackContext action)
         {
+            if (GameManager.Instance.currentScreen == GameScreen.Pause)
+            {
+                Debug.Log("Leaving pause screen inside");
+                LeavePauseScreen();
+                return;
+            }
+            Debug.Log("Entering pause screen");
+            _prePauseScreenEnum = GameManager.Instance.currentScreen;
+            _prePauseScreen = _currentScreen;
             // provide the player the possibility to leave the game from to desktop at any moment.
             DisplayPauseScreen();
+            
         }
 
         private void DisplayPauseScreen()
         {
             DisableAllScreens();
             _pauseScreen.gameObject.SetActive(true);
+            GameManager.Instance.currentScreen = GameScreen.Pause;
         }
         
         private void DisplayGameOverScreen(object sender, EventArgs e)

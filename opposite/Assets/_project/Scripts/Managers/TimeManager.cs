@@ -8,11 +8,12 @@ namespace OppositeGame._project.Scripts.Managers
         [SerializeField] public float timeChangeSpeed = 10f;
         [SerializeField] public float slowTimeDuration = 0.5f;
         public bool IsTimePaused => Time.timeScale == 0f;
+
         public float normalTimeScale = 1f;
         private float _slowTimeDurationTimer;
         private bool _isSlowTimeActive;
         private bool _isSlowTimeDurationTimerActive;
-        
+        private bool _forcePause;
         
         public void SlowTime()
         {
@@ -22,6 +23,7 @@ namespace OppositeGame._project.Scripts.Managers
         
         public void Update()
         {
+            if(_forcePause) return;
             var targetedTimeScale = _isSlowTimeActive ? slowTimeScale : normalTimeScale;
             if (_isSlowTimeDurationTimerActive)
             {
@@ -38,11 +40,13 @@ namespace OppositeGame._project.Scripts.Managers
         
         public void PauseTime()
         {
+            _forcePause = true;
             Time.timeScale = 0f;
         }
         
         public void ResumeTime()
         {
+            _forcePause = false;
             Time.timeScale = normalTimeScale;
         }
     }

@@ -110,7 +110,6 @@ namespace OppositeGame._project.Scripts.Managers
             switch (currentScreen)
             {
                 case GameScreen.Game when hasLifePoints == false:
-                    Debug.Log("hasLifePoints " + hasLifePoints);
                     ContinueRequest();
                     break;
                 case GameScreen.ContinueScreen when IsGameOver:
@@ -167,6 +166,7 @@ namespace OppositeGame._project.Scripts.Managers
         public void Resume()
         {
             _timeManager.ResumeTime();
+            
             OnGameResumed?.Invoke(null, EventArgs.Empty);
         }
 

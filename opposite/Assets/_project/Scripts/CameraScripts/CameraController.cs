@@ -26,6 +26,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
             GameManager.Instance.OnGameOver += StopMoving;
             GameManager.Instance.OnContinueScreen += StopMoving;
             GameManager.Instance.OnContinuePlaying += StartMoving;
+            GameManager.Instance.OnGameResumed += StartMoving;
             GameManager.Instance.OnGamePaused += StopMoving;
             GameManager.Instance.OnMainMenu += ResetPosition;
             thisCamera = GetComponent<Camera>();
@@ -111,6 +112,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
             GameManager.Instance.OnContinueScreen -= StopMoving;
             GameManager.Instance.OnContinuePlaying -= StartMoving;
             GameManager.Instance.OnMainMenu -= ResetPosition;
+            GameManager.Instance.OnGameResumed -= StartMoving;
         }
     }
 }
