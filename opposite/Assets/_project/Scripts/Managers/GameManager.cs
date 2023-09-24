@@ -39,6 +39,7 @@ namespace OppositeGame._project.Scripts.Managers
         public bool hasLifePoints =>  currentLifePoint > 0;
 
         public bool IsGameOver { get; set; }
+        public bool IsTimeSlowed => _timeManager.IsTimeSlowed;
         public bool IsPaused => _timeManager.IsTimePaused;
         // normalized energy values
         public float RedCurrentEnergy = 1;

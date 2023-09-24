@@ -168,7 +168,6 @@ namespace OppositeGame._project.Scripts.mechanics
             }
             else
             {
-                Debug.Log("Remove life point");
                 GameManager.Instance.currentLifePoint -= 1;
             }
             // if it's player shake the camera ?

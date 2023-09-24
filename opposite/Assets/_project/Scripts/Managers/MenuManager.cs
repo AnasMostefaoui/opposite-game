@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using OppositeGame._project.Scripts.Enemies;
 using OppositeGame._project.Scripts.GUI;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
 using TMPro;
@@ -70,6 +71,7 @@ namespace OppositeGame._project.Scripts.Managers
             GameManager.Instance.OnGameOver += DisplayGameOverScreen;
             GameManager.Instance.OnMainMenu +=  DisplayStartScreen;
             GameManager.Instance.OnEnergyChanged +=  UpdateRedEnergy;
+            Boss.OnBossDefeated +=  OnBossDefeated;
         }
 
         private void UpdateRedEnergy(float energy, PolarityType polarity)
@@ -82,6 +84,12 @@ namespace OppositeGame._project.Scripts.Managers
             {
                 redEnergyFillImage.fillAmount = energy;
             }
+        }
+
+        private void OnBossDefeated()
+        {
+            GameManager.Instance.Pause();
+            LeaveScreen(GameScreen.GameOver, () => DisplayGameOverScreen(this, EventArgs.Empty));
         }
 
         private void OnLeavingContinueScreen(GameScreen newScreen)
@@ -233,6 +241,7 @@ namespace OppositeGame._project.Scripts.Managers
             _continueScreen.GetComponent<ContinueScreen>().OnLeaving -= OnLeavingContinueScreen;
             GameManager.Instance.OnGameOver -= DisplayGameOverScreen;
             GameManager.Instance.OnEnergyChanged -=  UpdateRedEnergy;
+            Boss.OnBossDefeated +=  OnBossDefeated;
         }
     }
 }

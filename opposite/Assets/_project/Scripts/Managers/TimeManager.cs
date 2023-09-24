@@ -7,8 +7,8 @@ namespace OppositeGame._project.Scripts.Managers
         [SerializeField] public float slowTimeScale = 0.5f;
         [SerializeField] public float timeChangeSpeed = 10f;
         [SerializeField] public float slowTimeDuration = 0.5f;
-        public bool IsTimePaused => Time.timeScale == 0f;
-
+        public bool IsTimePaused => Time.timeScale == 0f;   
+        public bool IsTimeSlowed => _isSlowTimeDurationTimerActive;
         public float normalTimeScale = 1f;
         private float _slowTimeDurationTimer;
         private bool _isSlowTimeActive;
@@ -20,6 +20,7 @@ namespace OppositeGame._project.Scripts.Managers
             _isSlowTimeActive = true;
             _isSlowTimeDurationTimerActive = true;
         }
+        
         
         public void Update()
         {

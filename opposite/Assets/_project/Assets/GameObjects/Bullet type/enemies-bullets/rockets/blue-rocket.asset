@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d907b57e8b6e2b9459310507d2fc5f09, type: 3}
+  m_Name: blue-rocket
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 4148422010561086121, guid: 75f2469cebb0540a7bf47941d6a597a7, type: 3}
+  bulletPrefab: {fileID: 417265543973168434, guid: c28efc69b04ce4a448117a5e9870bf56, type: 3}
+  lifeTime: 5
+  damage: 1

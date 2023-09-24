@@ -24,6 +24,7 @@ namespace OppositeGame._project.Scripts.ScriptablesObjects.Weapons
             bullet.SetBulletSpeed(bulletSpeed);
             bullet.transform.Rotate(0, 0, rotationAngle );
             bullet.gameObject.layer = layerMask;
+            bullet.Prepare();
         }
 
         protected Bullet GetBullet(PolarityType polarity = PolarityType.Blue)

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e089d661834aec966e19cb741434bc, type: 3}
+  m_Name: red-heavy-enemy
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 7745007498135540281, guid: 10711e203ded5406db3e2f2b1556694d, type: 3}
+  bulletType: {fileID: 11400000, guid: d65af2a33b9eb4b00b7d860eec10f862, type: 2}
+  speed: 1
+  health: 5
+  score: 20

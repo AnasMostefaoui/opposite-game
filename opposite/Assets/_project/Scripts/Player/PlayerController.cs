@@ -24,6 +24,8 @@ namespace OppositeGame._project.Scripts.Player
         private SpriteRenderer _spriteRenderer;
         private TrailRenderer _trailRenderer;
         private Destructible _destructible;
+        private PlayerShield _redShield;
+        private PlayerShield _blueShield;
         private InputReader _inputReader;
         private Animator _animationController;
         private Color _originalColor;
@@ -38,6 +40,15 @@ namespace OppositeGame._project.Scripts.Player
             _trailRenderer = GetComponentInChildren<TrailRenderer>();
             _destructible ??= GetComponent<Destructible>();
             _movementController = GetComponentInChildren<PlayerMovementController>();
+            
+            var shields = GetComponents<PlayerShield>();
+            if (shields != null && shields.Length > 1)
+            {
+                // this is risky, better have a search by polarity.
+                _redShield = shields[0];
+                _blueShield = shields[1];
+            }
+            
             _originalColor = _spriteRenderer.color;
             
             GameManager.Instance.OnContinueScreen += OnContinueScreen;
@@ -56,7 +67,6 @@ namespace OppositeGame._project.Scripts.Player
                 _animationController.SetTrigger("Die");
                 return;
             }
-            Debug.Log("Reviving player");
             StartCoroutine(WaitAndRevive(2f));
         }
 
@@ -80,8 +90,13 @@ namespace OppositeGame._project.Scripts.Player
         
         private void OnPowerUpActivated()
         {
-            var hasEnoughEnergy = GameManager.Instance.RedCurrentEnergy >= 1f && GameManager.Instance.BlueCurrentEnergy >= 1f;
+            if(GameManager.Instance.IsTimeSlowed) return;
+            var energyRequirements = 0.9f;
+            var hasEnoughEnergy = GameManager.Instance.RedCurrentEnergy >= energyRequirements &&
+                                  GameManager.Instance.BlueCurrentEnergy >= energyRequirements;
             if (hasEnoughEnergy == false) return;
+            _redShield.ReduceEnergy(_redShield.Energy * 0.9f);
+            _blueShield.ReduceEnergy(_blueShield.Energy * 0.9f);
             GameManager.Instance.SlowTime();
         }
 

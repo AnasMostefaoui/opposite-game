@@ -28,7 +28,12 @@ namespace OppositeGame._project.Scripts.mechanics.Bullets
         {
             _speed = speed;
         }
-        
+
+        public void Prepare()
+        {
+            _lifetimeTimer = 0;
+        }
+
         private void Start()
         {
             _camera ??= Camera.main;

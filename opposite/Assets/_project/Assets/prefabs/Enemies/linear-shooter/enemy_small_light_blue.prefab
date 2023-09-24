@@ -270,6 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyType: {fileID: 0}
+  maxLifePoints: 50
 --- !u!114 &-6565459186786955706
 MonoBehaviour:
   m_ObjectHideFlags: 0

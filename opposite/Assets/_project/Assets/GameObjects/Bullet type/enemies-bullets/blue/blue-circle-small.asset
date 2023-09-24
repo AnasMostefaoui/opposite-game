@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d907b57e8b6e2b9459310507d2fc5f09, type: 3}
-  m_Name: Red small bullet
+  m_Name: blue-circle-small
   m_EditorClassIdentifier: 
-  explosionEffect: {fileID: 4148422010561086121, guid: 3f9b42c46ddd673468d0e39e0884b3f0, type: 3}
-  bulletPrefab: {fileID: -4583099719210730926, guid: f1b7a900f84e1da49ae0cf1924a3c579, type: 3}
+  explosionEffect: {fileID: 4148422010561086121, guid: 75f2469cebb0540a7bf47941d6a597a7, type: 3}
+  bulletPrefab: {fileID: 1096125022724832401, guid: 111af5a0c6f2e4fd2a99ed3fc9edb536, type: 3}
   lifeTime: 5
-  damage: 1
+  damage: 2

@@ -19,6 +19,15 @@ TagManager:
   - red-player-shield-mask
   - blue-player-shield-mask
   - blue-attractor-trap
+  - first-boss
+  - red-heavy-enemy
+  - blue-heavy-enemy
+  - blue-side-small-enemy
+  - red-side-small-enemy
+  - red-small-tracking-bullet
+  - blue-small-tracking-bullet
+  - blue-circle-small-bullet
+  - red-circle-small-bullet
   layers:
   - Default
   - TransparentFX
@@ -35,7 +44,7 @@ TagManager:
   - Traps
   - CameraModifiers
   - Area-effects
-  - 
+  - Boss
   - 
   - 
   - 
