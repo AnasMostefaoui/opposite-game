@@ -28,7 +28,7 @@ namespace OppositeGame._project.Scripts.mechanics
         private void Awake()
         {
             _camera = Camera.main;
-            if (TryGetComponent<PlayerPolarity>(out var playerPolarityProvider))
+            if (TryGetComponent<PolarityProvider>(out var playerPolarityProvider))
             {
                 PolarityProvider = playerPolarityProvider;
             }           
@@ -96,6 +96,23 @@ namespace OppositeGame._project.Scripts.mechanics
 
         private void CollideWithBullet(Bullet bullet)
         {
+            var isPlayer = CompareTag("Player");
+            
+            if(!isPlayer)
+            {
+                if (PolarityProvider == null)
+                {
+                    TakeDamage(bullet.Damage);
+                }
+                else
+                {
+                    var damageMultiplier = bullet.PolarityType == PolarityProvider.PolarityType ? 1 : 2;
+                    TakeDamage(bullet.Damage * damageMultiplier);
+                }
+                return;
+            }
+            
+            
             var samePolarity = bullet.PolarityType == PolarityProvider.PolarityType;
             var samePolarityShield = bullet.PolarityType == PolarityType.Red ? RedPlayerShield : BluePlayerShield;
             // we take full damage if the bullet has opposite polarity then the player

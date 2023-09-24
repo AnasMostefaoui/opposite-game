@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -4388543499452171799}
   - component: {fileID: -5781705402996680100}
   - component: {fileID: -3587289282898356772}
+  - component: {fileID: -6565459186786955706}
   m_Layer: 7
   m_Name: enemy_small_light_blue
   m_TagString: eb-small-type2
@@ -202,7 +203,7 @@ MonoBehaviour:
   weaponStrategy: {fileID: 11400000, guid: 75d952dd50caeb64e8a15228374f1c90, type: 2}
   startTransform: {fileID: 2560346561439093832}
   layer: 7
-  PolarityType: 0
+  PolarityType: 1
 --- !u!114 &4201063058476003483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +270,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyType: {fileID: 0}
+--- !u!114 &-6565459186786955706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201063058476003429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071926de00e543faaa3e5e6c21a4b98e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  polarityType: 1
 --- !u!1 &9046908275933224938
 GameObject:
   m_ObjectHideFlags: 0

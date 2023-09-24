@@ -19,8 +19,9 @@ namespace OppositeGame._project.Scripts.Enemies
         private void OnDisable()
         {
             if(_scoreBehavior == null) return;
-            var scoreMultiplier = GameManager.Instance.CurrentScore > 0 ? GameManager.Instance.CurrentScore : 1;
-            var timeBonus = (GameManager.Instance.totalPlayTime % 10) * 10;
+            var scoreMultiplier = GameManager.Instance.currentLifePoint > 0 ? 
+                GameManager.Instance.currentLifePoint : 1;
+            var timeBonus = (GameManager.Instance.totalPlayTime / 10) * 10;
             var finalScore = (_scoreBehavior.ScoreValue * scoreMultiplier) + timeBonus;
             // flash the score text if it's more than 20?
             GameManager.Instance.CurrentScore += (int) finalScore;
