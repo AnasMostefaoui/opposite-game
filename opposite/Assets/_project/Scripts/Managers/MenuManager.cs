@@ -141,7 +141,6 @@ namespace OppositeGame._project.Scripts.Managers
                     GameManager.Instance.Revive();
                     break;
                 case GameScreen.Pause:
-                    Debug.Log("Leaving pause screen");
                     LeavePauseScreen();
                     break;
                 case GameScreen.GameOver: 
@@ -170,7 +169,6 @@ namespace OppositeGame._project.Scripts.Managers
         {
             if (GameManager.Instance.currentScreen == GameScreen.Pause)
             {
-                Debug.Log("Leaving pause screen inside");
                 LeavePauseScreen();
                 return;
             }
