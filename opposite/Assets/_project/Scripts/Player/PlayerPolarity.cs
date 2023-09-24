@@ -18,6 +18,7 @@ namespace OppositeGame._project.Scripts.Player
             _animationController = GetComponent<Animator>();
             OnPolarityChanged += OnInternalPolarityChanged;
             _inputReader.OnPolarityChanged += OnInputPolarityChanged;
+            OnInternalPolarityChanged(PolarityType, PolarityType);
         }
 
         private void OnInputPolarityChanged(PolarityType newPolarity)
