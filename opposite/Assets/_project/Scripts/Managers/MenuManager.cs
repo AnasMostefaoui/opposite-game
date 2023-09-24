@@ -16,9 +16,11 @@ namespace OppositeGame._project.Scripts.Managers
         [SerializeField] private GameObject continueScreenPrefab;
         [SerializeField] private GameObject gameOverScreenPrefab;
         [SerializeField] private GameObject pauseScreenPrefab;
+        [SerializeField] private GameObject inGameUI;
         [SerializeField] private Image redEnergyFillImage;
         [SerializeField] private Image blueEnergyFillImage;
         [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI livesText;
         
         private PlayerInput _playerInput;
         private InputAction _startAction;
@@ -47,6 +49,7 @@ namespace OppositeGame._project.Scripts.Managers
                 Instance = this;
             }
             
+            inGameUI.SetActive(false);
             _playerInput = GetComponent<PlayerInput>();
             _playerInput.SwitchCurrentActionMap("Menu");
             _startAction = _playerInput.actions["Start"];
@@ -119,6 +122,7 @@ namespace OppositeGame._project.Scripts.Managers
         private void Update()
         {
             scoreText.text = $"score: {GameManager.Instance.CurrentScore}";
+            livesText.text = $"lives: x{GameManager.Instance.currentLifePoint}";
         }
 
         private void OnStartPressed(InputAction.CallbackContext action)
@@ -129,6 +133,7 @@ namespace OppositeGame._project.Scripts.Managers
             {
                 case GameScreen.MainMenu:
                     GameManager.Instance.StartGame();
+                    inGameUI.SetActive(true);
                     break;
                 case GameScreen.ContinueScreen when GameManager.Instance.IsGameOver == false:
                     GameManager.Instance.Revive();

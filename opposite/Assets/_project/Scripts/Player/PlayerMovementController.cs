@@ -46,6 +46,10 @@ namespace OppositeGame._project.Scripts.Player
             transform.position = transform.position.With(x: 0).With(y: 0);
         }
 
+        public void ResetPosition(Vector3 newPosition)
+        {
+            _destination = newPosition;
+        }
         private void Update()
         {
             var deltaTime = GameManager.Instance.IsPaused ? Time.deltaTime : Time.unscaledDeltaTime;
@@ -74,6 +78,7 @@ namespace OppositeGame._project.Scripts.Player
         
         private void OnTriggerStay2D(Collider2D other)
         {
+            // if the player is inside the area effect, apply force to the player based on it's shield polarity
             if (other.gameObject.layer == LayerMask.NameToLayer("Area-effects"))
             {
                 var polarityProvider = other.GetComponent<PolarityProvider>();
@@ -81,7 +86,8 @@ namespace OppositeGame._project.Scripts.Player
                 var samePolarity = _playerPolarity.PolarityType == polarityProvider.PolarityType;
                 
                 var isShieldOn = polarityProvider.PolarityType == PolarityType.Blue ? 
-                    GameManager.Instance.IsBlueShieldOn : GameManager.Instance.IsRedShieldOn; 
+                    GameManager.Instance.IsBlueShieldOn : GameManager.Instance.IsRedShieldOn;
+                // if we have similar polarity repulse, otherwise attract
                 var force = isShieldOn && samePolarity ? 2f : -2f;
                 _force = direction * force;
             }

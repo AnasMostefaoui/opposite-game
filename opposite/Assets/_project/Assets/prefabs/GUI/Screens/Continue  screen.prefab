@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481be196f73c4ddf888ce5d86b97e91f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  continueTime: 1
+  continueTime: 10
   continueTextMesh: {fileID: 7677534582977578302}
   counterTextMesh: {fileID: 7677534582626704659}
 --- !u!1 &7677534582977578300

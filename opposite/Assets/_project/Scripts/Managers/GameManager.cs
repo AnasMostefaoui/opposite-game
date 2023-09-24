@@ -14,26 +14,10 @@ namespace OppositeGame._project.Scripts.Managers
         GameOver,
         Pause
     }
-
-    [Serializable]
-    public class PlayerData
-    {
-        [Range(0, 100)]
-        [SerializeField] public float maxRedEnergy;
-        [Range(0, 100)]
-        [SerializeField] public float maxBlueEnergy;
-        [SerializeField] public float lifePoints;
-        
-        public float currentRedEnergy;
-        public float currentBlueEnergy;
-    }
-
     
     public class GameManager : MonoBehaviour
     {
         [SerializeField] public GameScreen currentScreen = GameScreen.MainMenu;
-        [Header("Player data settings")]
-        [SerializeField] public readonly PlayerData playerData;
         public static GameManager Instance { get; private set; }
         public event EventHandler OnGameOver;
         public event EventHandler OnGamePaused;
@@ -47,19 +31,33 @@ namespace OppositeGame._project.Scripts.Managers
         public event EventHandler OnMainMenu;
         public delegate void EnergyChanged(float value, PolarityType polarity);
         public delegate void DamageFeedback(float damageAmount, PolarityType polarity);
+        public delegate void LifePointChanged(int lifePoint);
         public event EnergyChanged OnEnergyChanged;
         public event EnergyChanged OnDamageFeedbackRequested;
-        
+        public event LifePointChanged OnLifePointChanged;
         public bool IsGameStarted { get; set; }
-        public bool HasNoLifePoints { get; set; }
+        public bool hasLifePoints =>  currentLifePoint > 0;
+
         public bool IsGameOver { get; set; }
         public bool IsPaused => _timeManager.IsTimePaused;
         // normalized energy values
         public float RedCurrentEnergy = 1;
         public float BlueCurrentEnergy = 1;
         public int CurrentScore = 0;
-        private float TimeScale { get; set; }
+        public int maxLifePoint = 2;
+
+        public int currentLifePoint
+        {
+            get => _currentLifePoint;
+            set
+            {
+                _currentLifePoint = value;
+                OnLifePointChanged?.Invoke(value);
+            }
+        }
+        public float totalPlayTime = 0;
         
+        private int _currentLifePoint = 2;
         private TimeManager _timeManager;
         
         private void Awake()
@@ -108,13 +106,14 @@ namespace OppositeGame._project.Scripts.Managers
         
         private void Update()
         {
+            totalPlayTime += Time.unscaledDeltaTime;
             switch (currentScreen)
             {
-                case GameScreen.Game when HasNoLifePoints:
+                case GameScreen.Game when hasLifePoints == false:
+                    Debug.Log("hasLifePoints " + hasLifePoints);
                     ContinueRequest();
                     break;
                 case GameScreen.ContinueScreen when IsGameOver:
-                    Debug.Log("Call game over");
                     GameIsOver();
                     break;
             }
@@ -123,7 +122,7 @@ namespace OppositeGame._project.Scripts.Managers
         private void ResetToMainMenu()
         {
             CurrentScore = 0;
-            HasNoLifePoints = false; // default life points
+            currentLifePoint = maxLifePoint;
             IsGameStarted = false;
             IsGameOver = false;
             currentScreen = GameScreen.MainMenu;
@@ -139,6 +138,7 @@ namespace OppositeGame._project.Scripts.Managers
         }
         public void StartGame()
         {
+            totalPlayTime = 0;
             IsGameStarted = true;
             currentScreen = GameScreen.Game;
             OnGameStarted?.Invoke(null, EventArgs.Empty);
@@ -152,9 +152,9 @@ namespace OppositeGame._project.Scripts.Managers
         
         public void Revive()
         {
+            currentLifePoint = maxLifePoint;
             IsGameOver = false;
             currentScreen = GameScreen.Game;
-            HasNoLifePoints = false;
             OnContinuePlaying?.Invoke(null, EventArgs.Empty); 
         }
         
@@ -181,12 +181,6 @@ namespace OppositeGame._project.Scripts.Managers
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex);
         }
-        
-        public void QuiteTheGame()
-        {
-            
-        }
-        
         
         private void OnOnGamePaused()
         {

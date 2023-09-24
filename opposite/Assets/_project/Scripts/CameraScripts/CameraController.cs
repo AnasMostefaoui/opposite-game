@@ -26,6 +26,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
             GameManager.Instance.OnGameOver += StopMoving;
             GameManager.Instance.OnContinueScreen += StopMoving;
             GameManager.Instance.OnContinuePlaying += StartMoving;
+            GameManager.Instance.OnGamePaused += StopMoving;
             GameManager.Instance.OnMainMenu += ResetPosition;
             thisCamera = GetComponent<Camera>();
             originalSize = thisCamera.orthographicSize;
@@ -106,6 +107,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
         {
             GameManager.Instance.OnGameStarted -= StartMoving;
             GameManager.Instance.OnGameOver -= StopMoving;
+            GameManager.Instance.OnGamePaused -= StopMoving;
             GameManager.Instance.OnContinueScreen -= StopMoving;
             GameManager.Instance.OnContinuePlaying -= StartMoving;
             GameManager.Instance.OnMainMenu -= ResetPosition;

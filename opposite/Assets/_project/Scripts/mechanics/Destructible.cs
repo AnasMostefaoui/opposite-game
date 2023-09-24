@@ -2,6 +2,7 @@
 using System.Linq;
 using OppositeGame._project.Scripts.Enemies;
 using OppositeGame._project.Scripts.Environment;
+using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
 using OppositeGame._project.Scripts.mechanics.Scoring;
@@ -97,22 +98,23 @@ namespace OppositeGame._project.Scripts.mechanics
         {
             var samePolarity = bullet.PolarityType == PolarityProvider.PolarityType;
             var samePolarityShield = bullet.PolarityType == PolarityType.Red ? RedPlayerShield : BluePlayerShield;
-            
+            // we take full damage if the bullet has opposite polarity then the player
             if (!samePolarity)
             {
                 TakeDamage(bullet.Damage);
                 return;
             }
 
-            // shield absorb same bullets
+            // If the shield is on and polarity are similar, absorb same bullets
             if (samePolarityShield && samePolarityShield.isShieldActive)
             {
                 TakeDamage(0);
             }
             else
             {
-                // same polarity will deal no damage as long as we have energy
+                // if the shield is off, but we have the same polarity reduce the polarity shield energy
                 samePolarityShield.ReduceEnergy(bullet.Damage * 0.5f);
+                // if the energy is off take full damage, otherwise absorb damage
                 TakeDamage( samePolarityShield.Energy > 0 ? 0 : bullet.Damage);
             }
         } 
@@ -138,6 +140,7 @@ namespace OppositeGame._project.Scripts.mechanics
         public void TakeDamage(float damage)
         {
             LifePoints -= damage;
+            // call shake feedback?
             if (LifePoints > 0) return;
             
             DisplayHitEffect();
@@ -145,6 +148,11 @@ namespace OppositeGame._project.Scripts.mechanics
             if (!CompareTag("Player"))
             {
                 gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Remove life point");
+                GameManager.Instance.currentLifePoint -= 1;
             }
             // if it's player shake the camera ?
             OnRelease?.Invoke(gameObject);

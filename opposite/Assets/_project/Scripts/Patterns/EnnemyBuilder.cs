@@ -8,7 +8,6 @@ namespace OppositeGame._project.Scripts.Patterns
     {
         private EnemyType _enemyType;
         private BulletType _bulletType;
-        private Vector3[] _waypoints;
         private Vector3 _position;
         private Quaternion _rotation;
 
@@ -38,8 +37,10 @@ namespace OppositeGame._project.Scripts.Patterns
         
         public GameObject Build()
         {
-            
-            var instance = GameObject.Instantiate(_enemyType.enemyPrefab, _position, _rotation);
+            // pull from object pool
+            var instance = ObjectPoolManager.Retrieve(_enemyType.enemyPrefab);
+            instance.transform.position = _position;
+            instance.transform.rotation = _rotation;
             var enemy = instance.GetComponent<Destructible>();
             enemy.LifePoints = _enemyType.health;
             return instance;

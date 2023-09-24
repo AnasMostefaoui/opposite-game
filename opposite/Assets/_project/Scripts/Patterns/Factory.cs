@@ -8,9 +8,6 @@ namespace OppositeGame._project.Scripts.Patterns
 {
     public class EnemyFactory
     {
-        // first draft of pooling
-        private List<GameObject> _enemies = new List<GameObject>();
-        
         public GameObject CreateEnemy(EnemyType enemyType, Vector3 position, Quaternion rotation)
         {
             var builder = new EnemyBuilder();
@@ -19,13 +16,11 @@ namespace OppositeGame._project.Scripts.Patterns
                 .SetPosition(position)
                 .SetRotation(rotation)
                 .Build();
-            _enemies.Add(enemy);
             return enemy;
         }
         
         public void DestroyEnemy(GameObject enemy)
         {
-            _enemies.Remove(enemy);
             // in case we subscribed to these events somewhere, clear them up to avoid memory leaks
             enemy.GetComponent<ViewPortObserver>().OnEnteredViewport = null;
             enemy.GetComponent<ViewPortObserver>().OnLeftViewport = null;

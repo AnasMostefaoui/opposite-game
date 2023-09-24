@@ -19,6 +19,7 @@ namespace OppositeGame._project.Scripts.Player
         [SerializeField] private float flickerDuration = 0.01f;
         
         public bool IsAlive => _destructible.LifePoints > 0;
+        private PlayerMovementController _movementController;
         private CircleCollider2D _playerCollider;
         private SpriteRenderer _spriteRenderer;
         private TrailRenderer _trailRenderer;
@@ -36,14 +37,47 @@ namespace OppositeGame._project.Scripts.Player
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _trailRenderer = GetComponentInChildren<TrailRenderer>();
             _destructible ??= GetComponent<Destructible>();
+            _movementController = GetComponentInChildren<PlayerMovementController>();
             _originalColor = _spriteRenderer.color;
             
             GameManager.Instance.OnContinueScreen += OnContinueScreen;
             GameManager.Instance.OnContinuePlaying += WillKeepPlaying;
             GameManager.Instance.OnMainMenu += OnMainMenu;
+            GameManager.Instance.OnLifePointChanged += OnLifePointsChanged;
             _inputReader.OnPowerUpActivated += OnPowerUpActivated;
         }
-    
+
+        private void OnLifePointsChanged(int lifepoint)
+        {
+            if(gameObject.activeSelf == false) return;
+            if(lifepoint <= 0)
+            {
+                // play a die animation? maybe later
+                _animationController.SetTrigger("Die");
+                return;
+            }
+            Debug.Log("Reviving player");
+            StartCoroutine(WaitAndRevive(2f));
+        }
+
+        private IEnumerator WaitAndRevive(float duration)
+        {
+            _inputReader.enabled = false;
+            _playerCollider.enabled = false;
+            _spriteRenderer.enabled = false;
+            _trailRenderer.enabled = false;
+            _destructible.enabled = false;
+            yield return new WaitForSeconds(duration);
+            _movementController.ResetPosition(transform.position.With(x: 0)
+                .With(y: Camera.main.transform.position.y - 1f));
+            _inputReader.enabled = true;
+            _destructible.enabled = true;
+            _spriteRenderer.enabled = true;
+            _trailRenderer.enabled = false;
+            _playerCollider.enabled = true;
+            WillKeepPlaying(this, EventArgs.Empty);
+        }
+        
         private void OnPowerUpActivated()
         {
             var hasEnoughEnergy = GameManager.Instance.RedCurrentEnergy >= 1f && GameManager.Instance.BlueCurrentEnergy >= 1f;
@@ -57,27 +91,17 @@ namespace OppositeGame._project.Scripts.Player
             _destructible.LifePoints = lifePoints;
         }
         
-        private void Update()
-        {
-            if (GameManager.Instance.currentScreen == GameScreen.Game && !IsAlive)
-            {
-                GameManager.Instance.ContinueRequest();
-            }
-        }
-
         private void OnMainMenu(object sender, EventArgs e)
         {
             transform.position = transform.position.With(x: 0).With(y: 0);
             gameObject.SetActive(true);
         }
-
-
+        
         private void OnContinueScreen(object sender, EventArgs e)
         {
             gameObject.SetActive(false);
         }
-
-                
+        
         private void WillKeepPlaying(object sender, EventArgs e)
         {
             ResetLifePoints();
@@ -114,7 +138,6 @@ namespace OppositeGame._project.Scripts.Player
             SetInvincible(false);
             _isReviving = false; 
         }
-
         
         private void OnDestroy()
         {
@@ -122,6 +145,7 @@ namespace OppositeGame._project.Scripts.Player
             GameManager.Instance.OnContinuePlaying -= WillKeepPlaying;
             GameManager.Instance.OnMainMenu -= OnMainMenu;
             _inputReader.OnPowerUpActivated -= OnPowerUpActivated;
+            GameManager.Instance.OnLifePointChanged -= OnLifePointsChanged;
         }
     }
 }
