@@ -143,6 +143,7 @@ namespace OppositeGame._project.Scripts.Managers
             {
                 case GameScreen.MainMenu:
                     GameManager.Instance.StartGame();
+                    AudioManager.Instance.PlayInGame();
                     inGameUI.SetActive(true);
                     break;
                 case GameScreen.ContinueScreen when GameManager.Instance.IsGameOver == false:
@@ -180,7 +181,6 @@ namespace OppositeGame._project.Scripts.Managers
                 LeavePauseScreen();
                 return;
             }
-            Debug.Log("Entering pause screen");
             _prePauseScreenEnum = GameManager.Instance.currentScreen;
             _prePauseScreen = _currentScreen;
             // provide the player the possibility to leave the game from to desktop at any moment.
@@ -214,6 +214,7 @@ namespace OppositeGame._project.Scripts.Managers
             DisableAllScreens();
             _currentScreen = _startScreen; 
             _currentScreen.SetActive(true);
+            AudioManager.Instance.PlayIntroMusic();
         }
         
         private void DisplayContinueScreen(object sender, EventArgs e)

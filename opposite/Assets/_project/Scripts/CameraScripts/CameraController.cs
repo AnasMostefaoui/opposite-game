@@ -57,13 +57,14 @@ namespace OppositeGame._project.Scripts.CameraScripts
             }
 
             var playerPosition = player.position;
-            transform.position = new Vector3(playerPosition.x, playerPosition.y, transform.position.z);
+                transform.position = new Vector3(0, 0, transform.position.z);
         }
 
         private void LateUpdate()
         {
             HandleZoom();
             if(_canMove == false) return;
+            
             // make the camera slowly start moving.
             currentSpeed = Mathf.MoveTowards(currentSpeed, 
                 maxSpeed * _speedModifier, 

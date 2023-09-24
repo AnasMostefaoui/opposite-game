@@ -58,7 +58,6 @@ namespace OppositeGame._project.Scripts.Enemies
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log( "Boss hit" );
             var isPlayerBullets = other.CompareTag("pr-small-bullet") || other.CompareTag("pb-small-bullet");
             if(!isPlayerBullets) return;
             var bullet = other.GetComponent<Bullet>();

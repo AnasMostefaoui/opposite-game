@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using MoreMountains.Feedbacks;
 using OppositeGame._project.Scripts.Enemies;
 using OppositeGame._project.Scripts.Environment;
 using OppositeGame._project.Scripts.Managers;
@@ -18,6 +19,7 @@ namespace OppositeGame._project.Scripts.mechanics
     {
         [SerializeField] public float LifePoints = 5f;
         [SerializeField] public ParticleSystem explosionEffectPrefab;
+        
         public Action<GameObject> OnRelease { get; set; }
         public PolarityProvider PolarityProvider { get; set; }
         public PlayerShield RedPlayerShield { get; set; }
@@ -112,7 +114,6 @@ namespace OppositeGame._project.Scripts.mechanics
                 return;
             }
             
-            
             var samePolarity = bullet.PolarityType == PolarityProvider.PolarityType;
             var samePolarityShield = bullet.PolarityType == PolarityType.Red ? RedPlayerShield : BluePlayerShield;
             // we take full damage if the bullet has opposite polarity then the player
@@ -131,6 +132,8 @@ namespace OppositeGame._project.Scripts.mechanics
             {
                 // if the shield is off, but we have the same polarity reduce the polarity shield energy
                 samePolarityShield.ReduceEnergy(bullet.Damage * 0.5f);
+                var player = GetComponent<PlayerController>();
+                player.hitFeedBack();
                 // if the energy is off take full damage, otherwise absorb damage
                 TakeDamage( samePolarityShield.Energy > 0 ? 0 : bullet.Damage);
             }
@@ -168,7 +171,11 @@ namespace OppositeGame._project.Scripts.mechanics
             }
             else
             {
+                
+                var playerController = GetComponent<PlayerController>();
+                if(playerController.IsDead) return;
                 GameManager.Instance.currentLifePoint -= 1;
+                
             }
             // if it's player shake the camera ?
             OnRelease?.Invoke(gameObject);

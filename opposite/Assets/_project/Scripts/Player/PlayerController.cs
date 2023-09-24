@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using MoreMountains.Feedbacks;
 using OppositeGame._project.Scripts.Inputs;
 using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics;
@@ -10,6 +11,7 @@ namespace OppositeGame._project.Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     { 
+        [SerializeField] private MMF_Player mmfPlayer;
         [SerializeField] private GameObject player;
         [Header("Camera settings")]
         [SerializeField] private Camera cameraObject;
@@ -30,7 +32,9 @@ namespace OppositeGame._project.Scripts.Player
         private Animator _animationController;
         private Color _originalColor;
         private bool _isReviving;
+        private bool _isDead;
 
+        public bool IsDead => _isDead;
         private void Awake()
         {
             _inputReader = GetComponent<InputReader>();
@@ -67,6 +71,9 @@ namespace OppositeGame._project.Scripts.Player
                 _animationController.SetTrigger("Die");
                 return;
             }
+
+            if(_isDead) return;
+            _isDead = true;
             StartCoroutine(WaitAndRevive(2f));
         }
 
@@ -151,8 +158,10 @@ namespace OppositeGame._project.Scripts.Player
             }   
             
             SetInvincible(false);
-            _isReviving = false; 
+            _isReviving = false;
+            _isDead = false;
         }
+        
         
         private void OnDestroy()
         {
@@ -161,6 +170,11 @@ namespace OppositeGame._project.Scripts.Player
             GameManager.Instance.OnMainMenu -= OnMainMenu;
             _inputReader.OnPowerUpActivated -= OnPowerUpActivated;
             GameManager.Instance.OnLifePointChanged -= OnLifePointsChanged;
+        }
+
+        public void hitFeedBack()
+        {
+            mmfPlayer.PlayFeedbacks();
         }
     }
 }

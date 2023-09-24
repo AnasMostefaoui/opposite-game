@@ -46,11 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScreen: 0
-  playerData:
-    maxRedEnergy: 100
-    maxBlueEnergy: 100
-    lifePoints: 5
+  RedCurrentEnergy: 1
+  BlueCurrentEnergy: 1
   CurrentScore: 0
+  maxLifePoint: 2
+  totalPlayTime: 0
+  IsRedShieldOn: 0
+  IsBlueShieldOn: 0
 --- !u!1001 &7944372662925352397
 PrefabInstance:
   m_ObjectHideFlags: 0

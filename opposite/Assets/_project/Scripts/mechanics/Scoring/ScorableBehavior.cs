@@ -9,7 +9,6 @@ namespace OppositeGame._project.Scripts.mechanics.Scoring
         
         public void AssignToScoreboard()
         {
-            Debug.Log("Scoore");
             GameManager.Instance.CurrentScore += ScoreValue;
         }
     }
