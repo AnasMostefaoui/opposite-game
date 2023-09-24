@@ -40,6 +40,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
 
         private void StartMoving(object sender, EventArgs e)
         {
+            if(GameManager.Instance.currentScreen != GameScreen.Game) return;
             _canMove = true;
         }
         private void StopMoving(object sender, EventArgs e)
