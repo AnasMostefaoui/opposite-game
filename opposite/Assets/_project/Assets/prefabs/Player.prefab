@@ -511,7 +511,7 @@ MonoBehaviour:
   energy: 10
   maxEnergy: 10
   energyConsumptionRate: 3
-  energyRecoveryRate: 2
+  energyRecoveryRate: 0.5
   polarity: 1
 --- !u!114 &2222248770517762888
 MonoBehaviour:
@@ -529,7 +529,7 @@ MonoBehaviour:
   energy: 10
   maxEnergy: 10
   energyConsumptionRate: 3
-  energyRecoveryRate: 2
+  energyRecoveryRate: 0.5
   polarity: 0
 --- !u!1 &2978092593551125110
 GameObject:
