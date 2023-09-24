@@ -16,6 +16,11 @@ namespace OppositeGame._project.Scripts.Managers
             audioSource = GetComponent<AudioSource>();
         }
 
+        private void Update()
+        {
+            audioSource.pitch = Time.timeScale;
+        }
+
         public void PlayIntroMusic()
         {
             audioSource.clip = introBGMusic;
