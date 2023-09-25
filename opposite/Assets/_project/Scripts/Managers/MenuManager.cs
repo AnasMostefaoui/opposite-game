@@ -89,6 +89,7 @@ namespace OppositeGame._project.Scripts.Managers
         private void OnBossDefeated()
         {
             GameManager.Instance.Pause();
+            GameManager.Instance.IsGameOver = true;
             LeaveScreen(GameScreen.GameOver, () => DisplayGameOverScreen(this, EventArgs.Empty));
         }
 

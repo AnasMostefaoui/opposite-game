@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bdf6d2137e407ba885fe32ec4f64df, type: 3}
   m_Name: blue-small-single
   m_EditorClassIdentifier: 
-  fireRate: 1
+  fireRate: 0.4
   bulletSpeed: 3
   bulletType: {fileID: 11400000, guid: d34f5f0b86fc14993b040762e10cd241, type: 2}

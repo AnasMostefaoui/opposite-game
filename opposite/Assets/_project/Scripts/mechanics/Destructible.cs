@@ -49,6 +49,7 @@ namespace OppositeGame._project.Scripts.mechanics
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.CompareTag("audio-boss-level")) return;
             if(_camera.IsPointInViewport(transform.position) == false) return;
             
             if (other.TryGetComponent<PlayerController>(out var player))
@@ -114,26 +115,28 @@ namespace OppositeGame._project.Scripts.mechanics
                 return;
             }
             
+            var player = GetComponent<PlayerController>();
             var samePolarity = bullet.PolarityType == PolarityProvider.PolarityType;
             var samePolarityShield = bullet.PolarityType == PolarityType.Red ? RedPlayerShield : BluePlayerShield;
             // we take full damage if the bullet has opposite polarity then the player
             if (!samePolarity)
             {
                 TakeDamage(bullet.Damage);
+                player.HitFeedBack();
                 return;
             }
 
             // If the shield is on and polarity are similar, absorb same bullets
             if (samePolarityShield && samePolarityShield.isShieldActive)
             {
+                player.AbsorbFeedBack();
                 TakeDamage(0);
             }
             else
             {
                 // if the shield is off, but we have the same polarity reduce the polarity shield energy
                 samePolarityShield.ReduceEnergy(bullet.Damage * 0.5f);
-                var player = GetComponent<PlayerController>();
-                player.hitFeedBack();
+                player.HitFeedBack();
                 // if the energy is off take full damage, otherwise absorb damage
                 TakeDamage( samePolarityShield.Energy > 0 ? 0 : bullet.Damage);
             }
@@ -152,6 +155,7 @@ namespace OppositeGame._project.Scripts.mechanics
             var samePolarityShield = laser.polarityType == PolarityType.Red ? RedPlayerShield : BluePlayerShield;
             if(samePolarity && samePolarityShield.isShieldActive)
             {
+                samePolarityShield.PlayLaserVoidFeedback();
                 return;
             };
             TakeDamage(laser.damage);

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f54f713366844a28b88b36ed8aa6f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStrategy: {fileID: 11400000, guid: 66f1c7281a7f81b48a0e2c2ad8e0b60f, type: 2}
+  weaponStrategy: {fileID: 11400000, guid: c8222a259b2594ddf9ffb527ecf2204e, type: 2}
   startTransform: {fileID: 6852695445898846671}
   layer: 15
   PolarityType: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f54f713366844a28b88b36ed8aa6f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStrategy: {fileID: 11400000, guid: 66f1c7281a7f81b48a0e2c2ad8e0b60f, type: 2}
+  weaponStrategy: {fileID: 11400000, guid: 2edb96e5c21714010b4e50ba58d0b3cb, type: 2}
   startTransform: {fileID: 8405205910341428228}
   layer: 15
   PolarityType: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f54f713366844a28b88b36ed8aa6f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStrategy: {fileID: 11400000, guid: 66f1c7281a7f81b48a0e2c2ad8e0b60f, type: 2}
+  weaponStrategy: {fileID: 11400000, guid: c8222a259b2594ddf9ffb527ecf2204e, type: 2}
   startTransform: {fileID: 6212813104357399209}
   layer: 15
   PolarityType: 0
@@ -271,6 +271,182 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyType: {fileID: 0}
   maxLifePoints: 50
+--- !u!1 &7356112654575925703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6781185801402926580}
+  - component: {fileID: 3999703690107622566}
+  - component: {fileID: 1572342523052709530}
+  m_Layer: 15
+  m_Name: right-spread-canon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6781185801402926580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356112654575925703}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.097, y: 0.285, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3827520735960450086}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3999703690107622566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356112654575925703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6593d87b8fe486aaa8bb2e80043e242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyType: {fileID: 0}
+  maxLifePoints: 20
+--- !u!114 &1572342523052709530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356112654575925703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f54f713366844a28b88b36ed8aa6f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponStrategy: {fileID: 11400000, guid: 7abeee050f92f489f95888bd45c53c20, type: 2}
+  startTransform: {fileID: 6781185801402926580}
+  layer: 15
+  PolarityType: 1
+--- !u!1 &8450237583600428130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3827520735960450086}
+  - component: {fileID: 1775510544456693838}
+  m_Layer: 15
+  m_Name: stage-two
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3827520735960450086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450237583600428130}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7185772362747787039}
+  - {fileID: 6781185801402926580}
+  m_Father: {fileID: 6075854508007122036}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1775510544456693838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450237583600428130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a86e5b0de314f8bbdfb2ec3ec47a128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 447846936960748450}
+  - {fileID: 3999703690107622566}
+  isVulnerable: 1
+--- !u!1 &8517951344357801387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7185772362747787039}
+  - component: {fileID: 447846936960748450}
+  - component: {fileID: 3691073122331317317}
+  m_Layer: 15
+  m_Name: left-spread-canon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7185772362747787039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8517951344357801387}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.091, y: 0.303, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3827520735960450086}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &447846936960748450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8517951344357801387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6593d87b8fe486aaa8bb2e80043e242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyType: {fileID: 0}
+  maxLifePoints: 20
+--- !u!114 &3691073122331317317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8517951344357801387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f54f713366844a28b88b36ed8aa6f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponStrategy: {fileID: 11400000, guid: 34a55cec9fcb944e093445325dbf6888, type: 2}
+  startTransform: {fileID: 7185772362747787039}
+  layer: 15
+  PolarityType: 0
 --- !u!1 &8558637542640276855
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,12 +477,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8558637542640276855}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: -1}
+  m_LocalPosition: {x: -0.9453632, y: 0.37503007, z: -0.058244944}
   m_LocalScale: {x: 2.2905, y: 2.2905, z: 2.2905}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7692374460183317071}
+  - {fileID: 3827520735960450086}
   m_Father: {fileID: 248183350283966027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2098740680168704441
@@ -347,8 +524,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1411343291
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 02b426d5a744c2c47a24a162e2b8fd27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -377,13 +554,13 @@ MonoBehaviour:
   m_PlayOnAwake: 1
   m_LoopMode: 1
   m_Method: 0
-  m_Duration: 1
-  m_MaxSpeed: 10
+  m_Duration: 20
+  m_MaxSpeed: 0.79557717
   m_EasingMode: 0
-  m_AlignmentMode: 1
+  m_AlignmentMode: 0
   m_ObjectForwardAxis: 2
-  m_ObjectUpAxis: 1
-  m_StartOffset: 0
+  m_ObjectUpAxis: 4
+  m_StartOffset: 1
 --- !u!61 &1968204677069934111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -514,6 +691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifePoints: 50
+  bossFightStages: []
 --- !u!1 &9214235948481029760
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f54f713366844a28b88b36ed8aa6f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStrategy: {fileID: 11400000, guid: 66f1c7281a7f81b48a0e2c2ad8e0b60f, type: 2}
+  weaponStrategy: {fileID: 11400000, guid: 2edb96e5c21714010b4e50ba58d0b3cb, type: 2}
   startTransform: {fileID: 9094983013368573448}
   layer: 15
   PolarityType: 0

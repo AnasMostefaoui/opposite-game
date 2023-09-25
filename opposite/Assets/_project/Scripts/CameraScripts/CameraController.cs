@@ -48,7 +48,17 @@ namespace OppositeGame._project.Scripts.CameraScripts
         {
             _canMove = false;
         }
-        
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.CompareTag("audio-boss-level"))
+            {
+                AudioManager.Instance.PlayBossMusic();
+                maxSpeed = 0;
+                _speedModifier *= 0.5f;
+                Destroy(other);
+            }
+        }
 
         private void Start()
         {

@@ -20,7 +20,10 @@ namespace OppositeGame._project.Scripts.Enemies
         {
             _scoreBehavior = GetComponent<ScorableBehavior>();
             _destructible = GetComponent<Destructible>();
-            _destructible.LifePoints = maxLifePoints;
+            if (_destructible)
+            {
+                _destructible.LifePoints = maxLifePoints;
+            }
         }
 
         private void OnDisable()

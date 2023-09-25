@@ -7,12 +7,15 @@ using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace OppositeGame._project.Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     { 
-        [SerializeField] private MMF_Player mmfPlayer;
+        [SerializeField] private MMF_Player hitFeedback;
+        [SerializeField] private MMF_Player absorbFeedback;
+        [SerializeField] private MMF_Player timeSlowFeedback;
         [SerializeField] private GameObject player;
         [Header("Camera settings")]
         [SerializeField] private Camera cameraObject;
@@ -103,6 +106,7 @@ namespace OppositeGame._project.Scripts.Player
             var hasEnoughEnergy = GameManager.Instance.RedCurrentEnergy >= energyRequirements &&
                                   GameManager.Instance.BlueCurrentEnergy >= energyRequirements;
             if (hasEnoughEnergy == false) return;
+            timeSlowFeedback.PlayFeedbacks();
             _redShield.ReduceEnergy(_redShield.Energy * 0.9f);
             _blueShield.ReduceEnergy(_blueShield.Energy * 0.9f);
             GameManager.Instance.SlowTime();
@@ -110,7 +114,7 @@ namespace OppositeGame._project.Scripts.Player
 
         private void Start()
         {
-            cameraObject ??= Camera.main;
+            cameraObject = Camera.main;
             _destructible.LifePoints = lifePoints;
         }
         
@@ -173,21 +177,14 @@ namespace OppositeGame._project.Scripts.Player
             GameManager.Instance.OnLifePointChanged -= OnLifePointsChanged;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public void HitFeedBack()
         {
-            if (other.CompareTag("audio-boss-level"))
-            {
-                AudioManager.Instance.PlayBossMusic();
-                var cameraController = cameraObject.GetComponent<CameraController>();
-                cameraController.maxSpeed = 0;
-                cameraController.StopMoving(this, EventArgs.Empty);
-                Destroy(other);
-            }
-        }
-
-        public void hitFeedBack()
+            hitFeedback.PlayFeedbacks();
+        }      
+        
+        public void AbsorbFeedBack()
         {
-            mmfPlayer.PlayFeedbacks();
+            absorbFeedback.PlayFeedbacks();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics.Bullets;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace OppositeGame._project.Scripts.Enemies
 {
@@ -11,7 +12,7 @@ namespace OppositeGame._project.Scripts.Enemies
         [SerializeField] private float maxLifePoints = 50;
         private float _currentLifePoints;
         private Collider2D _collider2D;
-        private List<BossFightStage> _bossFightStages;
+        public List<BossFightStage> bossFightStages;
         private int currentStageIndex = 0;
         public float normalizedLifePoints => _currentLifePoints / maxLifePoints;
         public static event Action OnBossDefeated;
@@ -25,13 +26,13 @@ namespace OppositeGame._project.Scripts.Enemies
         {
             _currentLifePoints = maxLifePoints;
             _collider2D.enabled = true;
-            foreach (var bossFightStage in _bossFightStages)
+            foreach (var bossFightStage in bossFightStages)
             {
                 bossFightStage.enemies.ForEach( enemy => enemy.OnEnemyDisabled += CheckStage );
             }
         }
         
-        private bool IsStageCompleted => _bossFightStages[currentStageIndex].IsCompleted;
+        private bool IsStageCompleted => bossFightStages[currentStageIndex].IsCompleted;
 
         private void CheckStage()
         {
@@ -45,13 +46,13 @@ namespace OppositeGame._project.Scripts.Enemies
         {
             _collider2D.enabled = true;
             currentStageIndex += 1;
-            if(currentStageIndex >= _bossFightStages.Count) return;
-            _bossFightStages[currentStageIndex].PlayStage();
+            if(currentStageIndex >= bossFightStages.Count) return;
+            bossFightStages[currentStageIndex].PlayStage();
         }
 
         private void SetTheStage()
         {
-            var stage = _bossFightStages[currentStageIndex];
+            var stage = bossFightStages[currentStageIndex];
             stage.SetupStage();
             _collider2D.enabled = !stage.isVulnerable;
         }

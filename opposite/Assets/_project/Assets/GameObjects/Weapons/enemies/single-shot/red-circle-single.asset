@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bdf6d2137e407ba885fe32ec4f64df, type: 3}
   m_Name: red-circle-single
   m_EditorClassIdentifier: 
-  fireRate: 0.8
+  fireRate: 0.5
   bulletSpeed: 2
   bulletType: {fileID: 11400000, guid: 8b915b978bddb4a00a825a85514c4592, type: 2}

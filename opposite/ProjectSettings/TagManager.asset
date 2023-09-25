@@ -29,6 +29,8 @@ TagManager:
   - blue-circle-small-bullet
   - red-circle-small-bullet
   - audio-boss-level
+  - hit-feedback
+  - absorb-feedback
   layers:
   - Default
   - TransparentFX

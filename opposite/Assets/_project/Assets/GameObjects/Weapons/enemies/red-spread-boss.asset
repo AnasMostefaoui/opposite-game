@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8bdf6d2137e407ba885fe32ec4f64df, type: 3}
-  m_Name: red-small-single
+  m_Script: {fileID: 11500000, guid: 4097e5747bd44e25b30a02203b818cde, type: 3}
+  m_Name: red-spread-boss
   m_EditorClassIdentifier: 
-  fireRate: 0.4
-  bulletSpeed: 3
-  bulletType: {fileID: 11400000, guid: ed45e5bbab921034bb73db91cbbc46e9, type: 2}
+  fireRate: 1
+  bulletSpeed: 1
+  bulletType: {fileID: 0}
+  spreadAngle: 0
+  numberOfBullets: 0

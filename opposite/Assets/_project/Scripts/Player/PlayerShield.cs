@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using MoreMountains.Feedbacks;
 using OppositeGame._project.Scripts.Inputs;
 using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
@@ -14,6 +15,9 @@ namespace OppositeGame._project.Scripts.Player
     }
     public class PlayerShield : MonoBehaviour
     {
+        
+        [SerializeField] private MMF_Player shieldActivationFeedback;
+        [SerializeField] private MMF_Player LaserVoidFeedback;
         [Range(0f, 1f)]
         [SerializeField] private float shieldTransparency = 0.3f;
         // How many energy points the shield has
@@ -66,6 +70,11 @@ namespace OppositeGame._project.Scripts.Player
             GameManager.Instance.UpdateRedEnergy(energy/maxEnergy, polarity);
         }
         
+        public void PlayLaserVoidFeedback()
+        {
+            LaserVoidFeedback.PlayFeedbacks();
+        }
+        
         private void Awake()
         {
             var tagName = polarity == PolarityType.Blue ? "blue-player-shield-mask" : "red-player-shield-mask";
@@ -88,6 +97,8 @@ namespace OppositeGame._project.Scripts.Player
             _playerPolarity.PolarityType = obj;
             
             if(!CanEnableShield) return;
+            shieldActivationFeedback.PlayFeedbacks();
+            
             _shieldState = ShieldState.Active;
             _shieldMaskObject.SetActive(true);
             OnShieldActivated?.Invoke();
