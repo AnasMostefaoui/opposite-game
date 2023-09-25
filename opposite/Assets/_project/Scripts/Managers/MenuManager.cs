@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using MoreMountains.Feedbacks;
 using OppositeGame._project.Scripts.Enemies;
 using OppositeGame._project.Scripts.GUI;
 using OppositeGame._project.Scripts.mechanics.Magnetism;
@@ -13,6 +14,8 @@ namespace OppositeGame._project.Scripts.Managers
     public class MenuManager : MonoBehaviour
     {
         public static MenuManager Instance { get; private set; }
+        
+        [SerializeField] private MMF_Player continueFeedback;
         [SerializeField] private GameObject startScreenPrefab;
         [SerializeField] private GameObject continueScreenPrefab;
         [SerializeField] private GameObject gameOverScreenPrefab;
@@ -88,8 +91,6 @@ namespace OppositeGame._project.Scripts.Managers
 
         private void OnBossDefeated()
         {
-            GameManager.Instance.Pause();
-            GameManager.Instance.IsGameOver = true;
             LeaveScreen(GameScreen.GameOver, () => DisplayGameOverScreen(this, EventArgs.Empty));
         }
 
@@ -148,12 +149,14 @@ namespace OppositeGame._project.Scripts.Managers
                     inGameUI.SetActive(true);
                     break;
                 case GameScreen.ContinueScreen when GameManager.Instance.IsGameOver == false:
+                    continueFeedback.PlayFeedbacks();
                     GameManager.Instance.Revive();
                     break;
                 case GameScreen.Pause:
                     LeavePauseScreen();
                     break;
                 case GameScreen.GameOver: 
+                    continueFeedback.PlayFeedbacks();
                     GameManager.Instance.RestartFromMainMenu(); 
                     EnterScreen(GameScreen.MainMenu,() => DisplayStartScreen(this, EventArgs.Empty));
                     break;
@@ -184,6 +187,7 @@ namespace OppositeGame._project.Scripts.Managers
             }
             _prePauseScreenEnum = GameManager.Instance.currentScreen;
             _prePauseScreen = _currentScreen;
+            continueFeedback.PlayFeedbacks();
             // provide the player the possibility to leave the game from to desktop at any moment.
             DisplayPauseScreen();
             

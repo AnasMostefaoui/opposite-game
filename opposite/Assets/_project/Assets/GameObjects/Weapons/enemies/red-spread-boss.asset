@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4097e5747bd44e25b30a02203b818cde, type: 3}
   m_Name: red-spread-boss
   m_EditorClassIdentifier: 
-  fireRate: 1
+  fireRate: 1.5
   bulletSpeed: 1
-  bulletType: {fileID: 0}
-  spreadAngle: 0
-  numberOfBullets: 0
+  bulletType: {fileID: 11400000, guid: 8b915b978bddb4a00a825a85514c4592, type: 2}
+  spreadAngle: 100
+  numberOfBullets: 10

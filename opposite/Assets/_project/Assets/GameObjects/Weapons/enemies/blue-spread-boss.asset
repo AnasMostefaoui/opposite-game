@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4097e5747bd44e25b30a02203b818cde, type: 3}
   m_Name: blue-spread-boss
   m_EditorClassIdentifier: 
-  fireRate: 1
+  fireRate: 1.5
   bulletSpeed: 1
-  bulletType: {fileID: 0}
-  spreadAngle: 0
-  numberOfBullets: 0
+  bulletType: {fileID: 11400000, guid: f402b3a398b394c20be72b57079ec3ef, type: 2}
+  spreadAngle: 100
+  numberOfBullets: 10
