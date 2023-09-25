@@ -143,3 +143,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   introBGMusic: {fileID: 8300000, guid: fbfe84f64607f4ca1b51c9f1463764cf, type: 3}
   inGameBGMusic: {fileID: 8300000, guid: e9a9696b43d524f0caddeed60f304756, type: 3}
+  bossMusic: {fileID: 8300000, guid: 252522134f86f4968867b9329d0264f7, type: 3}

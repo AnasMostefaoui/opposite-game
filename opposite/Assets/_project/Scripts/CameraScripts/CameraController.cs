@@ -10,7 +10,7 @@ namespace OppositeGame._project.Scripts.CameraScripts
     {
         [SerializeField] private Transform player;
         [SerializeField] private  float initialSpeed = 0f;  // Initial speed (0 for stationary)
-        [SerializeField] private  float maxSpeed = 2f;  // Target speed to reach
+        [SerializeField] public  float maxSpeed = 2f;  // Target speed to reach
         [SerializeField] private  float accelerationRate = 0.2f;  // Rate of acceleration
         [SerializeField] private  float currentSpeed = 0;
         [SerializeField] private  float zoomSpeed = 1;
@@ -38,12 +38,13 @@ namespace OppositeGame._project.Scripts.CameraScripts
             transform.position = transform.position.With(x: 0).With(y: 0);
         }
 
+        
         private void StartMoving(object sender, EventArgs e)
         {
             if(GameManager.Instance.currentScreen != GameScreen.Game) return;
             _canMove = true;
         }
-        private void StopMoving(object sender, EventArgs e)
+        public void StopMoving(object sender, EventArgs e)
         {
             _canMove = false;
         }

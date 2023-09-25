@@ -28,6 +28,7 @@ TagManager:
   - blue-small-tracking-bullet
   - blue-circle-small-bullet
   - red-circle-small-bullet
+  - audio-boss-level
   layers:
   - Default
   - TransparentFX

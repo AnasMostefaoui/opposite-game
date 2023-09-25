@@ -8,6 +8,8 @@ namespace OppositeGame._project.Scripts.Managers
     {
         [SerializeField] private AudioClip introBGMusic;
         [SerializeField] private AudioClip inGameBGMusic;
+        [SerializeField] private AudioClip bossMusic;
+        
         private AudioSource audioSource;
 
         protected override void Awake()
@@ -30,6 +32,12 @@ namespace OppositeGame._project.Scripts.Managers
         public void PlayInGame()
         {
             audioSource.clip = inGameBGMusic;
+            audioSource.Play();
+        }      
+        
+        public void PlayBossMusic()
+        {
+            audioSource.clip = bossMusic;
             audioSource.Play();
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using MoreMountains.Feedbacks;
+using OppositeGame._project.Scripts.CameraScripts;
 using OppositeGame._project.Scripts.Inputs;
 using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics;
@@ -170,6 +171,18 @@ namespace OppositeGame._project.Scripts.Player
             GameManager.Instance.OnMainMenu -= OnMainMenu;
             _inputReader.OnPowerUpActivated -= OnPowerUpActivated;
             GameManager.Instance.OnLifePointChanged -= OnLifePointsChanged;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("audio-boss-level"))
+            {
+                AudioManager.Instance.PlayBossMusic();
+                var cameraController = cameraObject.GetComponent<CameraController>();
+                cameraController.maxSpeed = 0;
+                cameraController.StopMoving(this, EventArgs.Empty);
+                Destroy(other);
+            }
         }
 
         public void hitFeedBack()
