@@ -5,6 +5,7 @@ using OppositeGame._project.Scripts.CameraScripts;
 using OppositeGame._project.Scripts.Inputs;
 using OppositeGame._project.Scripts.Managers;
 using OppositeGame._project.Scripts.mechanics;
+using OppositeGame._project.Scripts.mechanics.weapons;
 using OppositeGame._project.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -34,6 +35,7 @@ namespace OppositeGame._project.Scripts.Player
         private PlayerShield _blueShield;
         private InputReader _inputReader;
         private Animator _animationController;
+        private PlayerWeapon _playerWeapon;
         private Color _originalColor;
         private bool _isReviving;
         private bool _isDead;
@@ -48,6 +50,7 @@ namespace OppositeGame._project.Scripts.Player
             _trailRenderer = GetComponentInChildren<TrailRenderer>();
             _destructible ??= GetComponent<Destructible>();
             _movementController = GetComponentInChildren<PlayerMovementController>();
+            _playerWeapon = GetComponentInChildren<PlayerWeapon>();
             
             var shields = GetComponents<PlayerShield>();
             if (shields != null && shields.Length > 1)
@@ -78,6 +81,7 @@ namespace OppositeGame._project.Scripts.Player
 
             if(_isDead) return;
             _isDead = true;
+            _playerWeapon.enabled = false;
             StartCoroutine(WaitAndRevive(2f));
         }
 
@@ -96,6 +100,7 @@ namespace OppositeGame._project.Scripts.Player
             _spriteRenderer.enabled = true;
             _trailRenderer.enabled = false;
             _playerCollider.enabled = true;
+            _playerWeapon.enabled = true;
             WillKeepPlaying(this, EventArgs.Empty);
         }
         
